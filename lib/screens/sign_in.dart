@@ -17,89 +17,107 @@ class SignIn extends ConsumerWidget {
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.heart_broken,
-                    size: 36,
-                    color: primaryColor,
-                  ),
-                  Text(
-                    'Heal Point',
-                    style: theme.headline1,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Text(
-                'Welcome back!',
-                style: theme.headline2,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Enter your phone number and password',
-                style: theme.bodyText2,
-              ),
-              const SizedBox(height: 48),
-              AuthField(
-                  theme: theme,
-                  controller: phoneController,
-                  hint: 'enter your phone number',
-                  icon: const Icon(
-                    LineIcons.mobilePhone,
-                  ),
-                  label: 'phone number',
-                  obscureText: false),
-              AuthField(
-                  theme: theme,
-                  controller: passwordController,
-                  hint: 'enter your password',
-                  icon: const Icon(
-                    Icons.password,
-                  ),
-                  label: 'password',
-                  obscureText: true),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(),
-                  Text("Forgot password?", style: theme.bodyText1),
-                ],
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  primary: primaryColorLight,
-                  fixedSize: const Size(250, 50),
-                  textStyle: theme.bodyText1,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.heart_broken,
+                      size: 36,
+                      color: primaryColor,
+                    ),
+                    Text(
+                      'Heal Point',
+                      style: theme.headline1,
+                    ),
+                  ],
                 ),
-                child: const Text("Login"),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account?", style: theme.bodyText1),
-                  Text("Register Now!",
-                      style: theme.bodyText1!.copyWith(
-                        color: primaryColorLight,
-                        fontWeight: FontWeight.w600,
-                      )),
-                ],
-              ),
-            ],
+                const SizedBox(height: 24),
+                Text(
+                  'Welcome back!',
+                  style: theme.headline2,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Enter your phone number and password',
+                  style: theme.bodyText2,
+                ),
+                const SizedBox(height: 48),
+                AuthField(
+                    theme: theme,
+                    controller: phoneController,
+                    hint: 'enter your phone number',
+                    icon: const Icon(
+                      LineIcons.mobilePhone,
+                    ),
+                    label: 'phone number',
+                    obscureText: false),
+                AuthField(
+                    theme: theme,
+                    controller: passwordController,
+                    hint: 'enter your password',
+                    icon: const Icon(
+                      Icons.password,
+                    ),
+                    label: 'password',
+                    obscureText: true),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(),
+                    Text("Forgot password?", style: theme.bodyText1),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColorLight,
+                    fixedSize: const Size(250, 50),
+                    textStyle: theme.bodyText1,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                    ),
+                  ),
+                  child: const Text("Login"),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account?", style: theme.bodyText1),
+                    Text("Register Now!",
+                        style: theme.bodyText1!.copyWith(
+                          color: primaryColorLight,
+                          fontWeight: FontWeight.w600,
+                        )),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Row(children: const <Widget>[
+                  Expanded(child: Divider()),
+                  Text("OR"),
+                  Expanded(child: Divider()),
+                ]),
+                const SizedBox(height: 8),
+                ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(LineIcons.googleLogo),
+                    label: const Text("Connect with Google")),
+                const SizedBox(height: 8),
+                ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(LineIcons.apple),
+                    label: const Text("Connect with Apple")),
+              ],
+            ),
           ),
         ),
       ),
