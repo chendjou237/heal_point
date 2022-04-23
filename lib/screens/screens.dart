@@ -9,4 +9,7 @@ export 'profile.dart';
 export 'doctors.dart';
 export 'doctor_detail.dart';
 export 'hospital_detail.dart';
-export 'map.dart';
+export 'near_me.dart';
+export 'password.dart';
+export 'rating.dart';
+export 'heal_point.dart';

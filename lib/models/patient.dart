@@ -35,12 +35,20 @@ class Patient {
     };
   }
 
-  factory Patient.fromMap(Map<String, dynamic> map) {
+  factory Patient.fromMap(Map<String, dynamic>? map) {
     return Patient(
-      id: map['id'] ?? '',
-      phoneNumber: map['phoneNumber'] ?? '',
-      password: map['password'] ?? '',
-      names: map['names'] ?? '',
+      id: map?['id'] ?? '',
+      phoneNumber: map?['phoneNumber'] ?? '',
+      password: map?['password'] ?? '',
+      names: map?['names'] ?? '',
+    );
+  }
+  factory Patient.initial() {
+    return Patient(
+      id: '',
+      phoneNumber: '',
+      password: '',
+      names: '',
     );
   }
 
