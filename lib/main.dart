@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Import the generated file
 import 'firebase_options.dart';
+import 'screens/screens.dart';
 import 'utilities/utilities.dart';
 
 void main() async {
@@ -11,17 +13,36 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ProviderScope(child: HealPoint()));
+  runApp(const ProviderScope(child: HealPointApp()));
 }
 
-class HealPoint extends StatelessWidget {
-  const HealPoint({Key? key}) : super(key: key);
+class HealPointApp extends StatelessWidget {
+  const HealPointApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => const Root(),
+        '/home': (context) => const Home(),
+        '/sign_up': (context) => SignUp(),
+        '/sign_in': (context) => const SignIn(),
+        // '/verify_phone_number': (context) => const VerifyPhoneScreen(),
+        // '/personal_info': (context) => const PersonalInfo(),
+        '/password': (context) => const PasswordScreen(),
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
+        scaffoldBackgroundColor: backgroundColor,
+        appBarTheme: const AppBarTheme(
+          color: Colors.white10,
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ),
         primaryColor: primaryColor,
         brightness: Brightness.light,
         textTheme: const TextTheme(
@@ -31,8 +52,9 @@ class HealPoint extends StatelessWidget {
             color: primaryColor,
           ),
           headline2: TextStyle(
-            fontSize: 24.0,
+            fontSize: 16.0,
             fontWeight: FontWeight.bold,
+            color: primaryColorDark,
           ),
           bodyText1: TextStyle(
             fontSize: 18.0,
@@ -46,7 +68,6 @@ class HealPoint extends StatelessWidget {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const Root(),
     );
   }
 }
