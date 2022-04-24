@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  google_fonts: ^2.0.0
   firebase_core: ^1.14.0
   firebase_auth: ^3.3.13
   firebase_storage: ^10.2.11
@@ -48,7 +49,7 @@ flutter:
 
   assets:
     - assets/
-    - assets/images/
+    - assets/images/profile_pic.jpg
 
 flutter_native_splash:
 
