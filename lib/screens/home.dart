@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+
 import 'package:heal_point/screens/profile.dart';
+
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:line_icons/line_icons.dart';
 
-class Home extends StatelessWidget {
+import '../widgets/widgets.dart';
+
+class Home extends ConsumerWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final _theme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.only(
@@ -16,9 +22,10 @@ class Home extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -62,6 +69,48 @@ class Home extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
+
+            Text(
+              "For You",
+              style: _theme.headline1,
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 200,
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    .map(
+                      (e) => HealCard(theme: _theme),
+                    )
+                    .toList(),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              "Center's Categories",
+              style: _theme.headline1!.copyWith(fontSize: 24),
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 75,
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  "All",
+                  "Hospitals",
+                  "Clinics",
+                  "Pharmacies",
+                ]
+                    .map(
+                      (e) => CategoryBox(name: e),
+                    )
+                    .toList(),
+              ),
+            ),
+
           ],
         ),
       ),

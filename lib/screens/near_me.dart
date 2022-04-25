@@ -97,13 +97,13 @@ class _NearMeState extends State<NearMe> {
       );
     });
 
-    final directions = await DirectionsRepository().getDirections(
-      origin: _origin.position,
-      destination: pos,
-    );
+    // final directions = await DirectionsRepository().getDirections(
+    //   origin: _origin.position,
+    //   destination: pos,
+    // );
    
     setState(() {
-      info = directions;
+      // info = directions;
     });
   }
 
