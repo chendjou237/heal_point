@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:heal_point/screens/profile.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:line_icons/line_icons.dart';
 
 import '../widgets/widgets.dart';
@@ -25,6 +29,11 @@ class Home extends ConsumerWidget {
               children: [
                 GestureDetector(
                   onTap: () {
+                   Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Profile()),
+                    );
+                   
                     // controller.jumpToTab(3);
                   },
                   child: const CircleAvatar(
@@ -32,19 +41,23 @@ class Home extends ConsumerWidget {
                     backgroundImage:
                         AssetImage('assets/images/profile_pic.jpg'),
                   ),
+                  
                 ),
+                
                 const SizedBox(width: 20),
                 Text(
                   'Welcome,\nMr. John Doe',
                   style: _theme.headline2,
                 ),
+               
                 const SizedBox(width: 50),
                 IconButton(
                   icon: const Icon(
                     Icons.search,
                     size: 30,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                 ),
                 IconButton(
                   onPressed: () {},
@@ -56,6 +69,7 @@ class Home extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 24),
+
             Text(
               "For You",
               style: _theme.headline1,
@@ -96,6 +110,7 @@ class Home extends ConsumerWidget {
                     .toList(),
               ),
             ),
+
           ],
         ),
       ),
