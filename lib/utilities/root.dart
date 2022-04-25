@@ -34,7 +34,7 @@ class Root extends ConsumerWidget {
             // database.getPatient(authenticatedUser.uid);
             return const SignIn();
           } else {
-            return const HealPoint();
+            return const SignIn();
           }
         });
   }

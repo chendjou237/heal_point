@@ -38,7 +38,8 @@ class SignIn extends ConsumerWidget {
                 ),
                 const SizedBox(height: 48),
                 AuthField(
-                  validator: RequiredValidator(errorText: 'password is required'),
+                    validator:
+                        RequiredValidator(errorText: 'password is required'),
                     theme: theme,
                     controller: phoneController,
                     hint: 'enter your phone number',
@@ -48,7 +49,8 @@ class SignIn extends ConsumerWidget {
                     label: 'phone number',
                     obscureText: false),
                 AuthField(
-                  validator: RequiredValidator(errorText: 'password is required'),
+                    validator:
+                        RequiredValidator(errorText: 'password is required'),
                     theme: theme,
                     controller: passwordController,
                     hint: 'enter your password',
@@ -67,7 +69,11 @@ class SignIn extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 24),
-                AuthButton(theme: theme, onTap: () {}, label: "Login",),
+                AuthButton(
+                  theme: theme,
+                  onTap: () {},
+                  label: "Login",
+                ),
                 const SizedBox(height: 16),
                 GestureDetector(
                   onTap: () => Navigator.of(context).pushNamed('/sign_up'),
@@ -98,11 +104,14 @@ class SignIn extends ConsumerWidget {
                 const SizedBox(height: 8),
                 ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
+                      primary: Colors.blue,
                     ),
                     onPressed: () {},
-                    icon: const Icon(LineIcons.applePay),
-                    label: const Text("Connect with Apple")),
+                    icon: const Icon(
+                      LineIcons.facebook,
+                      color: Colors.white,
+                    ),
+                    label: const Text("Connect with Facebook")),
               ],
             ),
           ),
