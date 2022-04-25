@@ -29,6 +29,8 @@ class HealPointApp extends StatelessWidget {
         '/sign_up': (context) => SignUp(),
         '/sign_in': (context) => const SignIn(),
         '/center_detail': (context) => const CenterDetails(),
+        '/heal':(context) => HealPointApp(),
+        
         // '/verify_phone_number': (context) => const VerifyPhoneScreen(),
         // '/personal_info': (context) => const PersonalInfo(),
         '/password': (context) => const PasswordScreen(),
