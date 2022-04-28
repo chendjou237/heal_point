@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heal_point/providers/controller_providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -10,6 +11,8 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final _theme = Theme.of(context).textTheme;
+    final patient = ref.read(patientControllerProvider.notifier).state;
+    print("controller ${patient.toString()}");
     return Padding(
       padding: const EdgeInsets.only(
         top: 50,
@@ -35,7 +38,7 @@ class Home extends ConsumerWidget {
                 ),
                 const SizedBox(width: 20),
                 Text(
-                  'Welcome,\nMr. John Doe',
+                  'Welcome,\nMr. ${patient.names}',
                   style: _theme.headline2,
                 ),
                 const SizedBox(width: 50),

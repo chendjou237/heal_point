@@ -1,30 +1,36 @@
-
-
-
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/screens/screens.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:toast/toast.dart';
 
+import '../models/models.dart';
 import '../widgets/widgets.dart';
 
-class PasswordScreen extends StatefulWidget {
+class PasswordScreen extends ConsumerStatefulWidget {
   const PasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<PasswordScreen> createState() => _PasswordScreenState();
+  ConsumerState<PasswordScreen> createState() => _PasswordScreenState();
 }
 
-class _PasswordScreenState extends State<PasswordScreen> {
+class _PasswordScreenState extends ConsumerState<PasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final passwordController = TextEditingController();
     final confirmPasswordController = TextEditingController();
     final _theme = Theme.of(context).textTheme;
     final _formKey = GlobalKey<FormState>();
-    String match = "";
+    final  name = ref.read(nameProvider.state);
+    final email = ref.read(emailProvider.state);
+    final phone = ref.read(phoneProvider.state);
+    final auth = ref.read(firebaseAuthProvider);
+    final db = ref.read(databaseProvider);
+
+    // final = ref.read(fire);
     ToastContext().init(context);
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +59,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Welcome Among us $userName!',
+                  'Welcome Among us ${name.state}!',
                   style: _theme.headline2,
                 ),
                 const SizedBox(height: 8),
@@ -104,7 +110,25 @@ class _PasswordScreenState extends State<PasswordScreen> {
                         backgroundColor: Colors.green,
                         duration: Toast.lengthShort,
                       );
-                      Navigator.pushNamed(context, "/home");
+                      try {
+                        print("phone number: ${phone.state}, email: ${email.state}, id: ${auth.currentUser!.uid}, names: ${name.state},  ");
+                        
+                        await auth.currentUser!
+                            .updatePassword(passwordController.text);
+                        if (await db.createPatient(Patient(
+                          email: email.state,
+                          id: auth.currentUser!.uid,
+                          names: name.state,
+                          phoneNumber: phone.state,
+                        ))) Navigator.pushNamed(context, "/heal");
+                        Toast.show(
+                          "Something went wrong ",
+                          backgroundColor: Colors.red,
+                          duration: Toast.lengthShort,
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        throw e.message?? e.toString() ;
+                      }
                     }
                   },
                   label: "Welcome",
@@ -117,4 +141,3 @@ class _PasswordScreenState extends State<PasswordScreen> {
     );
   }
 }
-

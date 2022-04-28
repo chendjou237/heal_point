@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:heal_point/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:line_icons/line_icons.dart';
@@ -9,34 +10,39 @@ import 'package:pinput/pinput.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:toast/toast.dart';
 
+import '../models/models.dart';
 import '../utilities/utilities.dart';
 import '../widgets/widgets.dart';
 
-var userName = "undefined";
-final phoneNumberProvider = StateProvider((_) => '');
+final nameProvider = StateProvider((_) => "");
+final phoneProvider = StateProvider((_) => "");
+final emailProvider = StateProvider((_) => "");
 
-
-class SignUp extends StatefulWidget {
+class SignUp extends ConsumerStatefulWidget {
   @override
   _SignUpState createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+String verificationID = "";
+final otpVisibilityProvider = StateProvider((_) => false);
+TextEditingController otpController = TextEditingController();
+
+class _SignUpState extends ConsumerState<SignUp> {
   TextEditingController phoneController = TextEditingController();
-  TextEditingController otpController = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  bool otpVisibility = false;
-
-  String verificationID = "";
-
   @override
   Widget build(BuildContext context) {
+    final otpVisibility = ref.watch(otpVisibilityProvider.state);
+    final _auth = ref.read(authProvider.state);
     final _nameController = TextEditingController();
     ToastContext().init(context);
     final _theme = Theme.of(context).textTheme;
     String phoneNumber = '';
+    final _emailController = TextEditingController();
+    // final patient = ref.read(authPatientProvider.state);
+    final _fireAuth = ref.read(firebaseAuthProvider);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -56,31 +62,51 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                'Personal Info',
-                style: _theme.headline1,
-              ),
-              const SizedBox(height: 24),
-              Text(
-                'Hello!',
-                style: _theme.headline2,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Enter your name and phone number to continue',
-                style: _theme.bodyText2,
-              ),
-              const SizedBox(height: 24),
-              AuthField(
-                validator: RequiredValidator(errorText: 'password is required'),
-                theme: _theme,
-                controller: _nameController,
-                hint: 'enter your name',
-                icon: const Icon(
-                  LineIcons.user,
+              Visibility(
+                visible: !otpVisibility.state,
+                child: Column(
+                  children: [
+                    Text(
+                      'Personal Info',
+                      style: _theme.headline1,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      'Hello!',
+                      style: _theme.headline2,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Enter your name and phone number to continue',
+                      style: _theme.bodyText2,
+                    ),
+                    const SizedBox(height: 24),
+                    AuthField(
+                      validator:
+                          RequiredValidator(errorText: 'password is required'),
+                      theme: _theme,
+                      controller: _nameController,
+                      hint: 'enter your name',
+                      icon: const Icon(
+                        LineIcons.user,
+                      ),
+                      label: 'name',
+                      obscureText: false,
+                    ),
+                    AuthField(
+                      validator:
+                          RequiredValidator(errorText: 'password is required'),
+                      theme: _theme,
+                      controller: _emailController,
+                      hint: 'enter your email',
+                      icon: const Icon(
+                        LineIcons.envelope,
+                      ),
+                      label: 'email',
+                      obscureText: false,
+                    ),
+                  ],
                 ),
-                label: 'name',
-                obscureText: false,
               ),
               const SizedBox(height: 16),
               IntlPhoneField(
@@ -129,7 +155,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ],
                 ),
-                visible: otpVisibility,
+                visible: otpVisibility.state,
               ),
               const SizedBox(
                 height: 10,
@@ -137,9 +163,15 @@ class _SignUpState extends State<SignUp> {
               AuthButton(
                 theme: _theme,
                 onTap: () async {
-                  userName = _nameController.text;
-                  if (otpVisibility) {
-                    if (await verifyOTP()) {
+                  if (otpVisibility.state) {
+                    if (await _auth.state.verifyOTP()) {
+                      _fireAuth.currentUser!.updateEmail(_emailController.text);
+                      _fireAuth.currentUser!
+                          .updateDisplayName(_nameController.text);
+                      ref.read(nameProvider.state).state = _nameController.text;
+                      ref.read(emailProvider.state).state = _emailController.text;
+                      ref.read(phoneProvider.state).state = phoneNumber;
+
                       Toast.show(
                         "Phone Verified SuccessFully",
                         backgroundColor: Colors.green,
@@ -154,10 +186,10 @@ class _SignUpState extends State<SignUp> {
                       );
                     }
                   } else {
-                    loginWithPhone(phoneNumber);
+                    _auth.state.loginWithPhone(phoneNumber, context);
                   }
                 },
-                label: otpVisibility ? "Next" : "Verify",
+                label: otpVisibility.state ? "Next" : "Verify",
               ),
               const SizedBox(
                 height: 16,
@@ -184,49 +216,48 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Future<bool> loginWithPhone(String phoneNumber) async {
-    bool response = false;
-    print("The number to be input is $phoneNumber");
-    auth.verifyPhoneNumber(
-      phoneNumber: phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        await auth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "/password");
-        response = true;
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        print(e.message);
-      },
-      codeSent: (String verificationId, int? resendToken) {
-        otpVisibility = true;
-        verificationID = verificationId;
-        setState(() {});
-        response = true;
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {},
-    );
-    return response;
-  }
+  // Future<bool> loginWithPhone(String phoneNumber) async {
+  //   bool response = false;
+  //   print("The number to be input is $phoneNumber");
+  //   auth.verifyPhoneNumber(
+  //     phoneNumber: phoneNumber,
+  //     verificationCompleted: (PhoneAuthCredential credential) async {
+  //       await auth.signInWithCredential(credential);
+  //       Navigator.pushNamed(context, "/password");
+  //       response = true;
+  //     },
+  //     verificationFailed: (FirebaseAuthException e) {
+  //       print(e.message);
+  //     },
+  //     codeSent: (String verificationId, int? resendToken) {
+  //       otpVisibility = true;
+  //       verificationID = verificationId;
+  //       setState(() {});
+  //       response = true;
+  //     },
+  //     codeAutoRetrievalTimeout: (String verificationId) {},
+  //   );
+  //   return response;
+  // }
 
-  Future<bool> verifyOTP() async {
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationID, smsCode: otpController.text);
-    try {
-      await auth.signInWithCredential(credential).then(
-        (value) {
-          print("You are logged in successfully");
+  // Future<bool> verifyOTP() async {
+  //   PhoneAuthCredential credential = PhoneAuthProvider.credential(
+  //       verificationId: verificationID, smsCode: otpController.text);
+  //   try {
+  //     await auth.signInWithCredential(credential).then(
+  //       (value) {
+  //         print("You are logged in successfully");
 
-          Toast.show(
-            "You are logged in successfully",
-            backgroundColor: Colors.green,
-            duration: Toast.lengthShort,
-          );
-        },
-      );
-      return true;
-    } on FirebaseException catch (e) {
-      print("this is the message return by firebase: ${e.message}");
-      return false;
-    }
-  }
+  //         Toast.show(
+  //           "You are logged in successfully",
+  //           backgroundColor: Colors.green,
+  //           duration: Toast.lengthShort,
+  //         );
+  //       },
+  //     );
+  //     return true;
+  //   } on FirebaseException catch (e) {
+  //     print("this is the message return by firebase: ${e.message}");
+  //     return false;
+  //   }
 }

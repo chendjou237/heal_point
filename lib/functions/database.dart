@@ -29,24 +29,23 @@ class Database {
     }
   }
 
-  bool getPatient(String uid) {
+  Future<bool> getPatient(String uid) async {
     try {
-      _firestore
+      await _firestore
           .collection('patients')
           .doc(uid)
-          .get(GetOptions(source: Source.serverAndCache))
+          .get(const GetOptions(source: Source.serverAndCache))
           .then((doc) {
         Patient _patient = Patient.fromMap(doc.data());
-        _read(patientControllerProvider.notifier).data = _patient;
+        _patient = _patient.copyWith(id: uid);
+       
+        _read(patientControllerProvider.notifier).state = _patient;
+        print(
+            "in database ${_read(patientControllerProvider.notifier).state.toString()}");
       });
       return true;
     } on FirebaseException catch (err) {
-      Toast.show(
-        "Fetching error:  ${err.message} ?? ",
-        backgroundColor: errorColor,
-        duration: Toast.lengthLong,
-      );
-      return false;
+      throw err.message ?? err.toString();
     }
   }
 }

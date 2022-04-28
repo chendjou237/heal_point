@@ -25,8 +25,9 @@ class HealPointApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const Root(),
-        '/home': (context) => const Home(),
+        '/heal': (context) => const HealPoint(),
         '/sign_up': (context) => SignUp(),
+
         '/sign_in': (context) => const SignIn(),
         '/center_detail': (context) => const CenterDetails(),
         // '/verify_phone_number': (context) => const VerifyPhoneScreen(),

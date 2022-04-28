@@ -1,15 +1,17 @@
 import 'dart:convert';
 
 class Patient {
-  final String id;
+  final String? id;
   final String phoneNumber;
-  final String password;
+ 
   final String names;
+  final String email;
   Patient({
-    required this.id,
+     this.id,
     required this.phoneNumber,
-    required this.password,
+    
     required this.names,
+    required this.email,
   });
 
   Patient copyWith({
@@ -17,12 +19,14 @@ class Patient {
     String? phoneNumber,
     String? password,
     String? names,
+    String? email,
   }) {
     return Patient(
       id: id ?? this.id,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      password: password ?? this.password,
+    
       names: names ?? this.names,
+      email: email ?? this.email,
     );
   }
 
@@ -30,24 +34,27 @@ class Patient {
     return {
       'id': id,
       'phoneNumber': phoneNumber,
-      'password': password,
+     
       'names': names,
+      'emails': email,
     };
   }
 
   factory Patient.fromMap(Map<String, dynamic>? map) {
     return Patient(
-      id: map?['id'] ?? '',
+      
       phoneNumber: map?['phoneNumber'] ?? '',
-      password: map?['password'] ?? '',
+     
       names: map?['names'] ?? '',
+      email: map?['email'] ?? '',
     );
   }
   factory Patient.initial() {
     return Patient(
       id: '',
       phoneNumber: '',
-      password: '',
+     
+      email: '',
       names: '',
     );
   }
@@ -59,6 +66,9 @@ class Patient {
 
   @override
   String toString() {
-    return 'Patient(id: $id, phoneNumber: $phoneNumber, password: $password, names: $names)';
+    return 'Patient(id: $id, phoneNumber: $phoneNumber, names: $names)';
   }
+
+
+  
 }
