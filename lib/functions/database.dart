@@ -16,36 +16,41 @@ class Database {
   Future<bool> createPatient(Patient patient) async {
     bool result = false;
     try {
-      await _firestore.collection('patients').add(patient.toMap());
-
-      Toast.show('Patient created', duration: Toast.lengthLong);
+      await _firestore
+          .collection('patients')
+          .doc(patient.id)
+          .set(patient.toMap());
+      _read(patientControllerProvider.notifier).data = patient;
+      print(
+          "ON creation succeed ${_read(patientControllerProvider.notifier).state.toString()} ");
+      // Toast.show('Patient created', duration: Toast.lengthLong);
       result = true;
       return result;
     } on FirebaseException catch (e) {
       result = false;
-      Toast.show(e.message ?? "Something went wrong",
-          duration: Toast.lengthLong);
+      // Toast.show(e.message ?? "Something went wrong",
+      //     duration: Toast.lengthLong);
       return result;
     }
   }
 
-  bool getPatient(String uid) {
+  Future<bool> getPatient(String uid) async {
     try {
-      _firestore
+      await _firestore
           .collection('patients')
           .doc(uid)
-          .get(GetOptions(source: Source.serverAndCache))
+          .get(const GetOptions(source: Source.serverAndCache))
           .then((doc) {
         Patient _patient = Patient.fromMap(doc.data());
-        _read(patientControllerProvider.notifier).data = _patient;
+        _patient = _patient.copyWith(id: uid);
+
+        _read(patientControllerProvider.notifier).state = _patient;
+        print(
+            "in database ${_read(patientControllerProvider.notifier).state.toString()}");
       });
       return true;
     } on FirebaseException catch (err) {
-      Toast.show(
-        "Fetching error:  ${err.message} ?? ",
-        backgroundColor: errorColor,
-        duration: Toast.lengthLong,
-      );
+      print(err.message ?? err.toString());
       return false;
     }
   }

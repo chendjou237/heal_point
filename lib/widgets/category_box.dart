@@ -22,7 +22,7 @@ class CategoryBox extends ConsumerWidget {
         child: Center(
           child: Text(
             name,
-            style: Theme.of(context).textTheme.headline2!.copyWith(
+            style: Theme.of(context).textTheme.headline2?.copyWith(
                   color: selectedCity.state == name
                       ? Colors.white
                       : Colors.white54,
@@ -31,7 +31,7 @@ class CategoryBox extends ConsumerWidget {
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: const AssetImage("assets/images/profile_pic.jpg"),
+            image: const AssetImage("assets/images/pharmacies_de_garde.jpg"),
             opacity: selectedCity.state != name ? 0.6 : 0.2,
             fit: BoxFit.cover,
           ),

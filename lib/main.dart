@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-// Import the generated file
 import 'firebase_options.dart';
 import 'screens/screens.dart';
 import 'utilities/utilities.dart';
@@ -25,13 +24,14 @@ class HealPointApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const Root(),
-        '/home': (context) => const Home(),
+        '/heal': (context) => const HealPoint(),
         '/sign_up': (context) => SignUp(),
+
         '/sign_in': (context) => const SignIn(),
         '/center_detail': (context) => const CenterDetails(),
-        '/heal':(context) => HealPointApp(),
-        
-        // '/verify_phone_number': (context) => const VerifyPhoneScreen(),
+
+        '/phone_verification': (context) => const PhoneVerification(),
+
         // '/personal_info': (context) => const PersonalInfo(),
         '/password': (context) => const PasswordScreen(),
       },
@@ -66,7 +66,7 @@ class HealPointApp extends StatelessWidget {
           bodyText2: TextStyle(
             fontSize: 14.0,
             fontWeight: FontWeight.w400,
-            color: Colors.black54,
+            color: Colors.black87
           ),
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,

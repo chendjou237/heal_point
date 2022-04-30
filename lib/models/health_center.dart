@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-class Hospital {
+class HealthCenter {
   final String id;
   final String name;
   final String address;
   final String phoneNumber;
-  final String rating;
+  final double rating;
   final String image;
   final String description;
-  Hospital({
+  HealthCenter({
     required this.id,
     required this.name,
     required this.address,
@@ -31,13 +31,13 @@ class Hospital {
     };
   }
 
-  factory Hospital.fromMap(Map<String, dynamic> map) {
-    return Hospital(
+  factory HealthCenter.fromMap(Map<String, dynamic> map) {
+    return HealthCenter(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       address: map['address'] ?? '',
       phoneNumber: map['phoneNumber'] ?? '',
-      rating: map['rating'] ?? '',
+      rating: map['rating'] ?? 0.0,
       image: map['image'] ?? '',
       description: map['description'] ?? '',
     );
@@ -45,5 +45,5 @@ class Hospital {
 
   String toJson() => json.encode(toMap());
 
-  factory Hospital.fromJson(String source) => Hospital.fromMap(json.decode(source));
+  factory HealthCenter.fromJson(String source) => HealthCenter.fromMap(json.decode(source));
 }

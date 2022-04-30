@@ -8,3 +8,4 @@ const backgroundColor = Color.fromARGB(255, 226, 250, 255);
 const secondaryColor = Color(0xff00b4d8);
 const secondaryColorLight = Color(0xff90e0ef);
 const secondaryColorDark = Color(0xff0072b1);
+const successColor = Colors.green;

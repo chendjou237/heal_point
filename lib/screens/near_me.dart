@@ -9,7 +9,7 @@ const initialCameraPosition = CameraPosition(
   target: LatLng(37.773972, -122.431297),
   zoom: 11.5,
 );
- Directions? info  ;
+ Directions? info   ;
 
 class NearMe extends StatefulWidget {
   const NearMe({Key? key}) : super(key: key);
@@ -74,7 +74,7 @@ class _NearMeState extends State<NearMe> {
               
               ],
             ),
-          child: Text("${info!.totalDistance}, ${info!.totalDuration}",
+          child: Text("${info!.totalDistance}, ${info?.totalDuration}",
             style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w600,
