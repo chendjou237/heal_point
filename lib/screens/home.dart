@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:heal_point/models/models.dart';
 import 'package:heal_point/providers/providers.dart';
-
-
-import 'package:heal_point/screens/profile.dart';
-
+import 'package:heal_point/screens/screens.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -37,27 +34,27 @@ class Home extends ConsumerWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                   Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Profile()),
+                      MaterialPageRoute(builder: (context) => const Profile()),
                     );
-                   
+
                     // controller.jumpToTab(3);
                   },
-                  child: const CircleAvatar(
-                    radius: 30.0,
-                    backgroundImage:
-                        AssetImage('assets/images/profile_pic.jpg'),
+                  child: const Hero(
+                    tag: 'profile',
+                    child: const CircleAvatar(
+                      radius: 30.0,
+                      backgroundImage:
+                          AssetImage('assets/images/profile_pic.jpg'),
+                    ),
                   ),
-                  
                 ),
-                
                 const SizedBox(width: 20),
                 Text(
                   'Welcome,\nMr. ${patient.names}',
                   style: _theme.headline2,
                 ),
-
                 const SizedBox(width: 20),
                 Row(
                   children: [
@@ -70,7 +67,6 @@ class Home extends ConsumerWidget {
                     ),
                     IconButton(
                       onPressed: () async {
-                        await _auth.signOut(context);
                         // Navigator.pushNamed(context, "/sign_in");
                         // Navigator.push(
                         //       context,
@@ -83,12 +79,10 @@ class Home extends ConsumerWidget {
                       ),
                     ),
                   ],
-
                 ),
               ],
             ),
             const SizedBox(height: 24),
-
             Text(
               "For You",
               style: _theme.headline1,
@@ -146,7 +140,6 @@ class Home extends ConsumerWidget {
                     .toList(),
               ),
             ),
-
             const SizedBox(height: 24),
             Text(
               "Hospitals",
@@ -176,6 +169,7 @@ class Home extends ConsumerWidget {
                     .toList(),
               ),
             ),
+            const SizedBox(height: 24),
             Text(
               "Pharmacies",
               style: _theme.headline1,
@@ -204,6 +198,7 @@ class Home extends ConsumerWidget {
                     .toList(),
               ),
             ),
+            const SizedBox(height: 24),
             Text(
               "Clinics",
               style: _theme.headline1,
@@ -232,7 +227,6 @@ class Home extends ConsumerWidget {
                     .toList(),
               ),
             ),
-
           ],
         ),
       ),

@@ -51,7 +51,7 @@ flutter:
 
   assets:
     - assets/
-    - assets/images/profile_pic.jpg
+    - assets/images/
 
 flutter_native_splash:
 
