@@ -79,6 +79,7 @@ class SignIn extends ConsumerWidget {
                   theme: theme,
                   onTap: () {
                     Navigator.pushNamed(context, "/");
+
                   },
                   label: "Login",
                 ),

@@ -5,8 +5,7 @@ class Pharmacy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    // ignore: prefer_const_constructors
+    return Container();
   }
 }
