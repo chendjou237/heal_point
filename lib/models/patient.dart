@@ -2,13 +2,13 @@ import 'dart:convert';
 
 class Patient {
   final String? id;
-  final String phoneNumber;
+  final String? phoneNumber;
  
   final String names;
   final String email;
   Patient({
      this.id,
-    required this.phoneNumber,
+     this.phoneNumber,
     
     required this.names,
     required this.email,
@@ -44,7 +44,7 @@ class Patient {
     return Patient(
       
       phoneNumber: map?['phoneNumber'] ?? '',
-     
+     id: map?['id'] ?? '',
       names: map?['names'] ?? '',
       email: map?['email'] ?? '',
     );

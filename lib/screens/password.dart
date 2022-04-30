@@ -24,14 +24,15 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
     final confirmPasswordController = TextEditingController();
     final _theme = Theme.of(context).textTheme;
     final _formKey = GlobalKey<FormState>();
-    final  name = ref.read(nameProvider.state);
+    final name = ref.read(nameProvider.state);
     final email = ref.read(emailProvider.state);
     final phone = ref.read(phoneProvider.state);
-    final auth = ref.read(firebaseAuthProvider);
+    final auth = ref.read(authProvider);
     final db = ref.read(databaseProvider);
+    final fireAuth = ref.read(firebaseAuthProvider);
 
     // final = ref.read(fire);
-    ToastContext().init(context);
+    // ToastContext().init(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -105,33 +106,37 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                   theme: _theme,
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                      Toast.show(
-                        "Password Verified SuccessFully",
-                        backgroundColor: Colors.green,
-                        duration: Toast.lengthShort,
-                      );
+                      // Toast.show(
+                      //   "Password Verified SuccessFully",
+                      //   backgroundColor: Colors.green,
+                      //   duration: Toast.lengthShort,
+                      // );
                       try {
-                        print("phone number: ${phone.state}, email: ${email.state}, id: ${auth.currentUser!.uid}, names: ${name.state},  ");
-                        
-                        await auth.currentUser!
-                            .updatePassword(passwordController.text);
-                        if (await db.createPatient(Patient(
-                          email: email.state,
-                          id: auth.currentUser!.uid,
-                          names: name.state,
-                          phoneNumber: phone.state,
-                        ))) Navigator.pushNamed(context, "/heal");
-                        Toast.show(
-                          "Something went wrong ",
-                          backgroundColor: Colors.red,
-                          duration: Toast.lengthShort,
+                     
+
+                        await auth.signupUser(
+                          mail: email.state,
+                          context: context,
+                          pass: passwordController.text,
+                          patient: Patient(
+                            email: email.state,
+                            
+                            names: name.state,
+                            phoneNumber: phone.state,
+                          ),
                         );
+                        // Navigator.pushNamed(context, "/heal");
+                        // Toast.show(
+                        //   "Something went wrong ",
+                        //   backgroundColor: Colors.red,
+                        //   duration: Toast.lengthShort,
+                        // );
                       } on FirebaseAuthException catch (e) {
-                        throw e.message?? e.toString() ;
+                        throw e.message ?? e.toString();
                       }
                     }
                   },
-                  label: "Welcome",
+                  label: "Next",
                 ),
               ],
             ),

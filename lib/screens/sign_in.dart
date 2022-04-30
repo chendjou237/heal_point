@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:heal_point/screens/screens.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
 import 'package:heal_point/utilities/palette.dart';
+import 'package:toast/toast.dart';
 
+import '../providers/providers.dart';
 import '../widgets/widgets.dart';
 
 class SignIn extends ConsumerWidget {
   const SignIn({Key? key}) : super(key: key);
 
+  
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context,ref ) {
     final theme = Theme.of(context).textTheme;
+    final auth = ref.read(authProvider);
+    // ToastContext().init(context);
     final phoneController = TextEditingController();
     final passwordController = TextEditingController();
     return Scaffold(
@@ -72,8 +78,7 @@ class SignIn extends ConsumerWidget {
                 AuthButton(
                   theme: theme,
                   onTap: () {
-
-                    Navigator.pushNamed(context,"/heal");
+                    Navigator.pushNamed(context, "/");
                   },
                   label: "Login",
                 ),
@@ -86,7 +91,7 @@ class SignIn extends ConsumerWidget {
                     children: [
                       Text("Don't have an account?", style: theme.bodyText1),
                       Text("Register Now!",
-                          style: theme.bodyText1!.copyWith(
+                          style: theme.bodyText1?.copyWith(
                             color: primaryColorLight,
                             fontWeight: FontWeight.w600,
                           )),
@@ -101,7 +106,19 @@ class SignIn extends ConsumerWidget {
                 ]),
                 const SizedBox(height: 8),
                 ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await auth.signInWithGoogle(context);
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => HealPoint()));
+                      
+                      // Toast.show(
+                      //   "Somethin must kill a man",
+                      // backgroundColor: errorColor,
+                      // duration: Toast.lengthShort,
+                      // );
+                    },
                     icon: const Icon(LineIcons.googleLogo),
                     label: const Text("Connect with Google")),
                 const SizedBox(height: 8),

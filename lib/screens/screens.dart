@@ -14,3 +14,4 @@ export 'password.dart';
 export 'rating.dart';
 export 'heal_point.dart';
 export 'loading_screen.dart';
+export 'phone_verification.dart';

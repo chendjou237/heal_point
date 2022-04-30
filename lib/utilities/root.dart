@@ -21,7 +21,7 @@ class Root extends ConsumerWidget {
     
     return user.when(
         loading: () =>
-            const Scaffold(body: Center(child: CircularProgressIndicator())),
+            const LoadingScreen(),
         error: (_, __) => ErrorScreen(theme: _theme),
         data: (authenticatedUser) {
           if (authenticatedUser != null) {

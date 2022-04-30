@@ -21,13 +21,7 @@ class HealPoint extends ConsumerStatefulWidget {
 }
 
 class _HealPointState extends ConsumerState<HealPoint> {
-  PageController _pageController = PageController(initialPage: 0);
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
+  final PageController _pageController = PageController(initialPage: 0);
 
   @override
   void dispose() {
@@ -41,9 +35,9 @@ class _HealPointState extends ConsumerState<HealPoint> {
     final db = ref.read(databaseProvider);
     final user = ref.read(firebaseAuthProvider);
     final _theme = Theme.of(context).textTheme;
-    print("the current user ${user.currentUser!.uid}");
+    // print("the current user ${user.currentUser!.uid}");
     return FutureBuilder(
-        future: db.getPatient(user.currentUser!.uid),
+        future: db.getPatient(user.currentUser?.uid ?? "no id"),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
@@ -61,19 +55,22 @@ class _HealPointState extends ConsumerState<HealPoint> {
                     )
                   : const SizedBox.shrink(),
               body: SizedBox.expand(
-                child: PageView(
-                  controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged: (index) {
-                    setState(() => currentIndex.state = index);
-                  },
-                  children: const <Widget>[
-                    Home(),
-                    NearMe(),
-                    Pharmacy(),
-                    Orders(),
-                    Rating(),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 60.0),
+                  child: PageView(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    onPageChanged: (index) {
+                      setState(() => currentIndex.state = index);
+                    },
+                    children: const <Widget>[
+                      Home(),
+                      NearMe(),
+                      Pharmacy(),
+                      Orders(),
+                      Rating(),
+                    ],
+                  ),
                 ),
               ),
               bottomNavigationBar: ClipRRect(

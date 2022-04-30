@@ -37,9 +37,13 @@ class _SignUpState extends ConsumerState<SignUp> {
     final otpVisibility = ref.watch(otpVisibilityProvider.state);
     final _auth = ref.read(authProvider.state);
     final _nameController = TextEditingController();
-    ToastContext().init(context);
+   
     final _theme = Theme.of(context).textTheme;
     String phoneNumber = '';
+    final email = ref.read(emailProvider.state);
+    final name = ref.read(nameProvider.state);
+    final _formKey = GlobalKey<FormState>();
+
     final _emailController = TextEditingController();
     // final patient = ref.read(authPatientProvider.state);
     final _fireAuth = ref.read(firebaseAuthProvider);
@@ -59,161 +63,106 @@ class _SignUpState extends ConsumerState<SignUp> {
       body: Container(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Visibility(
-                visible: !otpVisibility.state,
-                child: Column(
-                  children: [
-                    Text(
-                      'Personal Info',
-                      style: _theme.headline1,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Hello!',
-                      style: _theme.headline2,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Enter your name and phone number to continue',
-                      style: _theme.bodyText2,
-                    ),
-                    const SizedBox(height: 24),
-                    AuthField(
-                      validator:
-                          RequiredValidator(errorText: 'password is required'),
-                      theme: _theme,
-                      controller: _nameController,
-                      hint: 'enter your name',
-                      icon: const Icon(
-                        LineIcons.user,
-                      ),
-                      label: 'name',
-                      obscureText: false,
-                    ),
-                    AuthField(
-                      validator:
-                          RequiredValidator(errorText: 'password is required'),
-                      theme: _theme,
-                      controller: _emailController,
-                      hint: 'enter your email',
-                      icon: const Icon(
-                        LineIcons.envelope,
-                      ),
-                      label: 'email',
-                      obscureText: false,
-                    ),
-                  ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Personal Info',
+                  style: _theme.headline1,
                 ),
-              ),
-              const SizedBox(height: 16),
-              IntlPhoneField(
-                onSubmitted: (value) {},
-                decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(),
+                const SizedBox(height: 24),
+                Text(
+                  'Hello!',
+                  style: _theme.headline2,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Enter your name and email to continue',
+                  style: _theme.bodyText2,
+                ),
+                const SizedBox(height: 24),
+                AuthField(
+                  validator:
+                      RequiredValidator(errorText: 'password is required'),
+                  theme: _theme,
+                  controller: _nameController,
+                  hint: 'enter your name',
+                  icon: const Icon(
+                    LineIcons.user,
                   ),
+                  label: 'name',
+                  obscureText: false,
                 ),
-                initialCountryCode: 'IN',
-                onChanged: (phone) {
-                  phoneNumber = phone.completeNumber;
-                  print(phoneNumber);
-                },
-              ),
-              const SizedBox(height: 24),
-              Visibility(
-                child: Column(
+                AuthField(
+                  validator:
+                      EmailValidator(errorText: "the email is not valid"),
+                  theme: _theme,
+                  controller: _emailController,
+                  hint: 'enter your email',
+                  icon: const Icon(
+                    LineIcons.envelope,
+                  ),
+                  label: 'email',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 16),
+                const SizedBox(
+                  height: 10,
+                ),
+                AuthButton(
+                  theme: _theme,
+                  onTap: () async {
+                    //  ToastContext().init(context);
+                    if (_formKey.currentState!.validate()) {
+                      // Toast.show(
+                      //   "Name and Email Verified SuccessFully",
+                      //   backgroundColor: Colors.green,
+                      //   duration: Toast.lengthShort,
+                      // );
+                      email.state = _emailController.text;
+                      name.state = _nameController.text;
+                      Navigator.pushNamed(context, "/password");
+                    }
+                    // Toast.show(
+                    //   "Something went wrong ",
+                    //   backgroundColor: Colors.red,
+                    //   duration: Toast.lengthShort,
+                    // );
+                  },
+                  label: "Next",
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Row(
                   children: [
-                    Text(
-                      "A code was sent to your phone number",
-                      style: _theme.headline2,
-                    ),
-                    const SizedBox(height: 16),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Pinput(
-                        controller: otpController,
-                        length: 6,
-                        onCompleted: (code) async {},
-                        defaultPinTheme: PinTheme(
-                          width: 56,
-                          height: 56,
-                          textStyle: const TextStyle(
-                              fontSize: 20,
-                              color: Color.fromRGBO(30, 60, 87, 1),
-                              fontWeight: FontWeight.w600),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: const Color.fromRGBO(234, 239, 243, 1)),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                    Text("Already have and account? ", style: _theme.bodyText1),
+                    GestureDetector(
+                      child: Text(
+                        "Sign In",
+                        style: _theme.bodyText1?.copyWith(
+                          color: primaryColorLight,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
+                      onTap: () => Navigator.pushNamed(context, "/sign_in"),
+                    )
                   ],
                 ),
-                visible: otpVisibility.state,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              AuthButton(
-                theme: _theme,
-                onTap: () async {
-                  if (otpVisibility.state) {
-                    if (await _auth.state.verifyOTP()) {
-                      _fireAuth.currentUser!.updateEmail(_emailController.text);
-                      _fireAuth.currentUser!
-                          .updateDisplayName(_nameController.text);
-                      ref.read(nameProvider.state).state = _nameController.text;
-                      ref.read(emailProvider.state).state = _emailController.text;
-                      ref.read(phoneProvider.state).state = phoneNumber;
-
-                      Toast.show(
-                        "Phone Verified SuccessFully",
-                        backgroundColor: Colors.green,
-                        duration: Toast.lengthShort,
-                      );
-                      Navigator.pushNamed(context, "/password");
-                    } else {
-                      Toast.show(
-                        "Something went wrong with verification",
-                        backgroundColor: Colors.red,
-                        duration: Toast.lengthShort,
-                      );
-                    }
-                  } else {
-                    _auth.state.loginWithPhone(phoneNumber, context);
-                  }
-                },
-                label: otpVisibility.state ? "Next" : "Verify",
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  Text("Already have and account? ", style: _theme.bodyText1),
-                  GestureDetector(
-                    child: Text(
-                      "Sign In",
-                      style: _theme.bodyText1!.copyWith(
-                        color: primaryColorLight,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    onTap: () => Navigator.pushNamed(context, "/sign_in"),
-                  )
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    
+    super.dispose();
   }
 
   // Future<bool> loginWithPhone(String phoneNumber) async {
