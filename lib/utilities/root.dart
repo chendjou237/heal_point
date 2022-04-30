@@ -32,9 +32,9 @@ class Root extends ConsumerWidget {
         data: (authenticatedUser) {
           if (authenticatedUser != null) {
             // database.getPatient(authenticatedUser.uid);
-            return const SignIn();
+            return const HealPoint();
           } else {
-            return const SignIn();
+            return const HealPoint();
           }
         });
   }

@@ -71,7 +71,9 @@ class SignIn extends ConsumerWidget {
                 const SizedBox(height: 24),
                 AuthButton(
                   theme: theme,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/heal');
+                  },
                   label: "Login",
                 ),
                 const SizedBox(height: 16),
