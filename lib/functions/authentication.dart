@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
-import 'package:heal_point/utilities/palette.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:toast/toast.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
+
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:auto_route/auto_route.dart'; 
 import '../models/models.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/providers.dart';
 
 class Authentication {
@@ -29,7 +30,8 @@ class Authentication {
             patient.copyWith(id: response.user?.uid ?? "no id"))) {
           // Toast.show("Successful signed up",
           // duration: Toast.lengthShort, backgroundColor: successColor);
-          Navigator.pushNamed(context, '/phone_verification');
+          // Navigator.pushNamed(context, '/phone_verification');
+          context.pushRoute(PhoneVerificationRoute());
         }
         // Toast.show("error while signing up",
         //     duration: Toast.lengthShort, backgroundColor: errorColor);
@@ -107,8 +109,9 @@ class Authentication {
           .doc(userCred.user?.uid)
           .get()
           .then((value) => value.exists)) {
-        await _read(databaseProvider).getPatient(userCred.user!.uid );
-        Navigator.of(context).pushNamed( "/");
+        await _read(databaseProvider).getPatient(userCred.user!.uid);
+        // Navigator.of(context).pushNamed("/");
+        context.pushRoute( HealPointRoute());
       }
 
       await _read(databaseProvider).createPatient(Patient(
@@ -116,7 +119,7 @@ class Authentication {
           phoneNumber: userCred.user?.phoneNumber ?? "0000",
           names: userCred.user?.displayName ?? "unknown",
           email: userCred.user?.email ?? "undefined"));
-      Navigator.of(context).pushNamed( "/");
+      Navigator.of(context).pushNamed("/");
     } on FirebaseAuthException catch (e) {
       throw e.message ?? e.toString();
     }
@@ -136,7 +139,8 @@ class Authentication {
       //   duration: 3,
       // );
       result = true;
-      Navigator.of(context).pushNamed("/sign_up");
+      // Navigator.of(context)shNamed("/sign_up");
+      context.router.popAndPush(SignUpRoute());
     } on FirebaseException catch (e) {
       result = false;
       print(e.message);

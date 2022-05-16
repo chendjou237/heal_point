@@ -18,7 +18,7 @@ final nameProvider = StateProvider((_) => "");
 final phoneProvider = StateProvider((_) => "");
 final emailProvider = StateProvider((_) => "");
 
-class SignUp extends ConsumerStatefulWidget {
+class SignUpPage extends ConsumerStatefulWidget {
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -27,7 +27,7 @@ String verificationID = "";
 final otpVisibilityProvider = StateProvider((_) => false);
 TextEditingController otpController = TextEditingController();
 
-class _SignUpState extends ConsumerState<SignUp> {
+class _SignUpState extends ConsumerState<SignUpPage> {
   TextEditingController phoneController = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;

@@ -3,11 +3,14 @@ import 'dart:convert';
 class Drug {
   final String id;
   final String name;
-  final String quantity;
+  final int quantity;
   final String? image;
-  final String price;
+  final double price;
   final String details;
-  Drug({
+  final String type;
+  final String category;
+  Drug( {
+   required this.type, required this.category, 
     required this.id,
     required this.name,
     required this.quantity,
@@ -24,6 +27,8 @@ class Drug {
       'image': image,
       'price': price,
       'details': details,
+      'type': type,
+      'category': category,
     };
   }
 
@@ -31,10 +36,12 @@ class Drug {
     return Drug(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
-      quantity: map['quantity'] ?? '',
+      quantity: map['quantity'] ?? 0,
       image: map['image'],
-      price: map['price'] ?? '',
+      price: map['price'] ?? 0.0,
       details: map['details'] ?? '',
+      type: map['type'] ?? '',
+      category: map['category'] ??'',
     );
   }
 

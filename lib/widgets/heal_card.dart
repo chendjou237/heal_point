@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
+import 'package:auto_route/auto_route.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import '../models/models.dart';
 
 class HealCard extends StatelessWidget {
   const HealCard({
     Key? key,
     required TextTheme theme,
-  required this.healthCenter,
+    required this.healthCenter,
   })  : _theme = theme,
         super(key: key);
 
@@ -18,7 +19,8 @@ class HealCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/center_detail');
+        // Navigator.pushNamed(context, '/center_detail');
+        context.pushRoute( CenterDetailsRoute());
       },
       child: Container(
         margin: const EdgeInsets.only(right: 20),
@@ -33,7 +35,7 @@ class HealCard extends StatelessWidget {
           ],
           color: Colors.black,
           borderRadius: BorderRadius.circular(10),
-          image:  DecorationImage(
+          image: DecorationImage(
             opacity: 0.7,
             image: AssetImage(healthCenter.image),
             fit: BoxFit.cover,

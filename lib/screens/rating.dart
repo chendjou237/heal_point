@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Rating extends StatelessWidget {
-  const Rating({ Key? key }) : super(key: key);
+class RatingsPage extends StatelessWidget {
+  const RatingsPage({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

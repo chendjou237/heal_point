@@ -15,3 +15,5 @@ export 'rating.dart';
 export 'heal_point.dart';
 export 'loading_screen.dart';
 export 'phone_verification.dart';
+export 'catalogue.dart';
+export 'center_detail.dart';

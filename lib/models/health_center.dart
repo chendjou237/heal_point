@@ -17,7 +17,6 @@ class HealthCenter {
     required this.image,
     required this.description,
   });
-  
 
   Map<String, dynamic> toMap() {
     return {
@@ -42,8 +41,19 @@ class HealthCenter {
       description: map['description'] ?? '',
     );
   }
-
+  factory HealthCenter.initial() {
+    return HealthCenter(
+      id: '',
+      name: '',
+      address: '',
+      image: '',
+      phoneNumber: '',
+      rating: 0.0,
+      description: '',
+    );
+  }
   String toJson() => json.encode(toMap());
 
-  factory HealthCenter.fromJson(String source) => HealthCenter.fromMap(json.decode(source));
+  factory HealthCenter.fromJson(String source) =>
+      HealthCenter.fromMap(json.decode(source));
 }

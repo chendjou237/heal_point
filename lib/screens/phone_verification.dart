@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
 import 'package:heal_point/utilities/utilities.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,16 +9,17 @@ import 'package:toast/toast.dart';
 
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
+import 'package:auto_route/auto_route.dart';
 
-class PhoneVerification extends ConsumerStatefulWidget {
-  const PhoneVerification({Key? key}) : super(key: key);
+class PhoneVerificationPage extends ConsumerStatefulWidget {
+  const PhoneVerificationPage({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _PhoneVerificationState();
 }
 
-class _PhoneVerificationState extends ConsumerState<PhoneVerification> {
+class _PhoneVerificationState extends ConsumerState<PhoneVerificationPage> {
   @override
   Widget build(BuildContext context) {
     final otpVisibility = ref.watch(otpVisibilityProvider.state);
@@ -106,7 +108,9 @@ class _PhoneVerificationState extends ConsumerState<PhoneVerification> {
                       //   backgroundColor: Colors.green,
                       //   duration: Toast.lengthShort,
                       // );
-                      Navigator.pushNamed(context, "/heal");
+                      // Navigator.pushNamed(context, "/heal");
+                      context.pushRoute(RootRouter());
+                      
                     }
                   } else {
                     await _auth.state.loginWithPhone(phoneNumber, context);
