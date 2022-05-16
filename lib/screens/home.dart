@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:heal_point/models/models.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/routes/route.gr.dart';
+import 'package:heal_point/screens/notification.dart';
 import 'package:heal_point/screens/screens.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -42,7 +43,7 @@ class HomePage extends ConsumerWidget {
                     //   MaterialPageRoute(
                     //       builder: (context) => const ProfilePage()),
                     // );
-                    context.pushRoute(ProfileRouter());
+                    context.pushRoute(const ProfileRouter());
                     // controller.jumpToTab(3);
                   },
                   child: const Hero(
@@ -76,7 +77,8 @@ class HomePage extends ConsumerWidget {
                         //       context,
                         //       MaterialPageRoute(
                         //           builder: (context) => SignIn()));
-                        context.pushRoute(RootRouter());
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const Notifications()));
                       },
                       icon: const Icon(
                         LineIcons.bell,
@@ -98,26 +100,21 @@ class HomePage extends ConsumerWidget {
               child: ListView(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                children: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    .map(
-                      (e) { 
-                     
-                        return HealCard(
-                        theme: _theme,
-                        healthCenter:   HealthCenter(
-                            id: "",
-                            name: "Central Hospital",
-                            address: "poste central",
-                            phoneNumber: "+237678784546",
-                            rating: 2.2,
-                            image:
-                                "assets/images/health_center/central_hospital.jpg",
-                            description:
-                                "The hospital somewhere in the center of yaounde"),
-                      );
-                      }
-                    )
-                    .toList(),
+                children: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((e) {
+                  return HealCard(
+                    theme: _theme,
+                    healthCenter: HealthCenter(
+                        id: "",
+                        name: "Central Hospital",
+                        address: "poste central",
+                        phoneNumber: "+237678784546",
+                        rating: 2.2,
+                        image:
+                            "assets/images/health_center/central_hospital.jpg",
+                        description:
+                            "The hospital somewhere in the center of yaounde"),
+                  );
+                }).toList(),
               ),
             ),
             const SizedBox(height: 24),

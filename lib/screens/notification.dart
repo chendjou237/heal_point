@@ -1,4 +1,3 @@
-// TODO Implement this library.
 // ignore: unused_import
 import 'package:flutter/material.dart';
 
@@ -15,19 +14,20 @@ class Notifications extends StatelessWidget {
 
   PreferredSizeWidget appBar() {
     return AppBar(
-      title: Text('Notifications'),
-      backgroundColor: Color.fromARGB(255, 112, 171, 219),
+      title: const Text('Notifications'),
+      backgroundColor: const Color.fromARGB(255, 112, 171, 219),
     );
   }
 
   Widget listView() {
-    backgroundColor: Color.fromARGB(255, 226, 250, 255);
+    backgroundColor:
+    const Color.fromARGB(255, 226, 250, 255);
     return ListView.separated(
         itemBuilder: (context, index) {
           return listViewItem(index);
         },
         separatorBuilder: (context, index) {
-          return Divider(height: 0);
+          return const Divider(height: 0);
         },
         itemCount: 15);
   }
@@ -60,12 +60,15 @@ class Notifications extends StatelessWidget {
     return Container(
       height: 50,
       width: 50,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.grey.shade300,
       ),
-      child: Icon(Icons.notifications, size:25, color: Color.fromARGB(255, 5, 25, 204),
+      child: const Icon(
+        Icons.notifications,
+        size: 25,
+        color: Color.fromARGB(255, 5, 25, 204),
       ),
     );
   }
@@ -82,9 +85,8 @@ class Notifications extends StatelessWidget {
               fontSize: textSize,
               color: Colors.black,
               fontWeight: FontWeight.bold),
-          children: [
+          children: const [
             TextSpan(
-              
               text: 'Message Description',
               style: TextStyle(
                 fontWeight: FontWeight.w400,
@@ -98,10 +100,10 @@ class Notifications extends StatelessWidget {
 
   Widget timeAndDate(int index) {
     return Container(
-      margin: EdgeInsets.only(top: 5),
+      margin: const EdgeInsets.only(top: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: const [
           Text(
             "15-05-2022",
             style: TextStyle(
