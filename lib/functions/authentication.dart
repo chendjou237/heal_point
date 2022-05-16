@@ -65,6 +65,8 @@ class Authentication {
     }
   }
 
+  
+
   Future<bool> loginWithPhone(String phoneNumber, BuildContext context) async {
     bool response = false;
     print("The number to be input is $phoneNumber");
