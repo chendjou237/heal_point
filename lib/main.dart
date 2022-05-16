@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-// Import the generated file
 import 'firebase_options.dart';
 import 'screens/screens.dart';
 import 'utilities/utilities.dart';
@@ -13,28 +13,34 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ProviderScope(child: HealPointApp()));
+  runApp( ProviderScope(child: HealPointApp()));
 }
 
 class HealPointApp extends StatelessWidget {
-  const HealPointApp({Key? key}) : super(key: key);
-
+   HealPointApp({Key? key}) : super(key: key);
+  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => const Root(),
-        '/home': (context) => const Home(),
-        '/sign_up': (context) => SignUp(),
-        '/sign_in': (context) => const SignIn(),
-        '/center_detail': (context) => const CenterDetails(),
-        '/heal':(context) => HealPointApp(),
-        
-        // '/verify_phone_number': (context) => const VerifyPhoneScreen(),
-        // '/personal_info': (context) => const PersonalInfo(),
-        '/password': (context) => const PasswordScreen(),
-      },
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
+      // routes: {
+      //   '/': (context) => const RootPage(),
+      //   '/heal': (context) => const HealPoint(),
+      //   '/sign_up': (context) => SignUpPage(),
+
+      //   '/sign_in': (context) => const SignIn(),
+      //   '/center_detail': (context) => const CenterDetailsPage(),
+
+      //   '/phone_verification': (context) => const PhoneVerificationPage(),
+
+      //   // '/personal_info': (context) => const PersonalInfo(),
+      //   '/password': (context) => const PasswordPage(),
+      //   'drug_detail': (context) => const DrugDetailPage(),
+      //   'catalogue': (context) => const CataloguePage(),
+      //   'center_detail': (context) => const CenterDetailsPage(),
+      // },
       title: 'Flutter Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: backgroundColor,
@@ -59,15 +65,19 @@ class HealPointApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: primaryColorDark,
           ),
+          headline3: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+            color: primaryColorLight,
+          ),
           bodyText1: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.w400,
           ),
           bodyText2: TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.w400,
-            color: Colors.black54,
-          ),
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
+              color: Colors.black87),
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

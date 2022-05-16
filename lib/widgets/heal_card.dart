@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:heal_point/routes/route.gr.dart';
+import '../models/models.dart';
 
 class HealCard extends StatelessWidget {
   const HealCard({
     Key? key,
     required TextTheme theme,
+    required this.healthCenter,
   })  : _theme = theme,
         super(key: key);
 
   final TextTheme _theme;
+  final HealthCenter healthCenter;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/center_detail');
+        // Navigator.pushNamed(context, '/center_detail');
+        context.pushRoute( CenterDetailsRoute());
       },
       child: Container(
         margin: const EdgeInsets.only(right: 20),
@@ -29,9 +35,9 @@ class HealCard extends StatelessWidget {
           ],
           color: Colors.black,
           borderRadius: BorderRadius.circular(10),
-          image: const DecorationImage(
+          image: DecorationImage(
             opacity: 0.7,
-            image: AssetImage('assets/images/profile_pic.jpg'),
+            image: AssetImage(healthCenter.image),
             fit: BoxFit.cover,
           ),
         ),
@@ -59,13 +65,13 @@ class HealCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Hopital Central",
-                    style: _theme.headline2!.copyWith(color: Colors.white)),
+                Text(healthCenter.name,
+                    style: _theme.headline2?.copyWith(color: Colors.white)),
                 const SizedBox(height: 8),
                 RatingBar.builder(
                   ignoreGestures: true,
                   itemSize: 16,
-                  initialRating: 3,
+                  initialRating: healthCenter.rating,
                   minRating: 1,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
@@ -86,8 +92,8 @@ class HealCard extends StatelessWidget {
                         size: 16, color: Colors.white.withOpacity(0.5)),
                     const SizedBox(width: 8),
                     Text(
-                      'Mvog Mbi',
-                      style: _theme.bodyText2!.copyWith(color: Colors.white),
+                      healthCenter.address,
+                      style: _theme.bodyText2?.copyWith(color: Colors.white),
                     ),
                   ],
                 ),

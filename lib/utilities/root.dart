@@ -5,37 +5,58 @@ import 'package:heal_point/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../screens/screens.dart';
+import '../widgets/widgets.dart';
 
-class Root extends ConsumerWidget {
-  const Root({Key? key}) : super(key: key);
+User? userState;
+
+class RootPage extends ConsumerWidget {
+  const RootPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authStateProvider);
     final database = ref.read(databaseProvider);
     final _theme = Theme.of(context).textTheme;
-    print(user);
+    // print(user);
 
     final auth = ref.read(firebaseAuthProvider);
-    
+
     return user.when(
-        loading: () =>
-            const Scaffold(body: Center(child: CircularProgressIndicator())),
-        error: (_, __) => Scaffold(
-              body: Container(
-                child: Center(
-                  child: Text("Something went wrong", style: _theme.headline2),
-                ),
-                color: Colors.green,
-              ),
-            ),
+        loading: () => const LoadingScreen(),
+        error: (_, __) => ErrorScreen(theme: _theme),
         data: (authenticatedUser) {
+          userState = authenticatedUser;
           if (authenticatedUser != null) {
             // database.getPatient(authenticatedUser.uid);
-            return const HealPoint();
+
+            return const HealPointPage();
           } else {
-            return const HealPoint();
+            return  SignInPage();
           }
         });
   }
 }
+
+// class RootTwoPage extends ConsumerWidget {
+//   const RootTwoPage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     return StreamBuilder<Object>(
+//       stream: ref.read(authProvider.state).state.authStateChanges as Stream<Object>,
+//       builder: (context, snapshot) {
+//         if (snapshot.hasError) {
+//           return ErrorScreen(theme: Theme.of(context).textTheme);
+//         }
+//         if (snapshot.hasData) {
+//           return const HealPointPage();
+//         } else {
+//           return SignInPage();
+//         }
+          
+//         }
+//         // return Container();
+      
+//     );
+//   }
+// }

@@ -2,28 +2,38 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:heal_point/providers/providers.dart';
+import 'package:heal_point/utilities/palette.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+class ProfilePage extends ConsumerWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _auth = ref.read(authProvider);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 226, 250, 255),
       body: Stack(
         children: [
-
           Positioned(
             top: 50,
             left: 20,
-            child: Icon(Icons.arrow_back, color: Colors.grey, size: 30,
+            child: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: secondaryColor,
+                size: 30,
               ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
           ),
-           
           Positioned(
             top: 50,
             right: 20,
-            child: Icon(Icons.settings, color: Colors.grey, size: 30),
+            child: Icon(Icons.settings, color: secondaryColor, size: 30),
           ),
           Center(
             child: Padding(
@@ -33,10 +43,13 @@ class Profile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 70,
-                    backgroundImage:
-                        AssetImage('assets/images/profile_pic.jpg'),
+                  Hero(
+                    tag: 'profile',
+                    child: CircleAvatar(
+                      radius: 70,
+                      backgroundImage:
+                          AssetImage('assets/images/profile_pic.jpg'),
+                    ),
                   ),
                   // ignore: prefer_const_constructors
                   SizedBox(height: 20),
@@ -61,7 +74,7 @@ class Profile extends StatelessWidget {
                   SizedBox(height: 20),
                   Container(
                     decoration: BoxDecoration(
-                      color: Color(0xff90e0ef),
+                      color: secondaryColorLight,
                       borderRadius: BorderRadius.all(
                         Radius.circular(30),
                       ),
@@ -97,10 +110,13 @@ class Profile extends StatelessWidget {
                     arrowShown: true,
                   ),
                   SizedBox(height: 20),
-                  ProfileMenuItem(
-                    text: 'Logout',
-                    icon: Icons.logout,
-                    arrowShown: false,
+                  GestureDetector(
+                    onTap: ()async => await _auth.signOut(context),
+                    child: ProfileMenuItem(
+                      text: 'Logout',
+                      icon: Icons.logout,
+                      arrowShown: false,
+                    ),
                   ),
                 ],
               ),
@@ -125,7 +141,7 @@ class ProfileMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[800],
+        color: primaryColor,
         borderRadius: BorderRadius.all(
           Radius.circular(30),
         ),
@@ -148,7 +164,7 @@ class ProfileMenuItem extends StatelessWidget {
               ),
               SizedBox(width: 10),
               Text(
-                '$text',
+                text,
                 style: GoogleFonts.lato(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
