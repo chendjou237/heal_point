@@ -6,8 +6,8 @@ import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/utilities/palette.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Profile extends ConsumerWidget {
-  const Profile({Key? key}) : super(key: key);
+class ProfilePage extends ConsumerWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

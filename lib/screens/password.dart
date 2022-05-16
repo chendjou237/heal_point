@@ -10,14 +10,14 @@ import 'package:toast/toast.dart';
 import '../models/models.dart';
 import '../widgets/widgets.dart';
 
-class PasswordScreen extends ConsumerStatefulWidget {
-  const PasswordScreen({Key? key}) : super(key: key);
+class PasswordPage extends ConsumerStatefulWidget {
+  const PasswordPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<PasswordScreen> createState() => _PasswordScreenState();
+  ConsumerState<PasswordPage> createState() => _PasswordScreenState();
 }
 
-class _PasswordScreenState extends ConsumerState<PasswordScreen> {
+class _PasswordScreenState extends ConsumerState<PasswordPage> {
   @override
   Widget build(BuildContext context) {
     final passwordController = TextEditingController();
@@ -131,6 +131,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                         //   backgroundColor: Colors.red,
                         //   duration: Toast.lengthShort,
                         // );
+                        
                       } on FirebaseAuthException catch (e) {
                         throw e.message ?? e.toString();
                       }

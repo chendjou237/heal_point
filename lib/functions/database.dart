@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:toast/toast.dart';
+
 
 import '../models/models.dart';
 import '../providers/providers.dart';
@@ -16,6 +16,7 @@ class Database {
   Future<bool> createPatient(Patient patient) async {
     bool result = false;
     try {
+      
       await _firestore
           .collection('patients')
           .doc(patient.id)

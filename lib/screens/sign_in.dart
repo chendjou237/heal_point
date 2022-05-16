@@ -6,22 +6,31 @@ import 'package:line_icons/line_icons.dart';
 
 import 'package:heal_point/utilities/palette.dart';
 import 'package:toast/toast.dart';
+import 'package:auto_route/auto_route.dart';
 
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
+class SignInPage extends ConsumerStatefulWidget {
+   SignInPage({Key? key}) : super(key: key);
 
-class SignIn extends ConsumerWidget {
-  const SignIn({Key? key}) : super(key: key);
-
-  
   @override
-  Widget build(BuildContext context,ref ) {
+  ConsumerState<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends ConsumerState<SignInPage> {
+  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
+
+  // final key = 
+  @override
+  Widget build(BuildContext context ) {
     final theme = Theme.of(context).textTheme;
     final auth = ref.read(authProvider);
     // ToastContext().init(context);
     final phoneController = TextEditingController();
     final passwordController = TextEditingController();
     return Scaffold(
+      
+      key: _scaffoldkey,
       body: SafeArea(
         child: Container(
           width: double.infinity,
@@ -78,7 +87,8 @@ class SignIn extends ConsumerWidget {
                 AuthButton(
                   theme: theme,
                   onTap: () {
-                    Navigator.pushNamed(context, "/");
+                    // Navigator.pushNamed(context, "/");
+                    // context.p
 
                   },
                   label: "Login",
@@ -136,8 +146,14 @@ class SignIn extends ConsumerWidget {
               ],
             ),
           ),
-        ),
+        ),//
       ),
     );
+  }
+  
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

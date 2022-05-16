@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:heal_point/models/models.dart';
 import 'package:heal_point/providers/providers.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,14 +12,15 @@ import 'package:line_icons/line_icons.dart';
 
 import '../widgets/widgets.dart';
 
-class Home extends ConsumerWidget {
-  const Home({Key? key}) : super(key: key);
+class HomePage extends ConsumerWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ref) {
     final _theme = Theme.of(context).textTheme;
     final patient = ref.read(patientControllerProvider);
     final _auth = ref.read(authProvider);
+    // final _centerConsume = ref.read(selectedCenterProvider.state);
     print("controller ${patient.toString()}");
     return Padding(
       padding: const EdgeInsets.only(
@@ -34,16 +37,17 @@ class Home extends ConsumerWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Profile()),
-                    );
-
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const ProfilePage()),
+                    // );
+                    context.pushRoute(ProfileRouter());
                     // controller.jumpToTab(3);
                   },
                   child: const Hero(
                     tag: 'profile',
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       radius: 30.0,
                       backgroundImage:
                           AssetImage('assets/images/profile_pic.jpg'),
@@ -72,6 +76,7 @@ class Home extends ConsumerWidget {
                         //       context,
                         //       MaterialPageRoute(
                         //           builder: (context) => SignIn()));
+                        context.pushRoute(RootRouter());
                       },
                       icon: const Icon(
                         LineIcons.bell,
@@ -95,18 +100,22 @@ class Home extends ConsumerWidget {
                 scrollDirection: Axis.horizontal,
                 children: [1, 2, 3, 4, 5, 6, 7, 8, 9]
                     .map(
-                      (e) => HealCard(
+                      (e) { 
+                     
+                        return HealCard(
                         theme: _theme,
-                        healthCenter: HealthCenter(
+                        healthCenter:   HealthCenter(
                             id: "",
                             name: "Central Hospital",
                             address: "poste central",
                             phoneNumber: "+237678784546",
                             rating: 2.2,
-                            image: "assets/images/central_hospital.jpg",
+                            image:
+                                "assets/images/health_center/central_hospital.jpg",
                             description:
                                 "The hospital somewhere in the center of yaounde"),
-                      ),
+                      );
+                      }
                     )
                     .toList(),
               ),
@@ -161,7 +170,8 @@ class Home extends ConsumerWidget {
                             address: "Ngousso",
                             phoneNumber: "+237678784546",
                             rating: 3.1,
-                            image: "assets/images/general_hospital.jpg",
+                            image:
+                                "assets/images/health_center/general_hospital.jpg",
                             description:
                                 "The hospital somewhere in the center of yaounde"),
                       ),
@@ -190,7 +200,8 @@ class Home extends ConsumerWidget {
                             address: "Etoudi",
                             phoneNumber: "+237678784546",
                             rating: 4.2,
-                            image: "assets/images/statoise_pharmarcie.jpg",
+                            image:
+                                "assets/images/health_center/statoise_pharmarcie.jpg",
                             description:
                                 "The hospital somewhere in the center of yaounde"),
                       ),
@@ -219,7 +230,8 @@ class Home extends ConsumerWidget {
                             address: "Zouatoupsi",
                             phoneNumber: "+237678784546",
                             rating: 2.8,
-                            image: "assets/images/wellstar_clinic.jpg",
+                            image:
+                                "assets/images/health_center/wellstar_clinic.jpg",
                             description:
                                 "The hospital somewhere in the center of yaounde"),
                       ),

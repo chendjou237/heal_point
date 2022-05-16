@@ -31,7 +31,7 @@ class CategoryBox extends ConsumerWidget {
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: const AssetImage("assets/images/pharmacies_de_garde.jpg"),
+            image: const AssetImage("assets/images/health_center/pharmacies_de_garde.jpg"),
             opacity: selectedCity.state != name ? 0.6 : 0.2,
             fit: BoxFit.cover,
           ),
