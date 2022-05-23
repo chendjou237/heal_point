@@ -7,7 +7,8 @@ import 'package:heal_point/widgets/heal_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import '../providers/providers.dart';
-// import 'package:pay_unit_sdk/pay_unit_sdk.dart';
+
+import 'package:pay_unit_sdk/pay_unit_sdk.dart';
 class DoctorDetailsPage extends ConsumerWidget {
   DoctorDetailsPage({Key? key}) : super(key: key);
   static const routeName = '/center_detail';
