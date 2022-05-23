@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/utilities/root.dart';
 
 import '../screens/screens.dart';
@@ -9,105 +10,113 @@ import '../screens/screens.dart';
     AutoRoute(
       path: '/',
       name: 'RootRouter',
-      page: RootPage,
+      page: HealPointPage,
       initial: true,
       children: [
        
-        AutoRoute(
-          path: 'sign_in',
-          page: SignInPage,
-        ),
-        AutoRoute(
-          path: 'heal_point',
-          page: HealPointPage,
-        ),
-        AutoRoute(
-          path: 'sign_up',
-          name: 'SignUpRouter',
-          page: EmptyRouterPage,
-          children: [
-         AutoRoute(
-           path: '',
-           page: SignUpPage,
-         ),
-         AutoRoute(
-           path: 'password',
-           page: PasswordPage,
-         ),
-         AutoRoute(
-           path: 'phone_verification',
-           page: PhoneVerificationPage,
-         ),
-          ],
-        ),
+        
         AutoRoute(
           path: 'home',
           name: 'homeRouter',
-          page: EmptyRouterPage,
+          page:HomePage,
           children: [
-         AutoRoute(
-           path: '',
-           page: HomePage,
-         ),
-         AutoRoute(
-           path: 'center_details',
-           page: CenterDetailsPage,
-         ),
-         AutoRoute(
-           path: 'profile',
-           name: 'ProfileRouter',
-           page: ProfilePage,
-         ),
+           
+            AutoRoute(
+              path: 'notifications',
+              page: NotificationsPage,
+            ),
+           
           ],
         ),
         AutoRoute(
-          path: 'near_me',
-          name: 'NearMeRouter',
-          page: NearMePage,
+          path: 'doctors',
+          name: 'doctorsRouter',
+          page: DoctorsPage,
+          children: [
+           
+            AutoRoute(
+              path: 'doctor_detail',
+              page: DoctorDetailsPage,
+            ),
+           
+            AutoRoute(
+              path: 'chat_room',
+              page: ChatRoomPage,
+            ),
+          
+          ],
+        ),  
+           AutoRoute(
+          path: 'health_cares',
+          name: 'HealthCaresRouter',
+          page: HealthCaresPage,
+          children: [
+          
+            AutoRoute(
+              path: 'center_details',
+              page: CenterDetailsPage,
+            ),
+            AutoRoute(
+              path: 'near_me',
+              page: NearMePage,
+            ),
+          ],
         ),
         AutoRoute(
           path: 'pharmacy',
           name: 'PharmacyRouter',
-          page: EmptyRouterPage,
+          page: PharmacyPage,
           children: [
-         AutoRoute(
-           path: '',
-           page: PharmacyPage,
-         ),
-         AutoRoute(
-           path: 'catalogue',
-           page: CataloguePage,
-         ),
-         AutoRoute(
-           path: 'drug_details',
-           page: DrugDetailPage,
-         ),
+           
+            AutoRoute(
+              path: 'catalogue',
+              page: CataloguePage,
+            ),
+            AutoRoute(
+              path: 'drug_details',
+              page: DrugDetailPage,
+            ),
           ],
         ),
+   
         AutoRoute(
-          path: 'orders',
-          name: 'OrdersRouter',
-          page: EmptyRouterPage,
-          children: [
-         AutoRoute(
-           path: '',
-           page: OrdersPage,
-         )
-          ],
+          path: 'account',
+          name: 'ProfileRouter',
+          page: ProfilePage,
+          
         ),
-        AutoRoute(
-          path: 'ratings',
-          name: 'RatingsRouter',
-          page: EmptyRouterPage,
-          children: [
-         AutoRoute(
-           path: '',
-           page: RatingsPage,
-         ),
-          ],
-        ),],
+      ],
     ),
-      
+    AutoRoute(
+      path: '/authentication',
+      page: EmptyRouterPage,
+      children: [
+         AutoRoute(
+          path: '',
+          page: SignInPage,
+        ),
+     
+       AutoRoute(
+          path: 'sign_up',
+          name: 'SignUpRouter',
+          page: EmptyRouterPage,
+          children: [
+            AutoRoute(
+              path: '',
+              page: SignUpPage,
+            ),
+            AutoRoute(
+              path: 'password',
+              page: PasswordPage,
+            ),
+            AutoRoute(
+              path: 'phone_verification',
+              page: PhoneVerificationPage,
+            ),
+          ],
+        ),
+      ],
+    ),
   ],
 )
 class $AppRouter {}

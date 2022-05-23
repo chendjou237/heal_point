@@ -12,17 +12,15 @@ import '../models/models.dart';
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
 
-final currentIndexProvider = StateProvider((ref) => 0);
-final infoProvider = StateProvider((ref) => Directions);
 
-class HealPointPage extends ConsumerStatefulWidget {
-  const HealPointPage({Key? key}) : super(key: key);
+class DoctorScreensPage extends ConsumerStatefulWidget {
+  const DoctorScreensPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HealPointState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _DoctorScreensState();
 }
 
-class _HealPointState extends ConsumerState<HealPointPage> {
+class _DoctorScreensState extends ConsumerState<DoctorScreensPage> {
   final PageController _pageController = PageController(initialPage: 0);
   
   @override
@@ -39,7 +37,7 @@ class _HealPointState extends ConsumerState<HealPointPage> {
     final user = ref.read(firebaseAuthProvider);
     final _theme = Theme.of(context).textTheme;
     return FutureBuilder(
-        future: db.patientDbInitializer(user.currentUser?.uid ?? "no id"),
+        future: db.getPatient(user.currentUser?.uid ?? "no id"),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return AutoTabsScaffold(
@@ -60,10 +58,10 @@ class _HealPointState extends ConsumerState<HealPointPage> {
            
               routes: const [
                 HomeRouter(),
-                DoctorsRouter(),
-                HealthCaresRouter(),
-                PharmacyRouter(),
-                ProfileRouter(),
+                DoctorsRoute(),
+                HealthCaresRoute(),
+                PharmacyRoute(),
+                ProfileRoute(),
               ],
               bottomNavigationBuilder: (_, tabsRouter) {
                 return ClipRRect(
@@ -90,17 +88,17 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                           text: 'Home',
                         ),
                          GButton(
-                          icon: LineIcons.doctor,
-                          text: 'Doctor',
+                          icon: LineIcons.calendar,
+                          text: 'Appointments',
                         ),
                         GButton(
-                          icon: LineIcons.hospital,
-                          text: 'Health Care',
+                          icon: LineIcons.phone,
+                          text: 'Call Request',
                         ),
-                        GButton(
-                          icon: LineIcons.medkit,
-                          text: 'Pharmacy',
-                        ),
+                        // GButton(
+                        //   icon: LineIcons.medkit,
+                        //   text: 'Pharmacy',
+                        // ),
                        
                         GButton(
                           icon: LineIcons.user,

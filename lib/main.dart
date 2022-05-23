@@ -25,22 +25,22 @@ class HealPointApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
-      // routes: {
-      //   '/': (context) => const RootPage(),
-      //   '/heal': (context) => const HealPoint(),
-      //   '/sign_up': (context) => SignUpPage(),
+      
+      
+      
+      
 
-      //   '/sign_in': (context) => const SignIn(),
-      //   '/center_detail': (context) => const CenterDetailsPage(),
+      
+      
 
-      //   '/phone_verification': (context) => const PhoneVerificationPage(),
+      
 
-      //   // '/personal_info': (context) => const PersonalInfo(),
-      //   '/password': (context) => const PasswordPage(),
-      //   'drug_detail': (context) => const DrugDetailPage(),
-      //   'catalogue': (context) => const CataloguePage(),
-      //   'center_detail': (context) => const CenterDetailsPage(),
-      // },
+      
+      
+      
+      
+      
+      
       title: 'Flutter Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: backgroundColor,

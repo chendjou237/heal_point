@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:heal_point/models/models.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/notification.dart';
 import 'package:auto_route/auto_route.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:line_icons/line_icons.dart';
 
 import '../widgets/widgets.dart';
 
-class DoctorsPage extends ConsumerWidget {
-  const DoctorsPage({Key? key}) : super(key: key);
+import '../models/models.dart';
 
-   @override
-  Widget build(BuildContext context, ref) {
+const initialCameraPosition = CameraPosition(
+  target: LatLng(3.952814, 11.516845),
+  zoom: 50.5,
+);
+Directions? info;
+
+class HealthCaresPage extends ConsumerStatefulWidget {
+  const HealthCaresPage({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<HealthCaresPage> createState() => _HealthCaresPageState();
+}
+
+late GoogleMapController googleMapController;
+
+class _HealthCaresPageState extends ConsumerState<HealthCaresPage> {
+  @override
+  Widget build(BuildContext context) {
     final _theme = Theme.of(context).textTheme;
     final patient = ref.read(patientControllerProvider);
     final _auth = ref.read(authProvider);
@@ -90,7 +105,7 @@ class DoctorsPage extends ConsumerWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              "Selections of Doctors?",
+              "For You",
               style: _theme.headline1,
             ),
             const SizedBox(height: 8),
@@ -241,4 +256,103 @@ class DoctorsPage extends ConsumerWidget {
     );
   }
 
+  @override
+  void dispose() {
+    // googleMapController.dispose();
+    super.dispose();
+  }
 }
+
+
+  // final Marker _origin = Marker(
+  //   markerId: const MarkerId("origin"),
+  //   position: initialCameraPosition.target,
+  //   infoWindow: const InfoWindow(title: "My Position"),
+  //   icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+  // );
+  // Marker _destination = const Marker(
+  //   markerId: MarkerId("destination"),
+  // );
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Stack(
+  //     alignment: Alignment.center,
+  //     children: [
+  //       Padding(
+  //         padding: const EdgeInsets.only(bottom: 36.0),
+  //         child: GoogleMap(
+  //           mapType: MapType.hybrid,
+  //           polylines: {
+  //             if (info != null)
+  //               Polyline(
+  //                 polylineId: const PolylineId('overview_polyline'),
+  //                 color: Colors.red,
+  //                 width: 5,
+  //                 points: info!.polylinePoints
+  //                     .map((ref) => LatLng(ref.latitude, ref.longitude))
+  //                     .toList(),
+  //               ),
+  //           },
+  //           markers: {
+  //             _origin,
+  //             _destination,
+  //           },
+  //           onMapCreated: (controller) => googleMapController = controller,
+  //           initialCameraPosition: initialCameraPosition,
+  //           myLocationEnabled: true,
+  //           zoomControlsEnabled: true,
+  //           onLongPress: _addMarker,
+  //         ),
+  //       ),
+  //       if (info != null)
+  //         Positioned(
+  //           top: 20,
+  //           child: Container(
+  //             padding: const EdgeInsets.symmetric(
+  //               horizontal: 12,
+  //               vertical: 6,
+  //             ),
+  //             decoration: BoxDecoration(
+  //               color: secondaryColorLight,
+  //               borderRadius: BorderRadius.circular(20),
+  //               boxShadow: const [
+  //                 BoxShadow(
+  //                   color: Colors.black26,
+  //                   offset: Offset(0, 2),
+  //                   blurRadius: 6.0,
+  //                 ),
+  //               ],
+  //             ),
+  //             child: Text(
+  //               "${info!.totalDistance}, ${info?.totalDuration}",
+  //               style: const TextStyle(
+  //                 fontSize: 18.0,
+  //                 fontWeight: FontWeight.w600,
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //     ],
+  //   );
+  // }
+
+  // void _addMarker(LatLng pos) async {
+  //   setState(() {
+  //     _destination = Marker(
+  //       markerId: const MarkerId("destination"),
+  //       infoWindow: const InfoWindow(title: "destination"),
+  //       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+  //       position: pos,
+  //     );
+  //   });
+
+    // final directions = await DirectionsRepository().getDirections(
+    //   origin: _origin.position,
+    //   destination: pos,
+    // );
+
+  //   setState(() {
+      // info = directions;
+  //   });
+  // }

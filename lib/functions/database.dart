@@ -31,20 +31,38 @@ class Database {
       return result;
     }
   }
-  
-  Future<bool> getHealthCenters(List<String> hids) async {
+
+  Future<bool> getHealthCenters() async {
     try {
-      for (var id in hids)  {
-        await _firestore
-            .collection('hospitals')
-            .doc(id)
-            .get(const GetOptions(source: Source.serverAndCache))
-            .then((value) {
-          List<HealthCenter> newList =
-              _read(healthCentersControllerProvider.notifier).state;
-          newList.add(HealthCenter.fromMap(value.data()!));
-          _read(healthCentersControllerProvider.notifier).state = newList;
+      await _firestore
+          .collection('hospitals')
+          .get(const GetOptions(source: Source.serverAndCache))
+          .then((value) {
+        value.docs.forEach((element) {
+          List<HealthCenter> healthCenters = [];
+          healthCenters.add(HealthCenter.fromMap(element.data()));
+          _read(healthCentersControllerProvider.notifier).data = healthCenters;
         });
+      });
+      return true;
+    } on FirebaseException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
+
+  Future<bool> getDrugs(List<String> dids) async {
+    try {
+      for (var id in dids) {
+        await _firestore
+            .collection('drugs')
+            .get(const GetOptions(source: Source.serverAndCache))
+            .then((value) => value.docs.forEach((element) {
+                  List<Drug> newList =
+                      _read(drugsControllerProvider.notifier).state;
+                  newList.add(Drug.fromMap(element.data()));
+                  _read(drugsControllerProvider.notifier).state = newList;
+                }));
       }
       return true;
     } on FirebaseException catch (e) {
@@ -52,20 +70,59 @@ class Database {
       return false;
     }
   }
-  Future<bool> getDrugs(List<String> dids) async {
+
+  Future<bool> getPatients() async {
     try {
-      for (var id in dids)  {
-        await _firestore
-            .collection('drugs')
-            .doc(id)
-            .get(const GetOptions(source: Source.serverAndCache))
-            .then((value) {
-          List<Drug> newList =
-              _read(drugsControllerProvider.notifier).state;
-          newList.add(Drug.fromMap(value.data()!));
-          _read(drugsControllerProvider.notifier).state = newList;
+      await _firestore
+          .collection('chat_room').where('doctor_email', isEqualTo: _read(doctorControllerProvider).email)
+          .get(const GetOptions(source: Source.serverAndCache))
+          .then((value) {
+        value.docs.forEach((element) {
+          List<Patient> patients = [];
+          patients.add(Patient.fromMap(element.data()));
+          _read(patientsControllerProvider.notifier).data = patients;
         });
-      }
+      });
+      return true;
+    } on FirebaseException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
+
+  Future<bool> getDocs() async {
+    try {
+      await _firestore
+          .collection('doctors')
+          .get(const GetOptions(source: Source.serverAndCache))
+          .then((value) {
+        value.docs.forEach((element) {
+          List<Doctor> doctors = [];
+          doctors.add(Doctor.fromMap(element.data()));
+          _read(doctorsControllerProvider.notifier).data = doctors;
+        });
+      });
+      return true;
+    } on FirebaseException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
+
+  Future<bool> patientDbInitializer(String uid) async {
+    try {
+      await getPatient(uid);
+      await getDocs();
+      return true;
+    } on FirebaseException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
+  Future<bool> doctorDbInitializer(String uid) async {
+    try {
+      await getDoc(uid);
+      await getDocs();
       return true;
     } on FirebaseException catch (e) {
       print(e.message);
@@ -86,6 +143,27 @@ class Database {
         _read(patientControllerProvider.notifier).state = _patient;
         print(
             "in database ${_read(patientControllerProvider.notifier).state.toString()}");
+      });
+      return true;
+    } on FirebaseException catch (err) {
+      print(err.message ?? err.toString());
+      return false;
+    }
+  }
+
+  Future<bool> getDoc(String uid) async {
+    try {
+      await _firestore
+          .collection('doctors')
+          .doc(uid)
+          .get(const GetOptions(source: Source.serverAndCache))
+          .then((doc) {
+        Doctor _doc = Doctor.fromMap(doc.data());
+        _doc = _doc.copyWith(id: uid);
+
+        _read(doctorControllerProvider.notifier).state = _doc;
+        print(
+            "in database ${_read(doctorControllerProvider.notifier).state.toString()}");
       });
       return true;
     } on FirebaseException catch (err) {

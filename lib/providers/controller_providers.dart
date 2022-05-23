@@ -1,6 +1,4 @@
 import 'package:heal_point/controllers/controllers.dart';
-import 'package:heal_point/controllers/drugs_controller.dart';
-import 'package:heal_point/controllers/health_centers_controller.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../models/models.dart';
@@ -15,3 +13,12 @@ final healthCentersControllerProvider =
 final drugsControllerProvider =
     StateNotifierProvider<DrugsController, List<Drug>>(
         (ref) => DrugsController(ref.read, []));
+final doctorsControllerProvider =
+    StateNotifierProvider<DoctorsController, List<Doctor>>(
+        (ref) => DoctorsController(ref.read, []));
+final patientsControllerProvider =
+    StateNotifierProvider<PatientsController, List<Patient>>(
+        (ref) => PatientsController(ref.read, []));
+final doctorControllerProvider =
+    StateNotifierProvider<DoctorController, Doctor>(
+        (ref) => DoctorController(ref.read, Doctor.initial()));

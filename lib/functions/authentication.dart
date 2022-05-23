@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
 
-
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:auto_route/auto_route.dart'; 
+import 'package:auto_route/auto_route.dart';
 import '../models/models.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/providers.dart';
@@ -14,6 +13,24 @@ class Authentication {
   final FirebaseAuth _firebaseAuth;
   final Reader _read;
   Authentication(this._firebaseAuth, this._read);
+
+  Future<bool> signInUser({required String mail, required String pass}) async {
+    bool result = false;
+    try {
+      await _firebaseAuth
+          .signInWithEmailAndPassword(email: mail, password: pass)
+          .then((response) async {
+        if (await _read(databaseProvider).getDoc(response.user!.uid)) {
+          result = true;
+        } else {
+          result = false;
+        }
+      });
+      return result;
+    } on FirebaseAuthException catch (err) {
+      return false;
+    }
+  }
 
   //sign up the user and store his data to firestore
   Future<void> signupUser({
@@ -31,12 +48,12 @@ class Authentication {
           // Toast.show("Successful signed up",
           // duration: Toast.lengthShort, backgroundColor: successColor);
           // Navigator.pushNamed(context, '/phone_verification');
-          context.pushRoute(PhoneVerificationRoute());
+          context.pushRoute(const PhoneVerificationRoute());
         }
         // Toast.show("error while signing up",
         //     duration: Toast.lengthShort, backgroundColor: errorColor);
       });
-    } on FirebaseAuthException catch (err) {
+    } on FirebaseAuthException {
       // Toast.show(
       //   err.message ?? "Something went wrong !",
       //   backgroundColor: errorColor,
@@ -64,8 +81,6 @@ class Authentication {
       return false;
     }
   }
-
-  
 
   Future<bool> loginWithPhone(String phoneNumber, BuildContext context) async {
     bool response = false;
@@ -113,7 +128,7 @@ class Authentication {
           .then((value) => value.exists)) {
         await _read(databaseProvider).getPatient(userCred.user!.uid);
         // Navigator.of(context).pushNamed("/");
-        context.pushRoute( HealPointRoute());
+        context.pushRoute(const RootRouter());
       }
 
       await _read(databaseProvider).createPatient(Patient(
@@ -121,7 +136,7 @@ class Authentication {
           phoneNumber: userCred.user?.phoneNumber ?? "0000",
           names: userCred.user?.displayName ?? "unknown",
           email: userCred.user?.email ?? "undefined"));
-      Navigator.of(context).pushNamed("/");
+      context.router.push(const RootRouter());
     } on FirebaseAuthException catch (e) {
       throw e.message ?? e.toString();
     }
@@ -142,7 +157,7 @@ class Authentication {
       // );
       result = true;
       // Navigator.of(context)shNamed("/sign_up");
-      context.router.popAndPush(SignUpRoute());
+      context.router.popAndPush(const SignUpRoute());
     } on FirebaseException catch (e) {
       result = false;
       print(e.message);
