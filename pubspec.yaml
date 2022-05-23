@@ -39,6 +39,7 @@ dependencies:
   flutter_native_splash: ^2.1.6
   like_button: ^2.0.4
   flutter_rating_bar: ^4.0.0
+  pay_unit_sdk: ^3.0.6
 
 dev_dependencies:
   flutter_test:
