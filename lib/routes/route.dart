@@ -11,47 +11,59 @@ import '../screens/screens.dart';
       path: '/',
       name: 'RootRouter',
       page: HealPointPage,
-      initial: true,
+    
       children: [
        
         
         AutoRoute(
           path: 'home',
-          name: 'homeRouter',
-          page:HomePage,
+          name: 'HomeRouter',
+          page:EmptyRouterPage,
           children: [
            
+            AutoRoute(
+              path: '',
+              page: HomePage,
+            ),
             AutoRoute(
               path: 'notifications',
               page: NotificationsPage,
             ),
-           
-          ],
-        ),
-        AutoRoute(
-          path: 'doctors',
-          name: 'doctorsRouter',
-          page: DoctorsPage,
-          children: [
-           
-            AutoRoute(
+             AutoRoute(
               path: 'doctor_detail',
               page: DoctorDetailsPage,
             ),
-           
             AutoRoute(
               path: 'chat_room',
               page: ChatRoomPage,
             ),
+          ],
+        ),
+        AutoRoute(
+          path: 'doctors',
+          name: 'DoctorsRouter',
+          page: EmptyRouterPage,
+          children: [
+           
+            AutoRoute(
+              path: '',
+              page: DoctorsPage,
+            ),
+           
+           
           
           ],
         ),  
            AutoRoute(
           path: 'health_cares',
           name: 'HealthCaresRouter',
-          page: HealthCaresPage,
+          page: EmptyRouterPage,
           children: [
           
+            AutoRoute(
+              path: '',
+              page: HealthCaresPage,
+            ),
             AutoRoute(
               path: 'center_details',
               page: CenterDetailsPage,
@@ -65,9 +77,13 @@ import '../screens/screens.dart';
         AutoRoute(
           path: 'pharmacy',
           name: 'PharmacyRouter',
-          page: PharmacyPage,
+          page: EmptyRouterPage,
           children: [
            
+            AutoRoute(
+              path: '',
+              page: PharmacyPage,
+            ),
             AutoRoute(
               path: 'catalogue',
               page: CataloguePage,

@@ -117,9 +117,14 @@ class DoctorsPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 24),
-            Text(
-              "Center's Categories",
-              style: _theme.headline1?.copyWith(fontSize: 24),
+            GestureDetector(
+              onTap: (){
+                context.pushRoute( DoctorDetailsRoute());
+              },
+              child: Text(
+                "Center's Categories",
+                style: _theme.headline1?.copyWith(fontSize: 24),
+              ),
             ),
             const SizedBox(height: 8),
             SizedBox(

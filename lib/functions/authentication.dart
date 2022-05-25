@@ -27,7 +27,7 @@ class Authentication {
         }
       });
       return result;
-    } on FirebaseAuthException catch (err) {
+    } on FirebaseAuthException {
       return false;
     }
   }
@@ -157,7 +157,7 @@ class Authentication {
       // );
       result = true;
       // Navigator.of(context)shNamed("/sign_up");
-      context.router.popAndPush(const SignUpRoute());
+      context.router.navigate(const EmptyRouterRoute());
     } on FirebaseException catch (e) {
       result = false;
       print(e.message);

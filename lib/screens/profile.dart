@@ -14,6 +14,7 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _auth = ref.read(authProvider);
+    final _patient = ref.read(patientControllerProvider);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 226, 250, 255),
       body: Stack(
@@ -56,7 +57,7 @@ class ProfilePage extends ConsumerWidget {
                   // ignore: prefer_const_constructors
                   SizedBox(height: 20),
                   Text(
-                    'Mr. John Doe',
+                    'Mr. ${_patient.names}',
                     style: GoogleFonts.lato(
                       color: Color(0xff03045e),
                       fontWeight: FontWeight.w700,
@@ -65,7 +66,7 @@ class ProfilePage extends ConsumerWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'John@gmail.com',
+                    _patient.email,
                     style: GoogleFonts.lato(
                       color: Color(0xff03045e),
                       fontWeight: FontWeight.w500,

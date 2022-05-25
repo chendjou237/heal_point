@@ -9,15 +9,16 @@ import 'package:line_icons/line_icons.dart';
 import '../providers/providers.dart';
 
 import 'package:pay_unit_sdk/pay_unit_sdk.dart';
-class DoctorDetailsPage extends ConsumerWidget {
-  DoctorDetailsPage({Key? key}) : super(key: key);
-  static const routeName = '/center_detail';
 
-  String contentType = "Description";
+class DoctorDetailsPage extends StatelessWidget {
+  const DoctorDetailsPage({Key? key}) : super(key: key);
+  // static const routeName = '/center_detail';
+
+  // String contentType = "Description";
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final _doctor = ref.read(selectedDoctorProvider);
+  Widget build(BuildContext context) {
+    // final _doctor = ref.read(selectedDoctorProvider);
     final _theme = Theme.of(context).textTheme;
     return Scaffold(
       body: SingleChildScrollView(
@@ -30,14 +31,37 @@ class DoctorDetailsPage extends ConsumerWidget {
                   "Choose Your Plan",
                   style: _theme.headline1,
                 ),
-                
+                PayUnitButton(
+                    apiUser: "payunit_mXBWKSxhb",
+                    apiPassword: "e062eadf-a8e3-4eaf-991f-79b1842f281a",
+                    apiKey: "f180c31f310e0476bba138c3b625f680ae2a71d1",
+                    transactionId: "98987889",
+                    mode: 'live',
+                    transactionCallBackUrl: "",
+                    notiFyUrl: "",
+                    transactionAmount: "1000",
+                    currency: "XAF",
+                    buttonTextColor: Colors.white,
+                    productName: "starter plan",
+                    color: Colors.teal,
+                    actionAfterProccess: (transactionId, transactionStatus) {
+                      //    a callback that has both transaction id and transaction status
+                      if (transactionStatus != "FAILED") {
+  print("Transaction id is : $transactionId  and transaction status : $transactionStatus");
+                      } else {
+                        print("transaction failed");
+                      }
+                    }),
                 HealButton(
                   label: "60 Minutes",
                   onTap: () {},
                 ),
                 HealButton(
                   label: "60 Minutes and prescription",
-                  onTap: () {},
+                  onTap: () {
+                    context.pushRoute(const ChatRoomRoute());
+                  },
+              
                 ),
               ]),
         ),

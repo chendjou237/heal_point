@@ -73,7 +73,7 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _doctor = ref.read(selectedDoctorProvider);
+    // final _doctor = ref.read(selectedDoctorProvider);
     final _patient = ref.read(patientControllerProvider);
     return Scaffold(
       appBar: AppBar(
@@ -142,15 +142,15 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
                       fs.collection('Messages').doc().set({
                         'message': message.text.trim(),
                         'time': DateTime.now(),
-                        'receiver_email': _doctor.email,
-                        'sender_email':_patient.email,
+                        'type': 'patient',
+                        'sender_email':_patient.email.trim(),
                       });
                       fs.collection('chat_room').doc().set({
                         'last_message': message.text.trim(),
                         // 'time': DateTime.now(),
                         
-                        'doctor_email': _doctor.email,
-                        'patient_email':_patient.email,
+                        // 'doctor_email': _doctor.email,
+                        'patient_email':_patient.email.trim(),
                       });
 
                       message.clear();

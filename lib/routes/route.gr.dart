@@ -47,7 +47,7 @@ class AppRouter extends _i2.RootStackRouter {
     },
     ProfileRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
+          routeData: routeData, child: const _i1.ProfilePage());
     },
     HomeRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -57,19 +57,17 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.NotificationsPage());
     },
-    DoctorsRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.DoctorsPage());
-    },
     DoctorDetailsRoute.name: (routeData) {
-      final args = routeData.argsAs<DoctorDetailsRouteArgs>(
-          orElse: () => const DoctorDetailsRouteArgs());
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i1.DoctorDetailsPage(key: args.key));
+          routeData: routeData, child: const _i1.DoctorDetailsPage());
     },
     ChatRoomRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.ChatRoomPage());
+    },
+    DoctorsRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.DoctorsPage());
     },
     HealthCaresRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -96,10 +94,6 @@ class AppRouter extends _i2.RootStackRouter {
     DrugDetailRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DrugDetailPage());
-    },
-    ProfileRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.ProfilePage());
     },
     SignInRoute.name: (routeData) {
       final args = routeData.argsAs<SignInRouteArgs>(
@@ -135,18 +129,18 @@ class AppRouter extends _i2.RootStackRouter {
                 _i2.RouteConfig(HomeRoute.name,
                     path: '', parent: HomeRouter.name),
                 _i2.RouteConfig(NotificationsRoute.name,
-                    path: 'notifications', parent: HomeRouter.name)
+                    path: 'notifications', parent: HomeRouter.name),
+                _i2.RouteConfig(DoctorDetailsRoute.name,
+                    path: 'doctor_detail', parent: HomeRouter.name),
+                _i2.RouteConfig(ChatRoomRoute.name,
+                    path: 'chat_room', parent: HomeRouter.name)
               ]),
           _i2.RouteConfig(DoctorsRouter.name,
               path: 'doctors',
               parent: RootRouter.name,
               children: [
                 _i2.RouteConfig(DoctorsRoute.name,
-                    path: '', parent: DoctorsRouter.name),
-                _i2.RouteConfig(DoctorDetailsRoute.name,
-                    path: 'doctor_detail', parent: DoctorsRouter.name),
-                _i2.RouteConfig(ChatRoomRoute.name,
-                    path: 'chat_room', parent: DoctorsRouter.name)
+                    path: '', parent: DoctorsRouter.name)
               ]),
           _i2.RouteConfig(HealthCaresRouter.name,
               path: 'health_cares',
@@ -171,12 +165,7 @@ class AppRouter extends _i2.RootStackRouter {
                     path: 'drug_details', parent: PharmacyRouter.name)
               ]),
           _i2.RouteConfig(ProfileRouter.name,
-              path: 'account',
-              parent: RootRouter.name,
-              children: [
-                _i2.RouteConfig(ProfileRoute.name,
-                    path: '', parent: ProfileRouter.name)
-              ])
+              path: 'account', parent: RootRouter.name)
         ]),
         _i2.RouteConfig(EmptyRouterRoute.name,
             path: '/authentication',
@@ -255,10 +244,9 @@ class PharmacyRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.EmptyRouterPage]
+/// [_i1.ProfilePage]
 class ProfileRouter extends _i2.PageRouteInfo<void> {
-  const ProfileRouter({List<_i2.PageRouteInfo>? children})
-      : super(ProfileRouter.name, path: 'account', initialChildren: children);
+  const ProfileRouter() : super(ProfileRouter.name, path: 'account');
 
   static const String name = 'ProfileRouter';
 }
@@ -281,32 +269,12 @@ class NotificationsRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i1.DoctorsPage]
-class DoctorsRoute extends _i2.PageRouteInfo<void> {
-  const DoctorsRoute() : super(DoctorsRoute.name, path: '');
-
-  static const String name = 'DoctorsRoute';
-}
-
-/// generated route for
 /// [_i1.DoctorDetailsPage]
-class DoctorDetailsRoute extends _i2.PageRouteInfo<DoctorDetailsRouteArgs> {
-  DoctorDetailsRoute({_i3.Key? key})
-      : super(DoctorDetailsRoute.name,
-            path: 'doctor_detail', args: DoctorDetailsRouteArgs(key: key));
+class DoctorDetailsRoute extends _i2.PageRouteInfo<void> {
+  const DoctorDetailsRoute()
+      : super(DoctorDetailsRoute.name, path: 'doctor_detail');
 
   static const String name = 'DoctorDetailsRoute';
-}
-
-class DoctorDetailsRouteArgs {
-  const DoctorDetailsRouteArgs({this.key});
-
-  final _i3.Key? key;
-
-  @override
-  String toString() {
-    return 'DoctorDetailsRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for
@@ -315,6 +283,14 @@ class ChatRoomRoute extends _i2.PageRouteInfo<void> {
   const ChatRoomRoute() : super(ChatRoomRoute.name, path: 'chat_room');
 
   static const String name = 'ChatRoomRoute';
+}
+
+/// generated route for
+/// [_i1.DoctorsPage]
+class DoctorsRoute extends _i2.PageRouteInfo<void> {
+  const DoctorsRoute() : super(DoctorsRoute.name, path: '');
+
+  static const String name = 'DoctorsRoute';
 }
 
 /// generated route for
@@ -376,14 +352,6 @@ class DrugDetailRoute extends _i2.PageRouteInfo<void> {
   const DrugDetailRoute() : super(DrugDetailRoute.name, path: 'drug_details');
 
   static const String name = 'DrugDetailRoute';
-}
-
-/// generated route for
-/// [_i1.ProfilePage]
-class ProfileRoute extends _i2.PageRouteInfo<void> {
-  const ProfileRoute() : super(ProfileRoute.name, path: '');
-
-  static const String name = 'ProfileRoute';
 }
 
 /// generated route for

@@ -58,10 +58,10 @@ class _DoctorScreensState extends ConsumerState<DoctorScreensPage> {
            
               routes: const [
                 HomeRouter(),
-                DoctorsRoute(),
-                HealthCaresRoute(),
-                PharmacyRoute(),
-                ProfileRoute(),
+                DoctorsRouter(),
+                HealthCaresRouter(),
+                PharmacyRouter(),
+                ProfileRouter(),
               ],
               bottomNavigationBuilder: (_, tabsRouter) {
                 return ClipRRect(

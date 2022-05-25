@@ -16,7 +16,7 @@ class _MessagesState extends ConsumerState<Messages> {
       .snapshots();
   @override
   Widget build(BuildContext context) {
-    final _doctor = ref.read(selectedDoctorProvider);
+    final _patient = ref.read(patientControllerProvider);
     return StreamBuilder(
       stream: _messageStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -42,7 +42,7 @@ class _MessagesState extends ConsumerState<Messages> {
             return Padding(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: Column(
-                crossAxisAlignment: _doctor.email == qs['email']
+                crossAxisAlignment: _patient.email == qs['sender_email']
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
                 children: [
@@ -56,7 +56,7 @@ class _MessagesState extends ConsumerState<Messages> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       title: Text(
-                        qs['receiver_email'],
+                        qs['sender_email'],
                         style: TextStyle(
                           fontSize: 15,
                         ),
