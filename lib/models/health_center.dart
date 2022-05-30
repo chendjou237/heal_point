@@ -6,6 +6,7 @@ class HealthCenter {
   final String address;
   final String phoneNumber;
   final double rating;
+  
   final String image;
   final String description;
   HealthCenter({

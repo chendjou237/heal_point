@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heal_point/screens/screens.dart';
 import 'package:lottie/lottie.dart';
 
 class DoctorCallsPage extends StatelessWidget {
@@ -6,12 +7,6 @@ class DoctorCallsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Lottie.network(
-        'https://assets2.lottiefiles.com/packages/lf20_0gZKjV.json',
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-      ),
-    );
+    return IndexPage();
   }
 }

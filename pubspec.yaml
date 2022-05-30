@@ -21,6 +21,8 @@ dependencies:
   flutterfire_ui: ^0.4.0+1
   hooks_riverpod: ^1.0.3
   flutter_hooks: ^0.18.3
+  agora_rtc_engine: ^4.2.2
+  permission_handler: ^8.1.1
  
   line_icons: ^2.0.1
   

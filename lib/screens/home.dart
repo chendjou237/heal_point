@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:heal_point/models/models.dart';
 
 import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/routes/route.gr.dart';
+
+import 'package:heal_point/screens/notification.dart';
+import 'package:heal_point/screens/screens.dart';
+
 import 'package:auto_route/auto_route.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../utilities/utilities.dart';
 import '../widgets/widgets.dart';
@@ -15,18 +21,16 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _theme = Theme.of(context).textTheme;
+
     final _patient = ref.read(patientControllerProvider);
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            backgroundColor,
-            secondaryColor,
-          ],
-        ),
+    final _auth = ref.read(authProvider);
+    // final _centerConsume = ref.read(selectedCenterProvider.state);
+    print("controller ${_patient.toString()}");
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 50,
+        left: 10,
+        right: 0,
       ),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

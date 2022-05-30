@@ -1,4 +1,7 @@
 export 'sign_up.dart';
+export 'index.dart';
+export 'call.dart';
+export 'video_confernce.dart';
 export 'sign_in.dart';
 export 'home.dart';
 export 'welcome.dart';
@@ -27,3 +30,4 @@ export 'doctor_screens.dart';
 export 'doctor_chat_room.dart';
 export 'doctor_profile.dart';
 export 'doctor_sign_in.dart';
+export 'index.dart';
