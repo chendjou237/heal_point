@@ -30,3 +30,4 @@ export 'doctor_screens.dart';
 export 'doctor_chat_room.dart';
 export 'doctor_profile.dart';
 export 'doctor_sign_in.dart';
+export 'index.dart';
