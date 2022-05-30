@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:heal_point/models/models.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/routes/route.gr.dart';
+import 'package:heal_point/screens/notification.dart';
 import 'package:heal_point/screens/screens.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -80,6 +81,21 @@ class HomePage extends ConsumerWidget {
                       },
                       icon: const Icon(
                         LineIcons.bell,
+                        size: 30,
+                      ),
+                    ),
+                     IconButton(
+                      onPressed: () async {
+                        // Navigator.pushNamed(context, "/sign_in");
+                        // Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => SignIn()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const Notifications()));
+                      },
+                      icon: const Icon(
+                        LineIcons.phone,
                         size: 30,
                       ),
                     ),
