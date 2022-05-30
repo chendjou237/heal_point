@@ -1,4 +1,7 @@
 export 'sign_up.dart';
+export 'index.dart';
+export 'call.dart';
+export 'video_confernce.dart';
 export 'sign_in.dart';
 export 'home.dart';
 export 'welcome.dart';
