@@ -3,16 +3,13 @@ import 'package:heal_point/screens/index.dart';
 
 
 
-class MyApp extends StatelessWidget {
+class VideoConferencePage extends StatelessWidget {
+  const VideoConferencePage({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Video Call',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: IndexPage(),
-    );
+    return 
+     IndexPage();
   }
 }
