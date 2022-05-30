@@ -108,6 +108,25 @@ class Database {
       return false;
     }
   }
+  Future<bool> getPatientChats() async {
+    try {
+      List<ChatRoom> rooms = [];
+      await _firestore
+          .collection('chat_rooms').where('status',isEqualTo: 'active')
+          .get(const GetOptions(source: Source.serverAndCache))
+          .then((value) {
+        value.docs.forEach((element) {
+          
+          rooms.add(ChatRoom.fromMap(element.data()));
+        });
+          _read(chatRoomProvider.state).state = rooms;
+      });
+      return true;
+    } on FirebaseException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
 
   Future<bool> patientDbInitializer(String uid) async {
     try {
@@ -122,7 +141,7 @@ class Database {
   Future<bool> doctorDbInitializer(String uid) async {
     try {
       await getDoc(uid);
-      await getDocs();
+      await getPatientChats();
       return true;
     } on FirebaseException catch (e) {
       print(e.message);
@@ -147,6 +166,20 @@ class Database {
       return true;
     } on FirebaseException catch (err) {
       print(err.message ?? err.toString());
+      return false;
+    }
+  }
+
+  Future<bool> closeSession(String sessionId)async{
+    try{
+      await _firestore.collection('chat_room').doc(sessionId).update({
+        'status': 'closed'
+      });
+      _read(sessionStatusProvider.state).state = false;
+      return true;
+    }
+    on FirebaseException catch(error) {
+      print(error.message);
       return false;
     }
   }

@@ -1,6 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:heal_point/routes/route.gr.dart';
-import 'package:heal_point/utilities/root.dart';
 
 import '../screens/screens.dart';
 
@@ -11,16 +9,12 @@ import '../screens/screens.dart';
       path: '/',
       name: 'RootRouter',
       page: HealPointPage,
-    
       children: [
-       
-        
         AutoRoute(
           path: 'home',
           name: 'HomeRouter',
-          page:EmptyRouterPage,
+          page: EmptyRouterPage,
           children: [
-           
             AutoRoute(
               path: '',
               page: HomePage,
@@ -29,7 +23,7 @@ import '../screens/screens.dart';
               path: 'notifications',
               page: NotificationsPage,
             ),
-             AutoRoute(
+            AutoRoute(
               path: 'doctor_detail',
               page: DoctorDetailsPage,
             ),
@@ -44,22 +38,17 @@ import '../screens/screens.dart';
           name: 'DoctorsRouter',
           page: EmptyRouterPage,
           children: [
-           
             AutoRoute(
               path: '',
               page: DoctorsPage,
             ),
-           
-           
-          
           ],
-        ),  
-           AutoRoute(
+        ),
+        AutoRoute(
           path: 'health_cares',
           name: 'HealthCaresRouter',
           page: EmptyRouterPage,
           children: [
-          
             AutoRoute(
               path: '',
               page: HealthCaresPage,
@@ -79,7 +68,6 @@ import '../screens/screens.dart';
           name: 'PharmacyRouter',
           page: EmptyRouterPage,
           children: [
-           
             AutoRoute(
               path: '',
               page: PharmacyPage,
@@ -94,12 +82,44 @@ import '../screens/screens.dart';
             ),
           ],
         ),
-   
         AutoRoute(
           path: 'account',
           name: 'ProfileRouter',
           page: ProfilePage,
-          
+        ),
+      ],
+    ),
+    AutoRoute(
+      path: '/doctor',
+      name: 'DoctorScreensRouter',
+      page: DoctorScreensPage,
+      children: [
+        AutoRoute(
+          path: 'doctor_home',
+          name: 'DoctorRouter',
+          page: EmptyRouterPage,
+          children: [
+            AutoRoute(
+              path: '',
+              page: DoctorHomePage,
+            ),
+            AutoRoute(
+              path: 'doctor_chat_room',
+              page: DoctorChatRoomPage,
+            ),
+          ],
+        ),
+        AutoRoute(
+          path: 'doctor_calls',
+          page: DoctorCallsPage,
+        ),
+        AutoRoute(
+          path: 'doctor_appointments',
+          page: DoctorAppointmentsPage,
+        ),
+        AutoRoute(
+          path: 'doctor_profile',
+          page: DoctorProfilePage,
         ),
       ],
     ),
@@ -107,12 +127,15 @@ import '../screens/screens.dart';
       path: '/authentication',
       page: EmptyRouterPage,
       children: [
-         AutoRoute(
+        AutoRoute(
           path: '',
           page: SignInPage,
         ),
-     
-       AutoRoute(
+        AutoRoute(
+          path: 'doctor_sign_in',
+          page: DoctorSignInPage,
+        ),
+        AutoRoute(
           path: 'sign_up',
           name: 'SignUpRouter',
           page: EmptyRouterPage,

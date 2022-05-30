@@ -25,6 +25,10 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.HealPointPage());
     },
+    DoctorScreensRouter.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.DoctorScreensPage());
+    },
     EmptyRouterRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.EmptyRouterPage());
@@ -95,11 +99,41 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DrugDetailPage());
     },
+    DoctorRouter.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i2.EmptyRouterPage());
+    },
+    DoctorCallsRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.DoctorCallsPage());
+    },
+    DoctorAppointmentsRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.DoctorAppointmentsPage());
+    },
+    DoctorProfileRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.DoctorProfilePage());
+    },
+    DoctorHomeRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.DoctorHomePage());
+    },
+    DoctorChatRoomRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.DoctorChatRoomPage());
+    },
     SignInRoute.name: (routeData) {
       final args = routeData.argsAs<SignInRouteArgs>(
           orElse: () => const SignInRouteArgs());
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: _i1.SignInPage(key: args.key));
+    },
+    DoctorSignInRoute.name: (routeData) {
+      final args = routeData.argsAs<DoctorSignInRouteArgs>(
+          orElse: () => const DoctorSignInRouteArgs());
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: _i1.DoctorSignInPage(key: args.key));
     },
     SignUpRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -167,11 +201,30 @@ class AppRouter extends _i2.RootStackRouter {
           _i2.RouteConfig(ProfileRouter.name,
               path: 'account', parent: RootRouter.name)
         ]),
+        _i2.RouteConfig(DoctorScreensRouter.name, path: '/doctor', children: [
+          _i2.RouteConfig(DoctorRouter.name,
+              path: 'doctor_home',
+              parent: DoctorScreensRouter.name,
+              children: [
+                _i2.RouteConfig(DoctorHomeRoute.name,
+                    path: '', parent: DoctorRouter.name),
+                _i2.RouteConfig(DoctorChatRoomRoute.name,
+                    path: 'doctor_chat_room', parent: DoctorRouter.name)
+              ]),
+          _i2.RouteConfig(DoctorCallsRoute.name,
+              path: 'doctor_calls', parent: DoctorScreensRouter.name),
+          _i2.RouteConfig(DoctorAppointmentsRoute.name,
+              path: 'doctor_appointments', parent: DoctorScreensRouter.name),
+          _i2.RouteConfig(DoctorProfileRoute.name,
+              path: 'doctor_profile', parent: DoctorScreensRouter.name)
+        ]),
         _i2.RouteConfig(EmptyRouterRoute.name,
             path: '/authentication',
             children: [
               _i2.RouteConfig(SignInRoute.name,
                   path: '', parent: EmptyRouterRoute.name),
+              _i2.RouteConfig(DoctorSignInRoute.name,
+                  path: 'doctor_sign_in', parent: EmptyRouterRoute.name),
               _i2.RouteConfig(SignUpRouter.name,
                   path: 'sign_up',
                   parent: EmptyRouterRoute.name,
@@ -194,6 +247,16 @@ class RootRouter extends _i2.PageRouteInfo<void> {
       : super(RootRouter.name, path: '/', initialChildren: children);
 
   static const String name = 'RootRouter';
+}
+
+/// generated route for
+/// [_i1.DoctorScreensPage]
+class DoctorScreensRouter extends _i2.PageRouteInfo<void> {
+  const DoctorScreensRouter({List<_i2.PageRouteInfo>? children})
+      : super(DoctorScreensRouter.name,
+            path: '/doctor', initialChildren: children);
+
+  static const String name = 'DoctorScreensRouter';
 }
 
 /// generated route for
@@ -355,6 +418,59 @@ class DrugDetailRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [_i2.EmptyRouterPage]
+class DoctorRouter extends _i2.PageRouteInfo<void> {
+  const DoctorRouter({List<_i2.PageRouteInfo>? children})
+      : super(DoctorRouter.name,
+            path: 'doctor_home', initialChildren: children);
+
+  static const String name = 'DoctorRouter';
+}
+
+/// generated route for
+/// [_i1.DoctorCallsPage]
+class DoctorCallsRoute extends _i2.PageRouteInfo<void> {
+  const DoctorCallsRoute() : super(DoctorCallsRoute.name, path: 'doctor_calls');
+
+  static const String name = 'DoctorCallsRoute';
+}
+
+/// generated route for
+/// [_i1.DoctorAppointmentsPage]
+class DoctorAppointmentsRoute extends _i2.PageRouteInfo<void> {
+  const DoctorAppointmentsRoute()
+      : super(DoctorAppointmentsRoute.name, path: 'doctor_appointments');
+
+  static const String name = 'DoctorAppointmentsRoute';
+}
+
+/// generated route for
+/// [_i1.DoctorProfilePage]
+class DoctorProfileRoute extends _i2.PageRouteInfo<void> {
+  const DoctorProfileRoute()
+      : super(DoctorProfileRoute.name, path: 'doctor_profile');
+
+  static const String name = 'DoctorProfileRoute';
+}
+
+/// generated route for
+/// [_i1.DoctorHomePage]
+class DoctorHomeRoute extends _i2.PageRouteInfo<void> {
+  const DoctorHomeRoute() : super(DoctorHomeRoute.name, path: '');
+
+  static const String name = 'DoctorHomeRoute';
+}
+
+/// generated route for
+/// [_i1.DoctorChatRoomPage]
+class DoctorChatRoomRoute extends _i2.PageRouteInfo<void> {
+  const DoctorChatRoomRoute()
+      : super(DoctorChatRoomRoute.name, path: 'doctor_chat_room');
+
+  static const String name = 'DoctorChatRoomRoute';
+}
+
+/// generated route for
 /// [_i1.SignInPage]
 class SignInRoute extends _i2.PageRouteInfo<SignInRouteArgs> {
   SignInRoute({_i3.Key? key})
@@ -371,6 +487,27 @@ class SignInRouteArgs {
   @override
   String toString() {
     return 'SignInRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i1.DoctorSignInPage]
+class DoctorSignInRoute extends _i2.PageRouteInfo<DoctorSignInRouteArgs> {
+  DoctorSignInRoute({_i3.Key? key})
+      : super(DoctorSignInRoute.name,
+            path: 'doctor_sign_in', args: DoctorSignInRouteArgs(key: key));
+
+  static const String name = 'DoctorSignInRoute';
+}
+
+class DoctorSignInRouteArgs {
+  const DoctorSignInRouteArgs({this.key});
+
+  final _i3.Key? key;
+
+  @override
+  String toString() {
+    return 'DoctorSignInRouteArgs{key: $key}';
   }
 }
 

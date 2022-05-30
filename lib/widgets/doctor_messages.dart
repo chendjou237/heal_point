@@ -1,23 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:heal_point/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Messages extends ConsumerStatefulWidget {
-  const Messages({Key? key}) : super(key: key);
+import 'package:heal_point/providers/providers.dart';
+
+import '../models/models.dart';
+
+class DoctorMessages extends ConsumerStatefulWidget {
+ 
+   DoctorMessages({Key? key}) : super(key: key);
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MessagesState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _DoctorMessagesState();
 }
 
-class _MessagesState extends ConsumerState<Messages> {
-  
+class _DoctorMessagesState extends ConsumerState<DoctorMessages> {
   @override
   Widget build(BuildContext context) {
+    final _doctor = ref.read(doctorControllerProvider);
     final _patient = ref.read(patientControllerProvider);
     Stream<QuerySnapshot> _messageStream = FirebaseFirestore.instance
-      .collection('chat_rooms').doc(_patient.id).collection('messages')
-      .orderBy('time')
-      .snapshots();
+        .collection('chat_rooms')
+        .doc(_patient.id)
+        .collection('messages')
+        .orderBy('time')
+        .snapshots();
+        // final _doctor = ref.read(doctorControllerProvider);
     return StreamBuilder(
       stream: _messageStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -43,13 +50,20 @@ class _MessagesState extends ConsumerState<Messages> {
             return Padding(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: Column(
-                crossAxisAlignment: _patient.email == qs['sender_email']
+                crossAxisAlignment: _doctor.email == qs['sender_email']
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  Container(
+                    decoration: BoxDecoration(
+                      color: _doctor.email == qs['sender_email']
+                          ? Colors.purple[100]
+                          : Colors.grey[100],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     width: 300,
                     child: ListTile(
+
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
                           color: Colors.purple,

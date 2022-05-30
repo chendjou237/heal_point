@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:heal_point/providers/providers.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DoctorHomePage extends ConsumerStatefulWidget {
@@ -11,16 +14,27 @@ class DoctorHomePage extends ConsumerStatefulWidget {
 class _DoctorHomePageState extends ConsumerState<DoctorHomePage> {
   @override
   Widget build(BuildContext context) {
+    final _rooms = ref.read(chatRoomProvider);
     final _theme = Theme.of(context).textTheme;
+    final _db = ref.read(databaseProvider);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(children:  [
+        child: Column(children: [
           Text(
-            "Patients",style: _theme.headline1,
+            "Patients",
+            style: _theme.headline1,
           ),
           const SizedBox(height: 20.0),
-          
+          ..._rooms.map((room) => ListTile(
+                title: Text(room.patientNames),
+                subtitle: Text(room.lastMessage),
+                trailing: Text(room.time),
+                onTap: () async {
+                  await _db.getPatient(room.patientId);
+                  context.pushRoute(const DoctorChatRoomRoute());
+                },
+              )),
         ]),
       ),
     );

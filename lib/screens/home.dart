@@ -43,7 +43,7 @@ class HomePage extends ConsumerWidget {
             HealButton(
                 label: "Get Started",
                 onTap: () {
-                  AutoRouter.of(context).popAndPush(const DoctorDetailsRoute());
+                  AutoRouter.of(context).push(const DoctorDetailsRoute());
                 }),
           ]),
     );

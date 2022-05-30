@@ -26,3 +26,4 @@ export 'doctor_home.dart';
 export 'doctor_screens.dart';
 export 'doctor_chat_room.dart';
 export 'doctor_profile.dart';
+export 'doctor_sign_in.dart';

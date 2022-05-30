@@ -144,6 +144,7 @@ class Authentication {
     // Once signed in, return the UserCredential
   }
 
+ 
   Future<void> signOut(BuildContext context) async {
     bool result = false;
     // ToastContext().init(context);

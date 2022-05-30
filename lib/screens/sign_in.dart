@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
@@ -137,12 +138,14 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushRoute(DoctorSignInRoute());
+                    },
                     icon: const Icon(
-                      LineIcons.facebook,
+                      LineIcons.doctor,
                       color: Colors.white,
                     ),
-                    label: const Text("Connect with Facebook")),
+                    label: const Text("Connect As Doctor")),
               ],
             ),
           ),

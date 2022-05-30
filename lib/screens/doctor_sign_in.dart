@@ -1,35 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:heal_point/screens/screens.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:line_icons/line_icons.dart';
 
-import 'package:heal_point/utilities/palette.dart';
-import 'package:toast/toast.dart';
 import 'package:auto_route/auto_route.dart';
 
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
+
 class DoctorSignInPage extends ConsumerStatefulWidget {
-   DoctorSignInPage({Key? key}) : super(key: key);
+  const DoctorSignInPage({Key? key}) : super(key: key);
 
   @override
   ConsumerState<DoctorSignInPage> createState() => _SignInPageState();
 }
 
 class _SignInPageState extends ConsumerState<DoctorSignInPage> {
-  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
-  // final key = 
+  // final key =
   @override
-  Widget build(BuildContext context ) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     final auth = ref.read(authProvider);
     // ToastContext().init(context);
     final _emailController = TextEditingController();
     final _passwordController = TextEditingController();
     return Scaffold(
-      
       key: _scaffoldkey,
       body: SafeArea(
         child: Container(
@@ -86,26 +83,24 @@ class _SignInPageState extends ConsumerState<DoctorSignInPage> {
                 const SizedBox(height: 24),
                 AuthButton(
                   theme: theme,
-                  onTap: ()async {
-                    // Navigator.pushNamed(context, "/");
-                    // context.p
-                  if( await ref.read(authProvider.state).state.signInUser(mail: _emailController.text, pass: _passwordController.text)){
-                    // AutoRouter.of(context).push(route)
-                  }
-
+                  onTap: () async {
+                    if (await ref.read(authProvider.state).state.signInUser(
+                        mail: _emailController.text,
+                        pass: _passwordController.text)) {
+                      AutoRouter.of(context).push(const DoctorScreensRouter());
+                    } else
+                      print('something went wrong');
                   },
                   label: "Login",
                 ),
-           
-               
               ],
             ),
           ),
-        ),//
+        ), //
       ),
     );
   }
-  
+
   @override
   void dispose() {
     // TODO: implement dispose
