@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:heal_point/routes/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'firebase_options.dart';
-import 'screens/screens.dart';
 import 'utilities/utilities.dart';
 
 void main() async {

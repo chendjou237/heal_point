@@ -19,9 +19,14 @@ class HealButton extends ConsumerWidget {
     final _theme = Theme.of(context).textTheme;
     return ElevatedButton(
       onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        primary: secondaryColorLight,
+        shape: StadiumBorder(
+        ),
+      ),
       child: Text(
         label,
-        style: _theme.button,
+        style: _theme.button.copyWith(color: Colors.white),
       ),
     );
   }
