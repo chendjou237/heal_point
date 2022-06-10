@@ -49,7 +49,7 @@ class _HealPointState extends ConsumerState<HealPointPage> {
               routes: const [
                 HomeRouter(),
                 DoctorsRouter(),
-                NurseFormRoute(),
+                NurseFormRouter(),
                 HealthCaresRouter(),
                 PharmacyRouter(),
                 ProfileRouter(),
