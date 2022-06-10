@@ -47,7 +47,7 @@ class AppRouter extends _i2.RootStackRouter {
     },
     NurseFormRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
+          routeData: routeData, child: const _i1.NurseFormPage());
     },
     HealthCaresRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -86,10 +86,6 @@ class AppRouter extends _i2.RootStackRouter {
     DoctorsRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DoctorsPage());
-    },
-    NurseFormRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.NurseFormPage());
     },
     HealthCaresRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -207,12 +203,7 @@ class AppRouter extends _i2.RootStackRouter {
                     path: '', parent: DoctorsRouter.name)
               ]),
           _i2.RouteConfig(NurseFormRouter.name,
-              path: 'nurse_form',
-              parent: RootRouter.name,
-              children: [
-                _i2.RouteConfig(NurseFormRoute.name,
-                    path: '', parent: NurseFormRouter.name)
-              ]),
+              path: 'nurse_form', parent: RootRouter.name),
           _i2.RouteConfig(HealthCaresRouter.name,
               path: 'health_cares',
               parent: RootRouter.name,
@@ -346,11 +337,9 @@ class DoctorsRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.EmptyRouterPage]
+/// [_i1.NurseFormPage]
 class NurseFormRouter extends _i2.PageRouteInfo<void> {
-  const NurseFormRouter({List<_i2.PageRouteInfo>? children})
-      : super(NurseFormRouter.name,
-            path: 'nurse_form', initialChildren: children);
+  const NurseFormRouter() : super(NurseFormRouter.name, path: 'nurse_form');
 
   static const String name = 'NurseFormRouter';
 }
@@ -447,14 +436,6 @@ class DoctorsRoute extends _i2.PageRouteInfo<void> {
   const DoctorsRoute() : super(DoctorsRoute.name, path: '');
 
   static const String name = 'DoctorsRoute';
-}
-
-/// generated route for
-/// [_i1.NurseFormPage]
-class NurseFormRoute extends _i2.PageRouteInfo<void> {
-  const NurseFormRoute() : super(NurseFormRoute.name, path: '');
-
-  static const String name = 'NurseFormRoute';
 }
 
 /// generated route for

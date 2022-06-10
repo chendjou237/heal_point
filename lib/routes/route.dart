@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:heal_point/routes/route.gr.dart';
 
 import '../screens/screens.dart';
 
@@ -51,13 +52,8 @@ import '../screens/screens.dart';
         AutoRoute(
           path: 'nurse_form',
           name: 'NurseFormRouter',
-          page: EmptyRouterPage,
-          children: [
-            AutoRoute(
-              path: '',
-              page: NurseFormPage,
-            ),
-          ],
+          page: NurseFormPage,
+        
         ),
         AutoRoute(
           path: 'health_cares',
