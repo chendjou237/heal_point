@@ -3,7 +3,7 @@ import 'package:heal_point/utilities/utilities.dart';
 import 'package:heal_point/widgets/widgets.dart';
 import 'package:lottie/lottie.dart';
 
-import '../models/models.dart';
+import '../../models/models.dart';
 
 class PharmacyPage extends StatelessWidget {
   const PharmacyPage({Key? key}) : super(key: key);

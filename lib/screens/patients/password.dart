@@ -7,8 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:toast/toast.dart';
 
-import '../models/models.dart';
-import '../widgets/widgets.dart';
+import '../../models/models.dart';
+import '../../widgets/widgets.dart';
 
 class PasswordPage extends ConsumerStatefulWidget {
   const PasswordPage({Key? key}) : super(key: key);

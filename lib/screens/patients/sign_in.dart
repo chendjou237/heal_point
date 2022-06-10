@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
@@ -8,8 +9,8 @@ import 'package:heal_point/utilities/palette.dart';
 import 'package:toast/toast.dart';
 import 'package:auto_route/auto_route.dart';
 
-import '../providers/providers.dart';
-import '../widgets/widgets.dart';
+import '../../providers/providers.dart';
+import '../../widgets/widgets.dart';
 class SignInPage extends ConsumerStatefulWidget {
    SignInPage({Key? key}) : super(key: key);
 
@@ -137,12 +138,27 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushRoute(DoctorSignInRoute());
+                    },
                     icon: const Icon(
-                      LineIcons.facebook,
+                      LineIcons.doctor,
                       color: Colors.white,
                     ),
-                    label: const Text("Connect with Facebook")),
+                    label: const Text("Connect As Doctor")),
+                    const SizedBox(height: 16),
+                     ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.purple,
+                    ),
+                    onPressed: () {
+                      context.pushRoute(NurseSignInRoute());
+                    },
+                    icon: const Icon(
+                      LineIcons.nurse,
+                      color: Colors.white,
+                    ),
+                    label: const Text("Connect As Nurse")),
               ],
             ),
           ),

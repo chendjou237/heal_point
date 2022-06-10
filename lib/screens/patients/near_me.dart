@@ -1,26 +1,24 @@
-import 'package:flutter/material.dart';
+
+  import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:heal_point/functions/directions_repository.dart';
+import 'package:heal_point/screens/screens.dart';
 import 'package:heal_point/utilities/utilities.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../models/models.dart';
 
-const initialCameraPosition = CameraPosition(
-  target: LatLng(3.952814, 11.516845),
-  zoom: 50.5,
-);
-Directions? info;
 
-class NearMePage extends StatefulWidget {
+class NearMePage extends ConsumerStatefulWidget {
   const NearMePage({Key? key}) : super(key: key);
 
   @override
-  State<NearMePage> createState() => _NearMePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _NearMePageState();
 }
 
-late GoogleMapController googleMapController;
+class _NearMePageState extends ConsumerState<NearMePage> {
 
-class _NearMePageState extends State<NearMePage> {
-  final Marker _origin = Marker(
+ 
+final Marker _origin = Marker(
     markerId: const MarkerId("origin"),
     position: initialCameraPosition.target,
     infoWindow: const InfoWindow(title: "My Position"),
@@ -103,19 +101,13 @@ class _NearMePageState extends State<NearMePage> {
       );
     });
 
-    // final directions = await DirectionsRepository().getDirections(
-    //   origin: _origin.position,
-    //   destination: pos,
-    // );
+    final directions = await DirectionsRepository().getDirections(
+      origin: _origin.position,
+      destination: pos,
+    );
 
     setState(() {
-      // info = directions;
+      info = directions;
     });
-  }
-
-  @override
-  void dispose() {
-    googleMapController.dispose();
-    super.dispose();
   }
 }

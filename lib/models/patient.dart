@@ -36,7 +36,7 @@ class Patient {
       'phoneNumber': phoneNumber,
      
       'names': names,
-      'emails': email,
+      'email': email,
     };
   }
 

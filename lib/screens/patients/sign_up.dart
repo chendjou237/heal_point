@@ -10,9 +10,9 @@ import 'package:pinput/pinput.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:toast/toast.dart';
 
-import '../models/models.dart';
-import '../utilities/utilities.dart';
-import '../widgets/widgets.dart';
+import '../../models/models.dart';
+import '../../utilities/utilities.dart';
+import '../../widgets/widgets.dart';
 
 final nameProvider = StateProvider((_) => "");
 final phoneProvider = StateProvider((_) => "");

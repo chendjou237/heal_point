@@ -1,8 +1,8 @@
 // ignore: unused_import
 import 'package:flutter/material.dart';
 
-class Notifications extends StatelessWidget {
-  const Notifications({Key? key}) : super(key: key);
+class NotificationsPage extends StatelessWidget {
+  const NotificationsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

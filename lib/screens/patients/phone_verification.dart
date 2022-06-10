@@ -7,8 +7,8 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:toast/toast.dart';
 
-import '../providers/providers.dart';
-import '../widgets/widgets.dart';
+import '../../providers/providers.dart';
+import '../../widgets/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 
 class PhoneVerificationPage extends ConsumerStatefulWidget {
