@@ -8,14 +8,14 @@ import 'package:auto_route/auto_route.dart';
 import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 
-class DoctorSignInPage extends ConsumerStatefulWidget {
-  const DoctorSignInPage({Key? key}) : super(key: key);
+class NurseSignInPage extends ConsumerStatefulWidget {
+  const NurseSignInPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<DoctorSignInPage> createState() => _SignInPageState();
+  ConsumerState<NurseSignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends ConsumerState<DoctorSignInPage> {
+class _SignInPageState extends ConsumerState<NurseSignInPage> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
   // final key =
@@ -40,7 +40,7 @@ class _SignInPageState extends ConsumerState<DoctorSignInPage> {
                 AppLogo(theme: theme),
                 const SizedBox(height: 24),
                 Text(
-                  'Welcome back! Doctor',
+                  'Welcome back! Nurse',
                   style: theme.headline2,
                 ),
                 const SizedBox(height: 16),
@@ -54,7 +54,7 @@ class _SignInPageState extends ConsumerState<DoctorSignInPage> {
                         RequiredValidator(errorText: 'password is required'),
                     theme: theme,
                     controller: _emailController,
-                    hint: 'enter your email number',
+                    hint: 'enter your email',
                     icon: const Icon(
                       Icons.mail,
                     ),
@@ -84,10 +84,10 @@ class _SignInPageState extends ConsumerState<DoctorSignInPage> {
                 AuthButton(
                   theme: theme,
                   onTap: () async {
-                    if (await ref.read(authProvider.state).state.signInDoc(
+                    if (await ref.read(authProvider.state).state.signInNurse(
                         mail: _emailController.text,
                         pass: _passwordController.text)) {
-                      AutoRouter.of(context).push(const DoctorScreensRouter());
+                      AutoRouter.of(context).push(const NurseScreensRouter());
                     } else
                       print('something went wrong');
                   },

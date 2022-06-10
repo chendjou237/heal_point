@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/models.dart';
 import '../providers/providers.dart';
 
+
 class Database {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   FirebaseStorage storage = FirebaseStorage.instance;
@@ -21,6 +22,26 @@ class Database {
       _read(patientControllerProvider.notifier).data = patient;
       print(
           "ON creation succeed ${_read(patientControllerProvider.notifier).state.toString()} ");
+      // Toast.show('Patient created', duration: Toast.lengthLong);
+      result = true;
+      return result;
+    } on FirebaseException {
+      result = false;
+      // Toast.show(e.message ?? "Something went wrong",
+      //     duration: Toast.lengthLong);
+      return result;
+    }
+  }
+  Future<bool> createNurseOrder(NurseOrder order) async {
+    bool result = false;
+    try {
+      await _firestore
+          .collection('nurse_orders')
+          .doc()
+          .set(order.toMap());
+      // _read(patientControllerProvider.notifier).data = patient;
+      print(
+          "ON creation succeed order created successfully");
       // Toast.show('Patient created', duration: Toast.lengthLong);
       result = true;
       return result;
@@ -127,6 +148,25 @@ class Database {
       return false;
     }
   }
+  Future<bool> getGeneralOrders() async {
+    try {
+      List<NurseOrder> orders = [];
+      await _firestore
+          .collection('nurse_orders')
+          .get(const GetOptions(source: Source.serverAndCache))
+          .then((value) {
+        value.docs.forEach((element) {
+          
+          orders.add(NurseOrder.fromMap(element.data()));
+        });
+          _read(listOrdersControllerProvider.notifier).state = orders;
+      });
+      return true;
+    } on FirebaseException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
 
   Future<bool> patientDbInitializer(String uid) async {
     try {
@@ -142,6 +182,16 @@ class Database {
     try {
       await getDoc(uid);
       await getPatientChats();
+      return true;
+    } on FirebaseException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
+  Future<bool> nurseDbInitializer(String uid) async {
+    try {
+      await getNurse(uid);
+      await getGeneralOrders();
       return true;
     } on FirebaseException catch (e) {
       print(e.message);
@@ -197,6 +247,26 @@ class Database {
         _read(doctorControllerProvider.notifier).state = _doc;
         print(
             "in database ${_read(doctorControllerProvider.notifier).state.toString()}");
+      });
+      return true;
+    } on FirebaseException catch (err) {
+      print(err.message ?? err.toString());
+      return false;
+    }
+  }
+  Future<bool> getNurse(String uid) async {
+    try {
+      await _firestore
+          .collection('nurse')
+          .doc(uid)
+          .get(const GetOptions(source: Source.serverAndCache))
+          .then((nurse) {
+        Doctor _nurse = Doctor.fromMap(nurse.data());
+        _nurse = _nurse.copyWith(id: uid);
+
+        _read(doctorControllerProvider.notifier).state = _nurse;
+        print(
+            "in database ${_read(nurseControllerProvider.notifier).state.toString()}");
       });
       return true;
     } on FirebaseException catch (err) {
