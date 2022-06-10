@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:auto_route/auto_route.dart';
 
-import '../providers/providers.dart';
-import '../widgets/widgets.dart';
+import '../../providers/providers.dart';
+import '../../widgets/widgets.dart';
 
 class DoctorSignInPage extends ConsumerStatefulWidget {
   const DoctorSignInPage({Key? key}) : super(key: key);

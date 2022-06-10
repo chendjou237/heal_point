@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heal_point/utilities/utilities.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HealButton extends ConsumerWidget {
@@ -26,7 +27,7 @@ class HealButton extends ConsumerWidget {
       ),
       child: Text(
         label,
-        style: _theme.button.copyWith(color: Colors.white),
+        style: _theme.button!.copyWith(color: Colors.white),
       ),
     );
   }

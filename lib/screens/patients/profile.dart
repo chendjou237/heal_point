@@ -6,15 +6,15 @@ import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/utilities/palette.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../widgets/profile_menu_items.dart';
+import '../../widgets/profile_menu_items.dart';
 
-class DoctorProfilePage extends ConsumerWidget {
-  const DoctorProfilePage({Key? key}) : super(key: key);
+class ProfilePage extends ConsumerWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _auth = ref.read(authProvider);
-    final _doctor = ref.read(doctorControllerProvider);
+    final _patient = ref.read(patientControllerProvider);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 226, 250, 255),
       body: Stack(
@@ -57,7 +57,7 @@ class DoctorProfilePage extends ConsumerWidget {
                   // ignore: prefer_const_constructors
                   SizedBox(height: 20),
                   Text(
-                    'Mr. ${_doctor.name}',
+                    'Mr. ${_patient.names}',
                     style: GoogleFonts.lato(
                       color: Color(0xff03045e),
                       fontWeight: FontWeight.w700,
@@ -66,7 +66,7 @@ class DoctorProfilePage extends ConsumerWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    _doctor.email,
+                    _patient.email,
                     style: GoogleFonts.lato(
                       color: Color(0xff03045e),
                       fontWeight: FontWeight.w500,
@@ -96,8 +96,8 @@ class DoctorProfilePage extends ConsumerWidget {
                   ),
                   SizedBox(height: 20),
                   ProfileMenuItem(
-                    text: 'Prescriptions',
-                    icon: Icons.book,
+                    text: 'Search history',
+                    icon: Icons.search,
                     arrowShown: true,
                   ),
                   SizedBox(height: 20),
@@ -130,5 +130,3 @@ class DoctorProfilePage extends ConsumerWidget {
     );
   }
 }
-
-// ignore: must_be_immutable

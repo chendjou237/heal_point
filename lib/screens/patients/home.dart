@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:heal_point/models/models.dart';
 
 import 'package:heal_point/providers/providers.dart';
-import 'package:heal_point/routes/route.gr.dart';
 
-import 'package:heal_point/screens/notification.dart';
-import 'package:heal_point/screens/screens.dart';
 
-import 'package:auto_route/auto_route.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:line_icons/line_icons.dart';
 
-import '../utilities/utilities.dart';
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -47,7 +40,7 @@ class HomePage extends ConsumerWidget {
             HealButton(
                 label: "Get Started",
                 onTap: () {
-                  AutoRouter.of(context).push(const DoctorDetailsRoute());
+                  // AutoRouter.of(context).push( const DoctorBundleRoute());
                 }),
           ]),
     );

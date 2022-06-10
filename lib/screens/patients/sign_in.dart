@@ -9,8 +9,8 @@ import 'package:heal_point/utilities/palette.dart';
 import 'package:toast/toast.dart';
 import 'package:auto_route/auto_route.dart';
 
-import '../providers/providers.dart';
-import '../widgets/widgets.dart';
+import '../../providers/providers.dart';
+import '../../widgets/widgets.dart';
 class SignInPage extends ConsumerStatefulWidget {
    SignInPage({Key? key}) : super(key: key);
 

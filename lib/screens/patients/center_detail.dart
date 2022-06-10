@@ -5,8 +5,8 @@ import 'package:heal_point/utilities/palette.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../models/models.dart';
-import '../providers/providers.dart';
+import '../../models/models.dart';
+import '../../providers/providers.dart';
 
 class CenterDetailsPage extends ConsumerWidget {
   CenterDetailsPage({Key? key}) : super(key: key);

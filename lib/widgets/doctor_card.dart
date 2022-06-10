@@ -24,7 +24,7 @@ class DoctorCard extends ConsumerWidget {
       onTap: () {
         // Navigator.pushNamed(context, '/center_detail');
         _selectedDoctor.state = doctor;
-        context.pushRoute(DoctorDetailsRoute());
+        // context.pushRoute(DoctorDetailsRoute());
       },
       child: Container(
         margin: const EdgeInsets.only(right: 20),

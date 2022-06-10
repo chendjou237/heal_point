@@ -6,19 +6,13 @@ import 'package:heal_point/utilities/palette.dart';
 import 'package:heal_point/widgets/heal_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
-import '../providers/providers.dart';
+import '../../providers/providers.dart';
 
-import 'package:pay_unit_sdk/pay_unit_sdk.dart';
-
-class DoctorDetailsPage extends ConsumerWidget {
-  const DoctorDetailsPage({Key? key}) : super(key: key);
-  
-
-  
+class DoctorChatPlanPage extends ConsumerWidget {
+  const DoctorChatPlanPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     final _theme = Theme.of(context).textTheme;
     return Scaffold(
       body: SingleChildScrollView(
@@ -33,46 +27,27 @@ class DoctorDetailsPage extends ConsumerWidget {
                     "Choose Your Plan",
                     style: _theme.headline1,
                   ),
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
                   HealButton(
                     label: "15 Minutes",
                     onTap: () {
-                      
+                      context.pushRoute(ChatRoomRoute(timeLeft: 15000));
                     },
                   ),
                   HealButton(
                     label: "30 Minutes and prescription",
                     onTap: () {
                       // ref.read(startTimerProvider);
-                      context.pushRoute(const ChatRoomRoute());
+                      context.pushRoute(ChatRoomRoute(timeLeft: 30000));
                     },
                   ),
                   HealButton(
                     label: "1h and prescription",
                     onTap: () {
                       // ref.read(startTimerProvider);
-                      context.pushRoute(const ChatRoomRoute());
+                      
+                      context.pushRoute(ChatRoomRoute(
+                        timeLeft: 3600000,
+                      ));
                     },
                   ),
                 ]),
@@ -83,8 +58,8 @@ class DoctorDetailsPage extends ConsumerWidget {
   }
 }
 
-class DoctorDescription extends ConsumerWidget {
-  const DoctorDescription({Key? key}) : super(key: key);
+class DoctorDescriptionPage extends ConsumerWidget {
+  const DoctorDescriptionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -106,7 +81,6 @@ class DoctorDescription extends ConsumerWidget {
           ],
         ),
         RatingBar.builder(
-            
             itemBuilder: (context, index) => const Icon(
                   Icons.star,
                   color: Colors.amber,
@@ -120,22 +94,16 @@ class DoctorDescription extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton.icon(
-              label: const Text("Ask"),
-              icon: const Icon(Icons.send, color: Colors.white),
-              onPressed: () {
-                AutoRouter.of(context).push(const ChatRoomRoute());
-              },
-            ),
+          
             const SizedBox(width: 10),
             ElevatedButton.icon(
-              label: const Text("Call"),
+              label: const Text("online consultation"),
               icon: const Icon(Icons.phone, color: Colors.white),
               onPressed: () {},
             ),
             const SizedBox(width: 10),
             ElevatedButton.icon(
-              label: const Text("Book"),
+              label: const Text("book an appointment"),
               icon: const Icon(Icons.book, color: Colors.white),
               onPressed: () {},
             ),

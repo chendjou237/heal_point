@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 
 class ChatRoomPage extends ConsumerStatefulWidget {
-  const ChatRoomPage({Key? key}) : super(key: key);
+  int timeLeft;
+  ChatRoomPage({
+    Key? key,
+    required this.timeLeft,
+  }) : super(key: key);
   @override
   _ChatRoomPageState createState() => _ChatRoomPageState();
 }
@@ -20,12 +24,12 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
   final TextEditingController message = TextEditingController();
   Timer? _timer;
   int _start = 10000;
-  int timeLeft = 15000;
+
   void startTimer() {
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-        if (timeLeft > 0) {
-          timeLeft -= 1000;
+        if (widget.timeLeft > 0) {
+          widget.timeLeft -= 1000;
         } else {
           timer.cancel();
           ref
@@ -39,16 +43,21 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
 
   @override
   void initState() {
+    startTimer();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final _patient = ref.read(patientControllerProvider);
+    print(_patient.names);
     return Scaffold(
+
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
-          '${timeLeft > 0 ? DateTime.fromMillisecondsSinceEpoch(timeLeft) : 'Time Over'}',
+          " ${15000 > 0 ? DateTime.fromMillisecondsSinceEpoch(15000).toString() : 'Time Over'}",
+          style: Theme.of(context).textTheme.headline1,
         ),
         actions: [
           MaterialButton(
@@ -56,7 +65,7 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
               _auth.signOut().whenComplete(() {});
             },
             child: const Text(
-              "signOut",
+              "Book Appointment",
             ),
           ),
         ],
@@ -101,11 +110,13 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    bool status = true; 
+                    bool status = true;
                     await fs
                         .collection('chat_rooms')
                         .doc(_patient.id)
-                        .get().then((value) => status = value.data()!['status'] == 'active');
+                        .get()
+                        .then((value) =>
+                            status = value.data()!['status'] == 'active');
                     if (message.text.isNotEmpty && status) {
                       fs.collection('chat_rooms').doc(_patient.id)
                         ..set({

@@ -30,6 +30,9 @@ class _DoctorHomePageState extends ConsumerState<DoctorHomePage> {
                 title: Text(room.patientNames),
                 subtitle: Text(room.lastMessage),
                 trailing: Text(room.time),
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage('https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80'),
+                ),
                 onTap: () async {
                   await _db.getPatient(room.patientId);
                   context.pushRoute(const DoctorChatRoomRoute());
@@ -40,3 +43,6 @@ class _DoctorHomePageState extends ConsumerState<DoctorHomePage> {
     );
   }
 }
+
+                        
+                            

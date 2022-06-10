@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../utilities/utilities.dart';
+
 class Messages extends ConsumerStatefulWidget {
   const Messages({Key? key}) : super(key: key);
   @override
@@ -10,29 +12,29 @@ class Messages extends ConsumerStatefulWidget {
 }
 
 class _MessagesState extends ConsumerState<Messages> {
-  
   @override
   Widget build(BuildContext context) {
     final _patient = ref.read(patientControllerProvider);
     Stream<QuerySnapshot> _messageStream = FirebaseFirestore.instance
-      .collection('chat_rooms').doc(_patient.id).collection('messages')
-      .orderBy('time')
-      .snapshots();
+        .collection('chat_rooms').doc(_patient.id)
+        .collection('messages')
+        .orderBy('time')
+        .snapshots();
     return StreamBuilder(
       stream: _messageStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text("something is wrong");
+          return const Text("something is wrong");
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         return ListView.builder(
           itemCount: snapshot.data!.docs.length,
-          physics: ScrollPhysics(),
+          physics: const ScrollPhysics(),
           shrinkWrap: true,
           primary: true,
           itemBuilder: (_, index) {
@@ -47,36 +49,51 @@ class _MessagesState extends ConsumerState<Messages> {
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: secondaryColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
                     width: 300,
                     child: ListTile(
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.purple,
+                        side: const BorderSide(
+                          color: secondaryColor,
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       title: Text(
                         qs['sender_email'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
+                          color: Colors.white,
                         ),
                       ),
                       subtitle: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
+                          SizedBox(
                             width: 200,
                             child: Text(
                               qs['message'],
                               softWrap: true,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
+                                color: Colors.white,
                               ),
                             ),
                           ),
                           Text(
                             d.hour.toString() + ":" + d.minute.toString(),
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
                           )
                         ],
                       ),

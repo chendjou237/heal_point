@@ -1,10 +1,13 @@
+import 'dart:developer';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 
 class DoctorChatRoomPage extends ConsumerStatefulWidget {
   const DoctorChatRoomPage({Key? key}) : super(key: key);
@@ -21,6 +24,7 @@ class _DoctorChatRoomPageState extends ConsumerState<DoctorChatRoomPage> {
   Widget build(BuildContext context) {
     final _patient = ref.read(patientControllerProvider);
     final _doctor = ref.read(doctorControllerProvider);
+    final _db = ref.read(databaseProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -28,11 +32,17 @@ class _DoctorChatRoomPageState extends ConsumerState<DoctorChatRoomPage> {
         ),
         actions: [
           MaterialButton(
-            onPressed: () {
-              _auth.signOut().whenComplete(() {});
+            onPressed: () async {
+              await _auth.signOut().whenComplete(() async {
+                if (await _db.closeSession(_patient.id!)) {
+                  context.popRoute();
+                } else {
+                  log('the close session was unsuccessful');
+                }
+              });
             },
             child: const Text(
-              "signOut",
+              "close chat",
             ),
           ),
         ],

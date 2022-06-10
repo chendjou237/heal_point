@@ -4,15 +4,15 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:heal_point/models/models.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/routes/route.gr.dart';
-import 'package:heal_point/screens/notification.dart';
+import 'package:heal_point/screens/patients/notification.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:line_icons/line_icons.dart';
 
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 
-import '../models/models.dart';
+import '../../models/models.dart';
 
 const initialCameraPosition = CameraPosition(
   target: LatLng(3.952814, 11.516845),

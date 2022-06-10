@@ -4,13 +4,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:heal_point/models/models.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/routes/route.gr.dart';
-import 'package:heal_point/screens/notification.dart';
+import 'package:heal_point/screens/patients/notification.dart';
 import 'package:auto_route/auto_route.dart';
 
 
 import 'package:line_icons/line_icons.dart';
 
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 
 class DoctorsPage extends ConsumerWidget {
   const DoctorsPage({Key? key}) : super(key: key);
@@ -119,7 +119,7 @@ class DoctorsPage extends ConsumerWidget {
             const SizedBox(height: 24),
             GestureDetector(
               onTap: (){
-                context.pushRoute( DoctorDetailsRoute());
+                // context.pushRoute( DoctorDetailsRoute());
               },
               child: Text(
                 "Center's Categories",

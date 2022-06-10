@@ -24,8 +24,12 @@ import '../screens/screens.dart';
               page: NotificationsPage,
             ),
             AutoRoute(
-              path: 'doctor_detail',
-              page: DoctorDetailsPage,
+              path: 'doctor_chat_plan',
+              page: DoctorChatPlanPage,
+            ),
+            AutoRoute(
+              path: 'doctor_bundle',
+              page: DoctorBundlePage,
             ),
             AutoRoute(
               path: 'chat_room',
@@ -57,10 +61,7 @@ import '../screens/screens.dart';
               path: 'center_details',
               page: CenterDetailsPage,
             ),
-            AutoRoute(
-              path: 'near_me',
-              page: NearMePage,
-            ),
+           
           ],
         ),
         AutoRoute(
@@ -76,10 +77,7 @@ import '../screens/screens.dart';
               path: 'catalogue',
               page: CataloguePage,
             ),
-            AutoRoute(
-              path: 'drug_details',
-              page: DrugDetailPage,
-            ),
+          
           ],
         ),
         AutoRoute(

@@ -3,9 +3,9 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:heal_point/functions/directions_repository.dart';
 import 'package:heal_point/screens/screens.dart';
+import 'package:heal_point/utilities/utilities.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../utilities/utilities.dart';
 
 
 class NearMePage extends ConsumerStatefulWidget {
