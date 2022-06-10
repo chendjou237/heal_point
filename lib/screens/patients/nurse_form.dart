@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../models/models.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final Uri _url = Uri.parse('https://flutter.dev');
+final Uri _url = Uri.parse('https://links.payunit.net/pay/628c3d02c8a95f1e7f7c3b29');
 
 class NurseFormPage extends ConsumerStatefulWidget {
   const NurseFormPage({Key? key}) : super(key: key);
