@@ -45,19 +45,7 @@ class _HealPointState extends ConsumerState<HealPointPage> {
             return AutoTabsScaffold(
               scaffoldKey: _scaffoldkey,
               extendBody: true,
-              floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-              floatingActionButton:  FloatingActionButton(
-                      onPressed: () => googleMapController.animateCamera(
-                        info != null
-                            ? CameraUpdate.newLatLngBounds(info!.bounds, 100.0)
-                            : CameraUpdate.newCameraPosition(
-                                initialCameraPosition),
-                      ),
-                      backgroundColor: secondaryColor,
-                      child: const Icon(Icons.near_me, color: Colors.white),
-                    )
-                , 
-           
+              
               routes: const [
                 HomeRouter(),
                 DoctorsRouter(),
