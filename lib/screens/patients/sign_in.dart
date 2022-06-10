@@ -152,7 +152,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                       primary: Colors.purple,
                     ),
                     onPressed: () {
-                      // context.pushRoute(DoctorSignInRoute());
+                      context.pushRoute(NurseSignInRoute());
                     },
                     icon: const Icon(
                       LineIcons.nurse,
