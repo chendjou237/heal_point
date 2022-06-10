@@ -70,8 +70,8 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                       tabBorderRadius: 30,
                       curve: Curves.easeOutExpo,
                       duration: const Duration(milliseconds: 100),
-                      gap: 8,
-                      iconSize: 24,
+                      gap: 4,
+                      iconSize: 18,
                       tabBackgroundColor: secondaryColor.withOpacity(0.5),
                       tabs: const [
                         GButton(
