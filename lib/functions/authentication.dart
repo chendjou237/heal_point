@@ -20,7 +20,41 @@ class Authentication {
       await _firebaseAuth
           .signInWithEmailAndPassword(email: mail, password: pass)
           .then((response) async {
+        if (await _read(databaseProvider).getPatient(response.user!.uid)) {
+          result = true;
+        } else {
+          result = false;
+        }
+      });
+      return result;
+    } on FirebaseAuthException {
+      return false;
+    }
+  }
+  Future<bool> signInDoc({required String mail, required String pass}) async {
+    bool result = false;
+    try {
+      await _firebaseAuth
+          .signInWithEmailAndPassword(email: mail, password: pass)
+          .then((response) async {
         if (await _read(databaseProvider).getDoc(response.user!.uid)) {
+          result = true;
+        } else {
+          result = false;
+        }
+      });
+      return result;
+    } on FirebaseAuthException {
+      return false;
+    }
+  }
+  Future<bool> signInNurse({required String mail, required String pass}) async {
+    bool result = false;
+    try {
+      await _firebaseAuth
+          .signInWithEmailAndPassword(email: mail, password: pass)
+          .then((response) async {
+        if (await _read(databaseProvider).getNurse(response.user!.uid)) {
           result = true;
         } else {
           result = false;

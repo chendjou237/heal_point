@@ -29,6 +29,10 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DoctorScreensPage());
     },
+    NurseScreensRouter.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.NurseScreensPage());
+    },
     EmptyRouterRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.EmptyRouterPage());
@@ -38,6 +42,10 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: const _i2.EmptyRouterPage());
     },
     DoctorsRouter.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i2.EmptyRouterPage());
+    },
+    NurseFormRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.EmptyRouterPage());
     },
@@ -65,6 +73,10 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DoctorChatPlanPage());
     },
+    DoctorBundleRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.DoctorBundlePage());
+    },
     ChatRoomRoute.name: (routeData) {
       final args = routeData.argsAs<ChatRoomRouteArgs>();
       return _i2.MaterialPageX<dynamic>(
@@ -74,6 +86,10 @@ class AppRouter extends _i2.RootStackRouter {
     DoctorsRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DoctorsPage());
+    },
+    NurseFormRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.NurseFormPage());
     },
     HealthCaresRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -117,6 +133,22 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DoctorChatRoomPage());
     },
+    NurseRouter.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i2.EmptyRouterPage());
+    },
+    NursePersonalRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.NursePersonalPage());
+    },
+    NurseProfileRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.NurseProfilePage());
+    },
+    NurseHomeRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.NurseHomePage());
+    },
     SignInRoute.name: (routeData) {
       final args = routeData.argsAs<SignInRouteArgs>(
           orElse: () => const SignInRouteArgs());
@@ -126,6 +158,10 @@ class AppRouter extends _i2.RootStackRouter {
     DoctorSignInRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DoctorSignInPage());
+    },
+    NurseSignInRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.NurseSignInPage());
     },
     SignUpRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -157,7 +193,9 @@ class AppRouter extends _i2.RootStackRouter {
                 _i2.RouteConfig(NotificationsRoute.name,
                     path: 'notifications', parent: HomeRouter.name),
                 _i2.RouteConfig(DoctorChatPlanRoute.name,
-                    path: 'doctor_detail', parent: HomeRouter.name),
+                    path: 'doctor_chat_plan', parent: HomeRouter.name),
+                _i2.RouteConfig(DoctorBundleRoute.name,
+                    path: 'doctor_bundle', parent: HomeRouter.name),
                 _i2.RouteConfig(ChatRoomRoute.name,
                     path: 'chat_room', parent: HomeRouter.name)
               ]),
@@ -167,6 +205,13 @@ class AppRouter extends _i2.RootStackRouter {
               children: [
                 _i2.RouteConfig(DoctorsRoute.name,
                     path: '', parent: DoctorsRouter.name)
+              ]),
+          _i2.RouteConfig(NurseFormRouter.name,
+              path: 'nurse_form',
+              parent: RootRouter.name,
+              children: [
+                _i2.RouteConfig(NurseFormRoute.name,
+                    path: '', parent: NurseFormRouter.name)
               ]),
           _i2.RouteConfig(HealthCaresRouter.name,
               path: 'health_cares',
@@ -206,6 +251,19 @@ class AppRouter extends _i2.RootStackRouter {
           _i2.RouteConfig(DoctorProfileRoute.name,
               path: 'doctor_profile', parent: DoctorScreensRouter.name)
         ]),
+        _i2.RouteConfig(NurseScreensRouter.name, path: '/nurse', children: [
+          _i2.RouteConfig(NurseRouter.name,
+              path: 'nurse_home',
+              parent: NurseScreensRouter.name,
+              children: [
+                _i2.RouteConfig(NurseHomeRoute.name,
+                    path: '', parent: NurseRouter.name)
+              ]),
+          _i2.RouteConfig(NursePersonalRoute.name,
+              path: 'nurse_personal', parent: NurseScreensRouter.name),
+          _i2.RouteConfig(NurseProfileRoute.name,
+              path: 'nurse_profile', parent: NurseScreensRouter.name)
+        ]),
         _i2.RouteConfig(EmptyRouterRoute.name,
             path: '/authentication',
             children: [
@@ -213,6 +271,8 @@ class AppRouter extends _i2.RootStackRouter {
                   path: '', parent: EmptyRouterRoute.name),
               _i2.RouteConfig(DoctorSignInRoute.name,
                   path: 'doctor_sign_in', parent: EmptyRouterRoute.name),
+              _i2.RouteConfig(NurseSignInRoute.name,
+                  path: 'nurse_sign_in', parent: EmptyRouterRoute.name),
               _i2.RouteConfig(SignUpRouter.name,
                   path: 'sign_up',
                   parent: EmptyRouterRoute.name,
@@ -248,6 +308,16 @@ class DoctorScreensRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [_i1.NurseScreensPage]
+class NurseScreensRouter extends _i2.PageRouteInfo<void> {
+  const NurseScreensRouter({List<_i2.PageRouteInfo>? children})
+      : super(NurseScreensRouter.name,
+            path: '/nurse', initialChildren: children);
+
+  static const String name = 'NurseScreensRouter';
+}
+
+/// generated route for
 /// [_i2.EmptyRouterPage]
 class EmptyRouterRoute extends _i2.PageRouteInfo<void> {
   const EmptyRouterRoute({List<_i2.PageRouteInfo>? children})
@@ -273,6 +343,16 @@ class DoctorsRouter extends _i2.PageRouteInfo<void> {
       : super(DoctorsRouter.name, path: 'doctors', initialChildren: children);
 
   static const String name = 'DoctorsRouter';
+}
+
+/// generated route for
+/// [_i2.EmptyRouterPage]
+class NurseFormRouter extends _i2.PageRouteInfo<void> {
+  const NurseFormRouter({List<_i2.PageRouteInfo>? children})
+      : super(NurseFormRouter.name,
+            path: 'nurse_form', initialChildren: children);
+
+  static const String name = 'NurseFormRouter';
 }
 
 /// generated route for
@@ -323,9 +403,18 @@ class NotificationsRoute extends _i2.PageRouteInfo<void> {
 /// [_i1.DoctorChatPlanPage]
 class DoctorChatPlanRoute extends _i2.PageRouteInfo<void> {
   const DoctorChatPlanRoute()
-      : super(DoctorChatPlanRoute.name, path: 'doctor_detail');
+      : super(DoctorChatPlanRoute.name, path: 'doctor_chat_plan');
 
   static const String name = 'DoctorChatPlanRoute';
+}
+
+/// generated route for
+/// [_i1.DoctorBundlePage]
+class DoctorBundleRoute extends _i2.PageRouteInfo<void> {
+  const DoctorBundleRoute()
+      : super(DoctorBundleRoute.name, path: 'doctor_bundle');
+
+  static const String name = 'DoctorBundleRoute';
 }
 
 /// generated route for
@@ -358,6 +447,14 @@ class DoctorsRoute extends _i2.PageRouteInfo<void> {
   const DoctorsRoute() : super(DoctorsRoute.name, path: '');
 
   static const String name = 'DoctorsRoute';
+}
+
+/// generated route for
+/// [_i1.NurseFormPage]
+class NurseFormRoute extends _i2.PageRouteInfo<void> {
+  const NurseFormRoute() : super(NurseFormRoute.name, path: '');
+
+  static const String name = 'NurseFormRoute';
 }
 
 /// generated route for
@@ -459,6 +556,41 @@ class DoctorChatRoomRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [_i2.EmptyRouterPage]
+class NurseRouter extends _i2.PageRouteInfo<void> {
+  const NurseRouter({List<_i2.PageRouteInfo>? children})
+      : super(NurseRouter.name, path: 'nurse_home', initialChildren: children);
+
+  static const String name = 'NurseRouter';
+}
+
+/// generated route for
+/// [_i1.NursePersonalPage]
+class NursePersonalRoute extends _i2.PageRouteInfo<void> {
+  const NursePersonalRoute()
+      : super(NursePersonalRoute.name, path: 'nurse_personal');
+
+  static const String name = 'NursePersonalRoute';
+}
+
+/// generated route for
+/// [_i1.NurseProfilePage]
+class NurseProfileRoute extends _i2.PageRouteInfo<void> {
+  const NurseProfileRoute()
+      : super(NurseProfileRoute.name, path: 'nurse_profile');
+
+  static const String name = 'NurseProfileRoute';
+}
+
+/// generated route for
+/// [_i1.NurseHomePage]
+class NurseHomeRoute extends _i2.PageRouteInfo<void> {
+  const NurseHomeRoute() : super(NurseHomeRoute.name, path: '');
+
+  static const String name = 'NurseHomeRoute';
+}
+
+/// generated route for
 /// [_i1.SignInPage]
 class SignInRoute extends _i2.PageRouteInfo<SignInRouteArgs> {
   SignInRoute({_i3.Key? key})
@@ -485,6 +617,15 @@ class DoctorSignInRoute extends _i2.PageRouteInfo<void> {
       : super(DoctorSignInRoute.name, path: 'doctor_sign_in');
 
   static const String name = 'DoctorSignInRoute';
+}
+
+/// generated route for
+/// [_i1.NurseSignInPage]
+class NurseSignInRoute extends _i2.PageRouteInfo<void> {
+  const NurseSignInRoute()
+      : super(NurseSignInRoute.name, path: 'nurse_sign_in');
+
+  static const String name = 'NurseSignInRoute';
 }
 
 /// generated route for

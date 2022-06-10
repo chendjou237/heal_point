@@ -6,6 +6,9 @@ import '../models/models.dart';
 final patientControllerProvider =
     StateNotifierProvider<PatientController, Patient>(
         (ref) => PatientController(ref.read, Patient.initial()));
+final nurseControllerProvider =
+    StateNotifierProvider<NurseController, Nurse>(
+        (ref) => NurseController(ref.read, Nurse.initial()));
 
 final healthCentersControllerProvider =
     StateNotifierProvider<HealthCentersControllers, List<HealthCenter>>(
@@ -19,6 +22,9 @@ final doctorsControllerProvider =
 final patientsControllerProvider =
     StateNotifierProvider<PatientsController, List<Patient>>(
         (ref) => PatientsController(ref.read, []));
+final listOrdersControllerProvider =
+    StateNotifierProvider<ListOrdersController, List<NurseOrder>>(
+        (ref) => ListOrdersController(ref.read, []));
 final doctorControllerProvider =
     StateNotifierProvider<DoctorController, Doctor>(
         (ref) => DoctorController(ref.read, Doctor.initial()));

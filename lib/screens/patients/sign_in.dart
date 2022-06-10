@@ -146,6 +146,19 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                       color: Colors.white,
                     ),
                     label: const Text("Connect As Doctor")),
+                    const SizedBox(height: 16),
+                     ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.purple,
+                    ),
+                    onPressed: () {
+                      // context.pushRoute(DoctorSignInRoute());
+                    },
+                    icon: const Icon(
+                      LineIcons.nurse,
+                      color: Colors.white,
+                    ),
+                    label: const Text("Connect As Nurse")),
               ],
             ),
           ),

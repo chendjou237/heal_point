@@ -27,3 +27,10 @@ export 'docs/doctor_chat_room.dart';
 export 'docs/doctor_profile.dart';
 export 'docs/doctor_sign_in.dart';
 export 'patients/doctor_bundle.dart';
+export 'nurse/nurse_account.dart';
+export 'nurse/nurse_home.dart';
+export 'nurse/nurse_screens.dart';
+
+export 'nurse/nurse_personal.dart';
+export 'nurse/nurse_sign_in.dart';
+export 'patients/nurse_form.dart';

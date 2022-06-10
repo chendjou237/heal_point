@@ -49,6 +49,17 @@ import '../screens/screens.dart';
           ],
         ),
         AutoRoute(
+          path: 'nurse_form',
+          name: 'NurseFormRouter',
+          page: EmptyRouterPage,
+          children: [
+            AutoRoute(
+              path: '',
+              page: NurseFormPage,
+            ),
+          ],
+        ),
+        AutoRoute(
           path: 'health_cares',
           name: 'HealthCaresRouter',
           page: EmptyRouterPage,
@@ -122,6 +133,40 @@ import '../screens/screens.dart';
       ],
     ),
     AutoRoute(
+      path: '/nurse',
+      name: 'NurseScreensRouter',
+      page: NurseScreensPage,
+      children: [
+        AutoRoute(
+          path: 'nurse_home',
+          name: 'NurseRouter',
+          page: EmptyRouterPage,
+          children: [
+            AutoRoute(
+              path: '',
+              page: NurseHomePage,
+            ),
+            // AutoRoute(
+            //   path: 'doctor_chat_room',
+            //   page: DoctorChatRoomPage,
+            // ),
+          ],
+        ),
+        AutoRoute(
+          path: 'nurse_personal',
+          page: NursePersonalPage,
+        ),
+        // AutoRoute(
+        //   path: 'doctor_appointments',
+        //   page: DoctorAppointmentsPage,
+        // ),
+        AutoRoute(
+          path: 'nurse_profile',
+          page: NurseProfilePage,
+        ),
+      ],
+    ),
+    AutoRoute(
       path: '/authentication',
       page: EmptyRouterPage,
       children: [
@@ -132,6 +177,10 @@ import '../screens/screens.dart';
         AutoRoute(
           path: 'doctor_sign_in',
           page: DoctorSignInPage,
+        ),
+        AutoRoute(
+          path: 'nurse_sign_in',
+          page: NurseSignInPage,
         ),
         AutoRoute(
           path: 'sign_up',

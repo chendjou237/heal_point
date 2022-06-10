@@ -12,25 +12,23 @@ import '../../models/models.dart';
 import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 
-final currentIndexProvider = StateProvider((ref) => 0);
-final infoProvider = StateProvider((ref) => Directions);
-
-class HealPointPage extends ConsumerStatefulWidget {
-  const HealPointPage({Key? key}) : super(key: key);
+class NurseScreensPage extends ConsumerStatefulWidget {
+  const NurseScreensPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HealPointState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _NurseScreensState();
 }
 
-class _HealPointState extends ConsumerState<HealPointPage> {
+class _NurseScreensState extends ConsumerState<NurseScreensPage> {
   final PageController _pageController = PageController(initialPage: 0);
-  
+
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
   }
-  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
+
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,32 +37,17 @@ class _HealPointState extends ConsumerState<HealPointPage> {
     final user = ref.read(firebaseAuthProvider);
     final _theme = Theme.of(context).textTheme;
     return FutureBuilder(
-        future: db.patientDbInitializer(user.currentUser?.uid ?? "no id"),
+        future: db.nurseDbInitializer(user.currentUser?.uid ?? "no id"),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return AutoTabsScaffold(
               scaffoldKey: _scaffoldkey,
-              extendBody: true,
-              floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-              floatingActionButton:  FloatingActionButton(
-                      onPressed: () => googleMapController.animateCamera(
-                        info != null
-                            ? CameraUpdate.newLatLngBounds(info!.bounds, 100.0)
-                            : CameraUpdate.newCameraPosition(
-                                initialCameraPosition),
-                      ),
-                      backgroundColor: secondaryColor,
-                      child: const Icon(Icons.near_me, color: Colors.white),
-                    )
-                , 
-           
+             
               routes: const [
-                HomeRouter(),
-                DoctorsRouter(),
-                NurseFormRoute(),
-                HealthCaresRouter(),
-                PharmacyRouter(),
-                ProfileRouter(),
+                NurseHomeRoute(),
+                NursePersonalRoute(),
+                // DoctorCallsRoute(),
+                NurseProfileRoute(),
               ],
               bottomNavigationBuilder: (_, tabsRouter) {
                 return ClipRRect(
@@ -73,7 +56,7 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                     topRight: Radius.circular(30.0),
                   ),
                   child: GNav(
-                    selectedIndex: tabsRouter.activeIndex,
+                      selectedIndex: tabsRouter.activeIndex,
                       onTabChange: tabsRouter.setActiveIndex,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 20),
@@ -90,23 +73,19 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                           icon: LineIcons.home,
                           text: 'Home',
                         ),
-                         GButton(
-                          icon: LineIcons.doctor,
-                          text: 'Doctor',
-                        ),
-                         GButton(
-                          icon: LineIcons.nurse,
-                          text: 'Nurse',
-                        ),
                         GButton(
-                          icon: LineIcons.hospital,
-                          text: 'Health Care',
+                          icon: LineIcons.calendar,
+                          text: 'Personal',
                         ),
-                        GButton(
-                          icon: LineIcons.medkit,
-                          text: 'Pharmacy',
-                        ),
-                       
+                        // GButton(
+                        //   icon: LineIcons.phone,
+                        //   text: 'Call Request',
+                        // ),
+                        // GButton(
+                        //   icon: LineIcons.medkit,
+                        //   text: 'Pharmacy',
+                        // ),
+
                         GButton(
                           icon: LineIcons.user,
                           text: 'Account',
@@ -114,7 +93,6 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                       ]),
                 );
               },
-            
             );
           } else if (snapshot.hasError) {
             return ErrorScreen(theme: _theme);
