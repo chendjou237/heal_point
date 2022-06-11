@@ -52,7 +52,6 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                 NurseFormRouter(),
                 HealthCaresRouter(),
                 PharmacyRouter(),
-                ProfileRouter(),
               ],
               bottomNavigationBuilder: (_, tabsRouter) {
                 return ClipRRect(
@@ -95,10 +94,7 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                           text: 'Pharmacy',
                         ),
                        
-                        GButton(
-                          icon: LineIcons.user,
-                          text: 'Account',
-                        ),
+           
                       ]),
                 );
               },

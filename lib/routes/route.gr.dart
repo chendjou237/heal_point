@@ -57,10 +57,6 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.EmptyRouterPage());
     },
-    ProfileRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.ProfilePage());
-    },
     HomeRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.HomePage());
@@ -68,6 +64,10 @@ class AppRouter extends _i2.RootStackRouter {
     NotificationsRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.NotificationsPage());
+    },
+    ProfileRouter.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.ProfilePage());
     },
     DoctorChatPlanRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -188,6 +188,8 @@ class AppRouter extends _i2.RootStackRouter {
                     path: '', parent: HomeRouter.name),
                 _i2.RouteConfig(NotificationsRoute.name,
                     path: 'notifications', parent: HomeRouter.name),
+                _i2.RouteConfig(ProfileRouter.name,
+                    path: 'account', parent: HomeRouter.name),
                 _i2.RouteConfig(DoctorChatPlanRoute.name,
                     path: 'doctor_chat_plan', parent: HomeRouter.name),
                 _i2.RouteConfig(DoctorBundleRoute.name,
@@ -221,9 +223,7 @@ class AppRouter extends _i2.RootStackRouter {
                     path: '', parent: PharmacyRouter.name),
                 _i2.RouteConfig(CatalogueRoute.name,
                     path: 'catalogue', parent: PharmacyRouter.name)
-              ]),
-          _i2.RouteConfig(ProfileRouter.name,
-              path: 'account', parent: RootRouter.name)
+              ])
         ]),
         _i2.RouteConfig(DoctorScreensRouter.name, path: '/doctor', children: [
           _i2.RouteConfig(DoctorRouter.name,
@@ -364,14 +364,6 @@ class PharmacyRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i1.ProfilePage]
-class ProfileRouter extends _i2.PageRouteInfo<void> {
-  const ProfileRouter() : super(ProfileRouter.name, path: 'account');
-
-  static const String name = 'ProfileRouter';
-}
-
-/// generated route for
 /// [_i1.HomePage]
 class HomeRoute extends _i2.PageRouteInfo<void> {
   const HomeRoute() : super(HomeRoute.name, path: '');
@@ -386,6 +378,14 @@ class NotificationsRoute extends _i2.PageRouteInfo<void> {
       : super(NotificationsRoute.name, path: 'notifications');
 
   static const String name = 'NotificationsRoute';
+}
+
+/// generated route for
+/// [_i1.ProfilePage]
+class ProfileRouter extends _i2.PageRouteInfo<void> {
+  const ProfileRouter() : super(ProfileRouter.name, path: 'account');
+
+  static const String name = 'ProfileRouter';
 }
 
 /// generated route for

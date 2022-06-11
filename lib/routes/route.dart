@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:heal_point/routes/route.gr.dart';
 
 import '../screens/screens.dart';
 
@@ -23,6 +22,11 @@ import '../screens/screens.dart';
             AutoRoute(
               path: 'notifications',
               page: NotificationsPage,
+            ),
+            AutoRoute(
+              path: 'account',
+              name: 'ProfileRouter',
+              page: ProfilePage,
             ),
             AutoRoute(
               path: 'doctor_chat_plan',
@@ -53,7 +57,6 @@ import '../screens/screens.dart';
           path: 'nurse_form',
           name: 'NurseFormRouter',
           page: NurseFormPage,
-        
         ),
         AutoRoute(
           path: 'health_cares',
@@ -68,7 +71,6 @@ import '../screens/screens.dart';
               path: 'center_details',
               page: CenterDetailsPage,
             ),
-           
           ],
         ),
         AutoRoute(
@@ -84,13 +86,7 @@ import '../screens/screens.dart';
               path: 'catalogue',
               page: CataloguePage,
             ),
-          
           ],
-        ),
-        AutoRoute(
-          path: 'account',
-          name: 'ProfileRouter',
-          page: ProfilePage,
         ),
       ],
     ),
