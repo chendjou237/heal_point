@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, unused_field, prefer_final_fields, avoid_print
+
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +28,7 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
   int _start = 10000;
 
   void startTimer() {
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (widget.timeLeft > 0) {
           widget.timeLeft -= 1000;

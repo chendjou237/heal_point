@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, invalid_use_of_protected_member, avoid_function_literals_in_foreach_calls, unused_local_variable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

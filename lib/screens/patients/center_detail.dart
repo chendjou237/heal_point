@@ -1,11 +1,13 @@
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:heal_point/utilities/palette.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../models/models.dart';
+//import '../../models/models.dart';
 import '../../providers/providers.dart';
 
 class CenterDetailsPage extends ConsumerWidget {

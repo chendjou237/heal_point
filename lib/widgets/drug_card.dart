@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+/*import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:heal_point/routes/route.gr.dart';
+import 'package:heal_point/routes/route.gr.dart';*/
 import 'package:heal_point/utilities/utilities.dart';
 import 'package:line_icons/line_icons.dart';
 import '../models/models.dart';
@@ -26,7 +26,7 @@ class DrugCard extends StatelessWidget {
           context: context,
           builder: (context) => SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.only(bottom: 80),
+              padding: const EdgeInsets.only(bottom: 80),
               height: MediaQuery.of(context).size.height * 0.8,
               decoration: BoxDecoration(
                 color: secondaryColorLight.withOpacity(0.8),
@@ -63,7 +63,7 @@ class DrugCard extends StatelessWidget {
                     const SizedBox(height: 20),
                     Row(
                       children: [
-                        Icon(LineIcons.store),
+                        const Icon(LineIcons.store),
                         const SizedBox(width: 5),
                         Text("${drug.quantity} In Stock"),
                       ],
@@ -73,7 +73,7 @@ class DrugCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.3,
                       child: Text(drug.details, style: _theme.bodyText1)),
                     const SizedBox(height: 20),
-                    ElevatedButton.icon(onPressed: (){},icon:Icon(Icons.payment), label: Text("Add to Cart"),
+                    ElevatedButton.icon(onPressed: (){},icon:const Icon(Icons.payment), label: const Text("Add to Cart"),
                     style: ElevatedButton.styleFrom(
                       primary: primaryColor,
                     ),
