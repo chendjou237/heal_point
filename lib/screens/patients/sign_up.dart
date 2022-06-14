@@ -112,7 +112,6 @@ class _SignUpState extends ConsumerState<SignUpPage> {
                   height: 10,
                 ),
                 AuthButton(
-                  theme: _theme,
                   onTap: () async {
                     //  ToastContext().init(context);
                     if (_formKey.currentState!.validate()) {

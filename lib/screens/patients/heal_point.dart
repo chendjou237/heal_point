@@ -48,9 +48,7 @@ class _HealPointState extends ConsumerState<HealPointPage> {
               
               routes: const [
                 HomeRouter(),
-                DoctorsRouter(),
-                NurseFormRouter(),
-                HealthCaresRouter(),
+                ServicesRouter(),
                 PharmacyRouter(),
               ],
               bottomNavigationBuilder: (_, tabsRouter) {
@@ -77,17 +75,10 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                           icon: LineIcons.home,
                           text: 'Home',
                         ),
-                         GButton(
-                          icon: LineIcons.doctor,
-                          text: 'Doctor',
-                        ),
-                         GButton(
-                          icon: LineIcons.nurse,
-                          text: 'Nurse',
-                        ),
+                        
                         GButton(
                           icon: LineIcons.hospital,
-                          text: 'Health Care',
+                          text: 'Services',
                         ),
                         GButton(
                           icon: LineIcons.medkit,

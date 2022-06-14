@@ -41,10 +41,11 @@ class _NurseScreensState extends ConsumerState<NurseScreensPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return AutoTabsScaffold(
+
               scaffoldKey: _scaffoldkey,
              
               routes: const [
-                NurseHomeRoute(),
+                NurseRouter(),
                 NursePersonalRoute(),
                 // DoctorCallsRoute(),
                 NurseProfileRoute(),

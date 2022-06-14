@@ -82,7 +82,6 @@ class _SignInPageState extends ConsumerState<DoctorSignInPage> {
                 ),
                 const SizedBox(height: 24),
                 AuthButton(
-                  theme: theme,
                   onTap: () async {
                     if (await ref.read(authProvider.state).state.signInDoc(
                         mail: _emailController.text,

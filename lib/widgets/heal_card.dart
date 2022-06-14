@@ -20,7 +20,7 @@ class HealCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // Navigator.pushNamed(context, '/center_detail');
-        context.pushRoute( CenterDetailsRoute());
+        // context.pushRoute( CenterDetailsRoute());
       },
       child: Container(
         margin: const EdgeInsets.only(right: 20),

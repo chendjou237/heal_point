@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:heal_point/routes/route.gr.dart';
@@ -82,14 +84,14 @@ class _SignInPageState extends ConsumerState<NurseSignInPage> {
                 ),
                 const SizedBox(height: 24),
                 AuthButton(
-                  theme: theme,
                   onTap: () async {
                     if (await ref.read(authProvider.state).state.signInNurse(
                         mail: _emailController.text,
                         pass: _passwordController.text)) {
                       AutoRouter.of(context).push(const NurseScreensRouter());
-                    } else
-                      print('something went wrong');
+                    } else {
+                      log('something went wrong');
+                    }
                   },
                   label: "Login",
                 ),

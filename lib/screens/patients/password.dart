@@ -103,7 +103,7 @@ class _PasswordScreenState extends ConsumerState<PasswordPage> {
                 ),
                 const SizedBox(height: 32),
                 AuthButton(
-                  theme: _theme,
+               
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
                       // Toast.show(

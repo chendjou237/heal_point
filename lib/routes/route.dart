@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:heal_point/screens/patients/home_services.dart';
 
 import '../screens/screens.dart';
 
@@ -32,44 +33,28 @@ import '../screens/screens.dart';
               path: 'doctor_chat_plan',
               page: DoctorChatPlanPage,
             ),
+          ],
+        ),
+        AutoRoute(
+          path: 'services',
+          name: 'ServicesRouter',
+          page: EmptyRouterPage,
+          children: [
             AutoRoute(
-              path: 'doctor_bundle',
-              page: DoctorBundlePage,
+              path: '',
+              page: ServicesPage,
+            ),
+            AutoRoute(
+              path: 'home_service',
+              page: HomeServicesPage,
+            ),
+            AutoRoute(
+              path: 'online_services',
+              page: OnlineServicesPage,
             ),
             AutoRoute(
               path: 'chat_room',
               page: ChatRoomPage,
-            ),
-          ],
-        ),
-        AutoRoute(
-          path: 'doctors',
-          name: 'DoctorsRouter',
-          page: EmptyRouterPage,
-          children: [
-            AutoRoute(
-              path: '',
-              page: DoctorsPage,
-            ),
-          ],
-        ),
-        AutoRoute(
-          path: 'nurse_form',
-          name: 'NurseFormRouter',
-          page: NurseFormPage,
-        ),
-        AutoRoute(
-          path: 'health_cares',
-          name: 'HealthCaresRouter',
-          page: EmptyRouterPage,
-          children: [
-            AutoRoute(
-              path: '',
-              page: HealthCaresPage,
-            ),
-            AutoRoute(
-              path: 'center_details',
-              page: CenterDetailsPage,
             ),
           ],
         ),

@@ -10,3 +10,4 @@ export 'profile_menu_items.dart';
 export 'messages.dart';
 export 'heal_button.dart';
 export 'doctor_messages.dart';
+export 'service_box.dart';

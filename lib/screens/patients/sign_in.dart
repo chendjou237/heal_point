@@ -86,7 +86,6 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 ),
                 const SizedBox(height: 24),
                 AuthButton(
-                  theme: theme,
                   onTap: () {
                     // Navigator.pushNamed(context, "/");
                     // context.p

@@ -11,12 +11,13 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i3;
+import 'package:flutter/material.dart' as _i4;
 
+import '../screens/patients/home_services.dart' as _i3;
 import '../screens/screens.dart' as _i1;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey])
+  AppRouter([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -41,15 +42,7 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.EmptyRouterPage());
     },
-    DoctorsRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
-    },
-    NurseFormRouter.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.NurseFormPage());
-    },
-    HealthCaresRouter.name: (routeData) {
+    ServicesRouter.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.EmptyRouterPage());
     },
@@ -73,29 +66,23 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.DoctorChatPlanPage());
     },
-    DoctorBundleRoute.name: (routeData) {
+    ServicesRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.DoctorBundlePage());
+          routeData: routeData, child: const _i1.ServicesPage());
+    },
+    HomeServicesRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i3.HomeServicesPage());
+    },
+    OnlineServicesRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.OnlineServicesPage());
     },
     ChatRoomRoute.name: (routeData) {
       final args = routeData.argsAs<ChatRoomRouteArgs>();
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i1.ChatRoomPage(key: args.key, timeLeft: args.timeLeft));
-    },
-    DoctorsRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.DoctorsPage());
-    },
-    HealthCaresRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.HealthCaresPage());
-    },
-    CenterDetailsRoute.name: (routeData) {
-      final args = routeData.argsAs<CenterDetailsRouteArgs>(
-          orElse: () => const CenterDetailsRouteArgs());
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i1.CenterDetailsPage(key: args.key));
     },
     PharmacyRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -191,29 +178,20 @@ class AppRouter extends _i2.RootStackRouter {
                 _i2.RouteConfig(ProfileRouter.name,
                     path: 'account', parent: HomeRouter.name),
                 _i2.RouteConfig(DoctorChatPlanRoute.name,
-                    path: 'doctor_chat_plan', parent: HomeRouter.name),
-                _i2.RouteConfig(DoctorBundleRoute.name,
-                    path: 'doctor_bundle', parent: HomeRouter.name),
+                    path: 'doctor_chat_plan', parent: HomeRouter.name)
+              ]),
+          _i2.RouteConfig(ServicesRouter.name,
+              path: 'services',
+              parent: RootRouter.name,
+              children: [
+                _i2.RouteConfig(ServicesRoute.name,
+                    path: '', parent: ServicesRouter.name),
+                _i2.RouteConfig(HomeServicesRoute.name,
+                    path: 'home_service', parent: ServicesRouter.name),
+                _i2.RouteConfig(OnlineServicesRoute.name,
+                    path: 'online_services', parent: ServicesRouter.name),
                 _i2.RouteConfig(ChatRoomRoute.name,
-                    path: 'chat_room', parent: HomeRouter.name)
-              ]),
-          _i2.RouteConfig(DoctorsRouter.name,
-              path: 'doctors',
-              parent: RootRouter.name,
-              children: [
-                _i2.RouteConfig(DoctorsRoute.name,
-                    path: '', parent: DoctorsRouter.name)
-              ]),
-          _i2.RouteConfig(NurseFormRouter.name,
-              path: 'nurse_form', parent: RootRouter.name),
-          _i2.RouteConfig(HealthCaresRouter.name,
-              path: 'health_cares',
-              parent: RootRouter.name,
-              children: [
-                _i2.RouteConfig(HealthCaresRoute.name,
-                    path: '', parent: HealthCaresRouter.name),
-                _i2.RouteConfig(CenterDetailsRoute.name,
-                    path: 'center_details', parent: HealthCaresRouter.name)
+                    path: 'chat_room', parent: ServicesRouter.name)
               ]),
           _i2.RouteConfig(PharmacyRouter.name,
               path: 'pharmacy',
@@ -329,29 +307,11 @@ class HomeRouter extends _i2.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.EmptyRouterPage]
-class DoctorsRouter extends _i2.PageRouteInfo<void> {
-  const DoctorsRouter({List<_i2.PageRouteInfo>? children})
-      : super(DoctorsRouter.name, path: 'doctors', initialChildren: children);
+class ServicesRouter extends _i2.PageRouteInfo<void> {
+  const ServicesRouter({List<_i2.PageRouteInfo>? children})
+      : super(ServicesRouter.name, path: 'services', initialChildren: children);
 
-  static const String name = 'DoctorsRouter';
-}
-
-/// generated route for
-/// [_i1.NurseFormPage]
-class NurseFormRouter extends _i2.PageRouteInfo<void> {
-  const NurseFormRouter() : super(NurseFormRouter.name, path: 'nurse_form');
-
-  static const String name = 'NurseFormRouter';
-}
-
-/// generated route for
-/// [_i2.EmptyRouterPage]
-class HealthCaresRouter extends _i2.PageRouteInfo<void> {
-  const HealthCaresRouter({List<_i2.PageRouteInfo>? children})
-      : super(HealthCaresRouter.name,
-            path: 'health_cares', initialChildren: children);
-
-  static const String name = 'HealthCaresRouter';
+  static const String name = 'ServicesRouter';
 }
 
 /// generated route for
@@ -398,18 +358,35 @@ class DoctorChatPlanRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i1.DoctorBundlePage]
-class DoctorBundleRoute extends _i2.PageRouteInfo<void> {
-  const DoctorBundleRoute()
-      : super(DoctorBundleRoute.name, path: 'doctor_bundle');
+/// [_i1.ServicesPage]
+class ServicesRoute extends _i2.PageRouteInfo<void> {
+  const ServicesRoute() : super(ServicesRoute.name, path: '');
 
-  static const String name = 'DoctorBundleRoute';
+  static const String name = 'ServicesRoute';
+}
+
+/// generated route for
+/// [_i3.HomeServicesPage]
+class HomeServicesRoute extends _i2.PageRouteInfo<void> {
+  const HomeServicesRoute()
+      : super(HomeServicesRoute.name, path: 'home_service');
+
+  static const String name = 'HomeServicesRoute';
+}
+
+/// generated route for
+/// [_i1.OnlineServicesPage]
+class OnlineServicesRoute extends _i2.PageRouteInfo<void> {
+  const OnlineServicesRoute()
+      : super(OnlineServicesRoute.name, path: 'online_services');
+
+  static const String name = 'OnlineServicesRoute';
 }
 
 /// generated route for
 /// [_i1.ChatRoomPage]
 class ChatRoomRoute extends _i2.PageRouteInfo<ChatRoomRouteArgs> {
-  ChatRoomRoute({_i3.Key? key, required int timeLeft})
+  ChatRoomRoute({_i4.Key? key, required int timeLeft})
       : super(ChatRoomRoute.name,
             path: 'chat_room',
             args: ChatRoomRouteArgs(key: key, timeLeft: timeLeft));
@@ -420,50 +397,13 @@ class ChatRoomRoute extends _i2.PageRouteInfo<ChatRoomRouteArgs> {
 class ChatRoomRouteArgs {
   const ChatRoomRouteArgs({this.key, required this.timeLeft});
 
-  final _i3.Key? key;
+  final _i4.Key? key;
 
   final int timeLeft;
 
   @override
   String toString() {
     return 'ChatRoomRouteArgs{key: $key, timeLeft: $timeLeft}';
-  }
-}
-
-/// generated route for
-/// [_i1.DoctorsPage]
-class DoctorsRoute extends _i2.PageRouteInfo<void> {
-  const DoctorsRoute() : super(DoctorsRoute.name, path: '');
-
-  static const String name = 'DoctorsRoute';
-}
-
-/// generated route for
-/// [_i1.HealthCaresPage]
-class HealthCaresRoute extends _i2.PageRouteInfo<void> {
-  const HealthCaresRoute() : super(HealthCaresRoute.name, path: '');
-
-  static const String name = 'HealthCaresRoute';
-}
-
-/// generated route for
-/// [_i1.CenterDetailsPage]
-class CenterDetailsRoute extends _i2.PageRouteInfo<CenterDetailsRouteArgs> {
-  CenterDetailsRoute({_i3.Key? key})
-      : super(CenterDetailsRoute.name,
-            path: 'center_details', args: CenterDetailsRouteArgs(key: key));
-
-  static const String name = 'CenterDetailsRoute';
-}
-
-class CenterDetailsRouteArgs {
-  const CenterDetailsRouteArgs({this.key});
-
-  final _i3.Key? key;
-
-  @override
-  String toString() {
-    return 'CenterDetailsRouteArgs{key: $key}';
   }
 }
 
@@ -574,7 +514,7 @@ class NurseHomeRoute extends _i2.PageRouteInfo<void> {
 /// generated route for
 /// [_i1.SignInPage]
 class SignInRoute extends _i2.PageRouteInfo<SignInRouteArgs> {
-  SignInRoute({_i3.Key? key})
+  SignInRoute({_i4.Key? key})
       : super(SignInRoute.name, path: '', args: SignInRouteArgs(key: key));
 
   static const String name = 'SignInRoute';
@@ -583,7 +523,7 @@ class SignInRoute extends _i2.PageRouteInfo<SignInRouteArgs> {
 class SignInRouteArgs {
   const SignInRouteArgs({this.key});
 
-  final _i3.Key? key;
+  final _i4.Key? key;
 
   @override
   String toString() {
