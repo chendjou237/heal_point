@@ -14,7 +14,7 @@ class ProfileMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: primaryColor,
         borderRadius: BorderRadius.all(
           Radius.circular(30),
@@ -36,7 +36,7 @@ class ProfileMenuItem extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
                 text,
                 style: GoogleFonts.lato(
@@ -48,8 +48,8 @@ class ProfileMenuItem extends StatelessWidget {
             ],
           ),
           arrowShown
-              ? Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
+              ? const Padding(
+                  padding: EdgeInsets.only(right: 12.0),
                   child:
                       Icon(Icons.arrow_forward, size: 30, color: Colors.white),
                 )

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, curly_braces_in_flow_control_structures
+
 import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
@@ -54,7 +56,7 @@ class _DoctorChatRoomPageState extends ConsumerState<DoctorChatRoomPage> {
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.79,
-              child: DoctorMessages(),
+              child: const DoctorMessages(),
             ),
             Row(
               children: [

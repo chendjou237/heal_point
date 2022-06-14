@@ -1,6 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
@@ -8,7 +10,7 @@ import 'package:heal_point/utilities/palette.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../models/models.dart';
+//import '../../models/models.dart';
 import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 

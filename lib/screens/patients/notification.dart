@@ -1,4 +1,6 @@
 // ignore: unused_import
+// ignore_for_file: unused_label, avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 
 class NotificationsPage extends StatelessWidget {

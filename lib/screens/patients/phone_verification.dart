@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';

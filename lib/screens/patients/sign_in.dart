@@ -1,18 +1,20 @@
+// ignore_for_file: unnecessary_new
+
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:heal_point/routes/route.gr.dart';
-import 'package:heal_point/screens/screens.dart';
+//import 'package:heal_point/screens/screens.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
 import 'package:heal_point/utilities/palette.dart';
-import 'package:toast/toast.dart';
+//import 'package:toast/toast.dart';
 import 'package:auto_route/auto_route.dart';
 
 import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 class SignInPage extends ConsumerStatefulWidget {
-   SignInPage({Key? key}) : super(key: key);
+   const SignInPage({Key? key}) : super(key: key);
 
   @override
   ConsumerState<SignInPage> createState() => _SignInPageState();
@@ -138,7 +140,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                       primary: Colors.blue,
                     ),
                     onPressed: () {
-                      context.pushRoute(DoctorSignInRoute());
+                      context.pushRoute(const DoctorSignInRoute());
                     },
                     icon: const Icon(
                       LineIcons.doctor,
@@ -151,7 +153,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                       primary: Colors.purple,
                     ),
                     onPressed: () {
-                      context.pushRoute(NurseSignInRoute());
+                      context.pushRoute(const NurseSignInRoute());
                     },
                     icon: const Icon(
                       LineIcons.nurse,
@@ -168,6 +170,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
   
   @override
   void dispose() {
+    // ignore: todo
     // TODO: implement dispose
     super.dispose();
   }

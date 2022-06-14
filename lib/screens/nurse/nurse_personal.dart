@@ -1,7 +1,9 @@
-import 'package:auto_route/auto_route.dart';
+//import 'package:auto_route/auto_route.dart';
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:heal_point/providers/providers.dart';
-import 'package:heal_point/routes/route.gr.dart';
+//import 'package:heal_point/routes/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NursePersonalPage extends ConsumerStatefulWidget {

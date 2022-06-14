@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:auto_route/auto_route.dart';
+//import 'package:auto_route/auto_route.dart';
 import 'package:heal_point/providers/ui_providers.dart';
-import 'package:heal_point/routes/route.gr.dart';
+//import 'package:heal_point/routes/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/models.dart';
 

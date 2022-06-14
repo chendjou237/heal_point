@@ -1,7 +1,9 @@
-import 'package:auto_route/auto_route.dart';
+//import 'package:auto_route/auto_route.dart';
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:heal_point/providers/providers.dart';
-import 'package:heal_point/routes/route.gr.dart';
+//import 'package:heal_point/routes/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NurseHomePage extends ConsumerStatefulWidget {
@@ -30,7 +32,7 @@ class _NurseHomePageState extends ConsumerState<NurseHomePage> {
                 title: Text(room.name),
                 subtitle: Text(room.description),
                 trailing: Text(room.townQuarter),
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundImage: NetworkImage('https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80'),
                 ),
                 onTap: () async {
