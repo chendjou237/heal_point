@@ -131,7 +131,7 @@ class HomePage extends ConsumerWidget {
               child: ListView.separated(scrollDirection: Axis.horizontal,
               
                   itemBuilder: (context, index) =>
-                      DrugCard(theme: _theme, drug: drugs[index]),
+                       DrugCard(theme: _theme, drug: drugs[index]),
                   separatorBuilder: (context, index) => const SizedBox(width: 16),
                   itemCount: drugs.length),
             ),
