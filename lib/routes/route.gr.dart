@@ -133,10 +133,8 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: const _i1.NurseHomePage());
     },
     SignInRoute.name: (routeData) {
-      final args = routeData.argsAs<SignInRouteArgs>(
-          orElse: () => const SignInRouteArgs());
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i1.SignInPage(key: args.key));
+          routeData: routeData, child: const _i1.SignInPage());
     },
     DoctorSignInRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -166,7 +164,7 @@ class AppRouter extends _i2.RootStackRouter {
 
   @override
   List<_i2.RouteConfig> get routes => [
-        _i2.RouteConfig(RootRouter.name, path: '/', children: [
+        _i2.RouteConfig(RootRouter.name, path: '/home', children: [
           _i2.RouteConfig(HomeRouter.name,
               path: 'home',
               parent: RootRouter.name,
@@ -233,27 +231,25 @@ class AppRouter extends _i2.RootStackRouter {
           _i2.RouteConfig(NurseProfileRoute.name,
               path: 'nurse_profile', parent: NurseScreensRouter.name)
         ]),
-        _i2.RouteConfig(EmptyRouterRoute.name,
-            path: '/authentication',
-            children: [
-              _i2.RouteConfig(SignInRoute.name,
-                  path: '', parent: EmptyRouterRoute.name),
-              _i2.RouteConfig(DoctorSignInRoute.name,
-                  path: 'doctor_sign_in', parent: EmptyRouterRoute.name),
-              _i2.RouteConfig(NurseSignInRoute.name,
-                  path: 'nurse_sign_in', parent: EmptyRouterRoute.name),
-              _i2.RouteConfig(SignUpRouter.name,
-                  path: 'sign_up',
-                  parent: EmptyRouterRoute.name,
-                  children: [
-                    _i2.RouteConfig(SignUpRoute.name,
-                        path: '', parent: SignUpRouter.name),
-                    _i2.RouteConfig(PasswordRoute.name,
-                        path: 'password', parent: SignUpRouter.name),
-                    _i2.RouteConfig(PhoneVerificationRoute.name,
-                        path: 'phone_verification', parent: SignUpRouter.name)
-                  ])
-            ])
+        _i2.RouteConfig(EmptyRouterRoute.name, path: '/', children: [
+          _i2.RouteConfig(SignInRoute.name,
+              path: '', parent: EmptyRouterRoute.name),
+          _i2.RouteConfig(DoctorSignInRoute.name,
+              path: 'doctor_sign_in', parent: EmptyRouterRoute.name),
+          _i2.RouteConfig(NurseSignInRoute.name,
+              path: 'nurse_sign_in', parent: EmptyRouterRoute.name),
+          _i2.RouteConfig(SignUpRouter.name,
+              path: 'sign_up',
+              parent: EmptyRouterRoute.name,
+              children: [
+                _i2.RouteConfig(SignUpRoute.name,
+                    path: '', parent: SignUpRouter.name),
+                _i2.RouteConfig(PasswordRoute.name,
+                    path: 'password', parent: SignUpRouter.name),
+                _i2.RouteConfig(PhoneVerificationRoute.name,
+                    path: 'phone_verification', parent: SignUpRouter.name)
+              ])
+        ])
       ];
 }
 
@@ -261,7 +257,7 @@ class AppRouter extends _i2.RootStackRouter {
 /// [_i1.HealPointPage]
 class RootRouter extends _i2.PageRouteInfo<void> {
   const RootRouter({List<_i2.PageRouteInfo>? children})
-      : super(RootRouter.name, path: '/', initialChildren: children);
+      : super(RootRouter.name, path: '/home', initialChildren: children);
 
   static const String name = 'RootRouter';
 }
@@ -290,8 +286,7 @@ class NurseScreensRouter extends _i2.PageRouteInfo<void> {
 /// [_i2.EmptyRouterPage]
 class EmptyRouterRoute extends _i2.PageRouteInfo<void> {
   const EmptyRouterRoute({List<_i2.PageRouteInfo>? children})
-      : super(EmptyRouterRoute.name,
-            path: '/authentication', initialChildren: children);
+      : super(EmptyRouterRoute.name, path: '/', initialChildren: children);
 
   static const String name = 'EmptyRouterRoute';
 }
@@ -513,22 +508,10 @@ class NurseHomeRoute extends _i2.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i1.SignInPage]
-class SignInRoute extends _i2.PageRouteInfo<SignInRouteArgs> {
-  SignInRoute({_i4.Key? key})
-      : super(SignInRoute.name, path: '', args: SignInRouteArgs(key: key));
+class SignInRoute extends _i2.PageRouteInfo<void> {
+  const SignInRoute() : super(SignInRoute.name, path: '');
 
   static const String name = 'SignInRoute';
-}
-
-class SignInRouteArgs {
-  const SignInRouteArgs({this.key});
-
-  final _i4.Key? key;
-
-  @override
-  String toString() {
-    return 'SignInRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

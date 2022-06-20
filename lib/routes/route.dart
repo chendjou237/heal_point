@@ -7,7 +7,7 @@ import '../screens/screens.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(
-      path: '/',
+      path: '/home',
       name: 'RootRouter',
       page: HealPointPage,
       children: [
@@ -144,7 +144,7 @@ import '../screens/screens.dart';
       ],
     ),
     AutoRoute(
-      path: '/authentication',
+      path: '/',
       page: EmptyRouterPage,
       children: [
         AutoRoute(

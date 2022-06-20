@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:heal_point/routes/route.gr.dart';*/
 import 'package:heal_point/utilities/utilities.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/models.dart';
+import '../providers/providers.dart';
 
-class DrugCard extends StatelessWidget {
+final Uri _url =
+    Uri.parse('https://links.payunit.net/pay/62b00761c8a95f1e7f7c404a');
+
+class DrugCard extends ConsumerWidget {
   const DrugCard({
     Key? key,
     required TextTheme theme,
@@ -17,8 +23,20 @@ class DrugCard extends StatelessWidget {
   final TextTheme _theme;
   final Drug drug;
 
+  Future<bool> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      return true;
+    } else {
+      print("something went wrong");
+      return true;
+    }
+    // throw 'Could not launch $_url';
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final db = ref.read(databaseProvider);
+    final locationController = TextEditingController();
     return GestureDetector(
       onTap: () {
         // Navigator.pushNamed(context, '/center_detail');
@@ -69,19 +87,44 @@ class DrugCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
+                    TextFormField(
+                        decoration: InputDecoration(
+                      labelText: 'Location',
+                      labelStyle: const TextStyle(color: secondaryColorLight),
+                      hintText: "Enter the location",
+                      hintStyle: const TextStyle(color: secondaryColorDark),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    )),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      child: Text(drug.details, style: _theme.bodyText1)),
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        child: Text(drug.details, style: _theme.bodyText1)),
                     const SizedBox(height: 20),
-                    ElevatedButton.icon(onPressed: (){},icon:const Icon(Icons.payment), label: const Text("Add to Cart"),
-                    style: ElevatedButton.styleFrom(
-                      primary: primaryColor,
-                    ),
-                    
-                    
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        if (await _launchUrl()) {
+//  if (await db.createNurseOrder(NurseOrder(
+//                     name: nameController.text,
+//                     date: dateController.text,
+//                     time: timeController.text,
+//                     townQuarter: townQuarterController.text,
+//                     description: descriptionController.text,
+//                   )
+//                   )) {
+//                     const SnackBar(
+//                       content: Text('Order created'),
+//                     );
+//                   }
+                        }
+                      },
+                      icon: const Icon(Icons.payment),
+                      label: const Text("Add to Cart"),
+                      style: ElevatedButton.styleFrom(
+                        primary: primaryColor,
+                      ),
                     ),
                   ]),
-          
             ),
           ),
         );

@@ -122,6 +122,9 @@ class _DoctorChatRoomPageState extends ConsumerState<DoctorChatRoomPage> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 25,
+            )
           ],
         ),
       ),

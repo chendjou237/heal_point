@@ -33,6 +33,7 @@ class Authentication {
       return false;
     }
   }
+
   Future<bool> signInDoc({required String mail, required String pass}) async {
     bool result = false;
     try {
@@ -50,6 +51,7 @@ class Authentication {
       return false;
     }
   }
+
   Future<bool> signInNurse({required String mail, required String pass}) async {
     bool result = false;
     try {
@@ -104,9 +106,7 @@ class Authentication {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationID, smsCode: otpController.text);
     try {
-      await _read(firebaseAuthProvider)
-          .currentUser
-          ?.updatePhoneNumber(credential);
+      await _firebaseAuth.signInWithCredential(credential);
       // Navigator.pushNamed(context, "/heal");
       _read(patientControllerProvider.notifier)
           // ignore: invalid_use_of_protected_member
@@ -125,7 +125,14 @@ class Authentication {
     _read(firebaseAuthProvider).verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) async {
+        await _firebaseAuth.signInWithCredential(credential);
+        // Navigator.pushNamed(context, "/heal");
+        _read(patientControllerProvider.notifier)
+            // ignore: invalid_use_of_protected_member
+            .state
+            .copyWith(phoneNumber: _read(phoneProvider.state).state);
         response = true;
+        context.pushRoute(const HomeRouter());
       },
       verificationFailed: (FirebaseAuthException e) {
         print(e.message);
@@ -181,7 +188,6 @@ class Authentication {
     // Once signed in, return the UserCredential
   }
 
- 
   Future<void> signOut(BuildContext context) async {
     bool result = false;
     // ToastContext().init(context);

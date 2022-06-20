@@ -25,7 +25,6 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
   final _auth = FirebaseAuth.instance;
   final TextEditingController message = TextEditingController();
   Timer? _timer;
-  int _start = 10000;
 
   void startTimer() {
     Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -54,11 +53,10 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
     final _patient = ref.read(patientControllerProvider);
     print(_patient.names);
     return Scaffold(
-
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          " ${15000 > 0 ? DateTime.fromMillisecondsSinceEpoch(15000).toString() : 'Time Over'}",
+          " enjoy your chat",
           style: Theme.of(context).textTheme.headline1,
         ),
         actions: [
@@ -77,6 +75,13 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                " ${widget.timeLeft > 0 ? DateTime.fromMillisecondsSinceEpoch(widget.timeLeft).minute : 'Time Over'} : ${widget.timeLeft > 0 ? DateTime.fromMillisecondsSinceEpoch(widget.timeLeft).second : 'Time Over'}",
+                style: Theme.of(context).textTheme.headline1,
+              ),
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.79,
               child: const Messages(),

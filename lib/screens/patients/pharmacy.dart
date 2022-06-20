@@ -137,7 +137,7 @@ class PharmacyPage extends StatelessWidget {
 List<Drug> drugs = [
   Drug(
     id: '',
-    name: 'drug 1',
+    name: 'paracetamol',
     quantity: 5,
     details: '',
     price: 1000.0,
@@ -147,7 +147,7 @@ List<Drug> drugs = [
   ),
   Drug(
     id: '',
-    name: 'drug 2',
+    name: 'insitocil',
     quantity: 15,
     details: '',
     price: 3000.0,
@@ -157,7 +157,7 @@ List<Drug> drugs = [
   ),
   Drug(
     id: '',
-    name: 'drug 3',
+    name: 'efferalgan',
     quantity: 10,
     details: '',
     price: 1500.0,
@@ -167,7 +167,7 @@ List<Drug> drugs = [
   ),
   Drug(
     id: '',
-    name: 'drug 4',
+    name: 'licotinamine',
     quantity: 20,
     details: '',
     price: 3200.0,
@@ -177,7 +177,7 @@ List<Drug> drugs = [
   ),
   Drug(
     id: '',
-    name: 'drug 5',
+    name: 'hibuprofane',
     quantity: 1,
     details: '',
     price: 10000.0,
@@ -187,7 +187,7 @@ List<Drug> drugs = [
   ),
   Drug(
     id: '',
-    name: 'drug 1',
+    name: 'pantreol',
     quantity: 5,
     details: '',
     price: 2000.0,

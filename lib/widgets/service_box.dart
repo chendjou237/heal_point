@@ -8,8 +8,7 @@ class ServiceBox extends StatelessWidget {
     required this.title,
     required this.onTap,
     required this.desc,
-  })  : 
-        super(key: key);
+  }) : super(key: key);
 
   final String image;
   final IconData icon;
@@ -23,26 +22,27 @@ class ServiceBox extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        alignment: Alignment.bottomCenter,
         height: MediaQuery.of(context).size.height * 0.3,
         width: MediaQuery.of(context).size.width * 0.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Colors.black,
+          color: const Color.fromARGB(255, 216, 216, 216),
           image: DecorationImage(
             image: NetworkImage(image),
             fit: BoxFit.cover,
-            opacity: 0.5,
+            opacity: 0.8,
           ),
         ),
         child: ListTile(
-          leading: Icon(icon),
+          leading: Icon(icon, color: Colors.white),
           title: Text(
             title,
-            style: _theme.bodyText1,
+            style: _theme.bodyMedium!.copyWith(color: Colors.white),
           ),
           subtitle: Text(
             desc,
-            style: _theme.bodySmall!.copyWith(color: Colors.black38),
+            style: _theme.bodySmall!.copyWith(color: Colors.white70),
           ),
         ),
       ),

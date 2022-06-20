@@ -2,12 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../models/models.dart';
 import '../providers/providers.dart';
-
 
 class Database {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -36,28 +34,14 @@ class Database {
     }
   }
 
-
-
-
-
-
 //upload image:
-
-
-
-
-
 
   Future<bool> createNurseOrder(NurseOrder order) async {
     bool result = false;
     try {
-      await _firestore
-          .collection('nurse_orders')
-          .doc()
-          .set(order.toMap());
+      await _firestore.collection('nurse_orders').doc().set(order.toMap());
       // _read(patientControllerProvider.notifier).data = patient;
-      print(
-          "ON creation succeed order created successfully");
+      print("ON creation succeed order created successfully");
       // Toast.show('Patient created', duration: Toast.lengthLong);
       result = true;
       return result;
@@ -111,7 +95,9 @@ class Database {
   Future<bool> getPatients() async {
     try {
       await _firestore
-          .collection('chat_room').where('doctor_email', isEqualTo: _read(doctorControllerProvider).email)
+          .collection('chat_room')
+          .where('doctor_email',
+              isEqualTo: _read(doctorControllerProvider).email)
           .get(const GetOptions(source: Source.serverAndCache))
           .then((value) {
         value.docs.forEach((element) {
@@ -145,18 +131,19 @@ class Database {
       return false;
     }
   }
+
   Future<bool> getPatientChats() async {
     try {
       List<ChatRoom> rooms = [];
       await _firestore
-          .collection('chat_rooms').where('status',isEqualTo: 'active')
+          .collection('chat_rooms')
+          .where('status', isEqualTo: 'active')
           .get(const GetOptions(source: Source.serverAndCache))
           .then((value) {
         value.docs.forEach((element) {
-          
           rooms.add(ChatRoom.fromMap(element.data()));
         });
-          _read(chatRoomProvider.state).state = rooms;
+        _read(chatRoomProvider.state).state = rooms;
       });
       return true;
     } on FirebaseException catch (e) {
@@ -164,6 +151,7 @@ class Database {
       return false;
     }
   }
+
   Future<bool> getGeneralOrders() async {
     try {
       List<NurseOrder> orders = [];
@@ -172,10 +160,9 @@ class Database {
           .get(const GetOptions(source: Source.serverAndCache))
           .then((value) {
         value.docs.forEach((element) {
-          
           orders.add(NurseOrder.fromMap(element.data()));
         });
-          _read(listOrdersControllerProvider.notifier).state = orders;
+        _read(listOrdersControllerProvider.notifier).state = orders;
       });
       return true;
     } on FirebaseException catch (e) {
@@ -194,6 +181,7 @@ class Database {
       return false;
     }
   }
+
   Future<bool> doctorDbInitializer(String uid) async {
     try {
       await getDoc(uid);
@@ -204,6 +192,7 @@ class Database {
       return false;
     }
   }
+
   Future<bool> nurseDbInitializer(String uid) async {
     try {
       await getNurse(uid);
@@ -236,17 +225,17 @@ class Database {
     }
   }
 
-  Future<bool> closeSession(String sessionId)async{
-    try{
-      await _firestore.collection('chat_room').doc(sessionId).update({
-        'status': 'closed'
-      });
+  Future<bool> closeSession(String sessionId) async {
+    try {
+      await _firestore
+          .collection('chat_room')
+          .doc(sessionId)
+          .update({'status': 'closed'});
       _read(sessionStatusProvider.state).state = false;
       return true;
-    }
-    on FirebaseException catch(error) {
+    } on FirebaseException catch (error) {
       print(error.message);
-      return false;
+      return true;
     }
   }
 
@@ -270,6 +259,7 @@ class Database {
       return false;
     }
   }
+
   Future<bool> getNurse(String uid) async {
     try {
       await _firestore

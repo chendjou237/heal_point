@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/utilities/utilities.dart';
 import 'package:heal_point/widgets/service_box.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:line_icons/line_icons.dart';
 
 class ServicesPage extends StatelessWidget {
   const ServicesPage({Key? key}) : super(key: key);
@@ -23,7 +21,8 @@ class ServicesPage extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: Padding(
+        child: Container(
+          width: double.infinity,
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

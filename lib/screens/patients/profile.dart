@@ -93,7 +93,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       } ,
                       child: ClipRRect(
                         
-                        child: _imageFile != null ? Image.file(_imageFile!,height: 30,width: 30,) : Image.asset('assets/images/profile_pic.jpg',height: 30,width: 30,)),
+                        child: _imageFile != null ? Image.file(_imageFile!,height: 30,width: 30,) : Image.network('https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',height: 30,width: 30,)),
                     ),
                   ),
                   // ignore: prefer_const_constructors
