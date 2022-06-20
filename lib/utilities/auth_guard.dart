@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:heal_point/screens/screens.dart';
+//import 'package:heal_point/screens/screens.dart';
 import 'package:heal_point/utilities/root.dart';
 
 import '../routes/route.gr.dart';

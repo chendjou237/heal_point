@@ -1,14 +1,16 @@
+// ignore_for_file: avoid_print, sized_box_for_whitespace
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:heal_point/providers/providers.dart';
 
-import '../models/models.dart';
+//import '../models/models.dart';
 
 class DoctorMessages extends ConsumerStatefulWidget {
  
-   DoctorMessages({Key? key}) : super(key: key);
+   const DoctorMessages({Key? key}) : super(key: key);
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _DoctorMessagesState();
 }
@@ -29,17 +31,17 @@ class _DoctorMessagesState extends ConsumerState<DoctorMessages> {
       stream: _messageStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text("something is wrong");
+          return const Text("something is wrong");
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         return ListView.builder(
           itemCount: snapshot.data!.docs.length,
-          physics: ScrollPhysics(),
+          physics: const ScrollPhysics(),
           shrinkWrap: true,
           primary: true,
           itemBuilder: (_, index) {
@@ -65,14 +67,14 @@ class _DoctorMessagesState extends ConsumerState<DoctorMessages> {
                     child: ListTile(
 
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(
+                        side: const BorderSide(
                           color: Colors.purple,
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       title: Text(
                         qs['sender_email'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                         ),
                       ),
@@ -84,7 +86,7 @@ class _DoctorMessagesState extends ConsumerState<DoctorMessages> {
                             child: Text(
                               qs['message'],
                               softWrap: true,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                               ),
                             ),

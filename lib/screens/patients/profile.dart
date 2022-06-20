@@ -1,18 +1,56 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, duplicate_ignore
 
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/utilities/palette.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 
 import '../../widgets/profile_menu_items.dart';
 
-class ProfilePage extends ConsumerWidget {
+class ProfilePage extends ConsumerStatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends ConsumerState<ProfilePage> {
+
+ File? _imageFile;
+
+  ///NOTE: Only supported on Android & iOS
+  ///Needs image_picker plugin {https://pub.dev/packages/image_picker}
+  final picker = ImagePicker();
+
+  Future pickImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _imageFile = File(pickedFile!.path);
+    });
+  }
+
+   Future uploadImageToFirebase(BuildContext context) async {
+    String fileName = basename(_imageFile!.path);
+    Reference firebaseStorageRef =
+        FirebaseStorage.instance.ref().child('uploads/$fileName');
+    UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile!);
+    TaskSnapshot taskSnapshot = await uploadTask;
+    taskSnapshot.ref.getDownloadURL().then(
+          (value) => print("Done: $value"),
+        );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
     final _auth = ref.read(authProvider);
     final _patient = ref.read(patientControllerProvider);
     return Scaffold(
@@ -48,10 +86,14 @@ class ProfilePage extends ConsumerWidget {
                 children: [
                   Hero(
                     tag: 'profile',
-                    child: CircleAvatar(
-                      radius: 70,
-                      backgroundImage:
-                          AssetImage('assets/images/profile_pic.jpg'),
+                    child: GestureDetector(
+                      onTap: (){
+                        pickImage();
+                      
+                      } ,
+                      child: ClipRRect(
+                        
+                        child: _imageFile != null ? Image.file(_imageFile!,height: 30,width: 30,) : Image.network('https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',height: 30,width: 30,)),
                     ),
                   ),
                   // ignore: prefer_const_constructors

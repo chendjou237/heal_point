@@ -1,6 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:heal_point/main.dart';
+//import 'package:heal_point/main.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -31,7 +33,7 @@ class RootPage extends ConsumerWidget {
 
             return const HealPointPage();
           } else {
-            return  SignInPage();
+            return  const SignInPage();
           }
         });
   }

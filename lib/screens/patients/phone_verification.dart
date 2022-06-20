@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
@@ -5,7 +7,6 @@ import 'package:heal_point/utilities/utilities.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:pinput/pinput.dart';
-import 'package:toast/toast.dart';
 
 import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
@@ -99,7 +100,6 @@ class _PhoneVerificationState extends ConsumerState<PhoneVerificationPage> {
                 height: 10,
               ),
               AuthButton(
-                theme: _theme,
                 onTap: () async {
                   if (otpVisibility.state) {
                     if (await _auth.state.verifyOTP()) {
@@ -109,8 +109,7 @@ class _PhoneVerificationState extends ConsumerState<PhoneVerificationPage> {
                       //   duration: Toast.lengthShort,
                       // );
                       // Navigator.pushNamed(context, "/heal");
-                      context.pushRoute(RootRouter());
-                      
+                      context.pushRoute(const RootRouter());
                     }
                   } else {
                     await _auth.state.loginWithPhone(phoneNumber, context);

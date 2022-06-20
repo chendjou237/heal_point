@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_route/auto_route.dart';
@@ -20,7 +22,7 @@ class HealCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // Navigator.pushNamed(context, '/center_detail');
-        context.pushRoute( CenterDetailsRoute());
+        // context.pushRoute( CenterDetailsRoute());
       },
       child: Container(
         margin: const EdgeInsets.only(right: 20),

@@ -18,31 +18,34 @@ class _DoctorHomePageState extends ConsumerState<DoctorHomePage> {
     final _theme = Theme.of(context).textTheme;
     final _db = ref.read(databaseProvider);
     return SingleChildScrollView(
-      child: Padding(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          Text(
-            "Patients",
-            style: _theme.headline1,
-          ),
-          const SizedBox(height: 20.0),
-          ..._rooms.map((room) => ListTile(
-                title: Text(room.patientNames),
-                subtitle: Text(room.lastMessage),
-                trailing: Text(room.time),
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage('https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80'),
-                ),
-                onTap: () async {
-                  await _db.getPatient(room.patientId);
-                  context.pushRoute(const DoctorChatRoomRoute());
-                },
-              )),
-        ]),
+        child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Patients",
+                style: _theme.headline1,
+              ),
+              const SizedBox(height: 20.0),
+              ..._rooms.map((room) => ListTile(
+                    title: Text(room.patientNames),
+                    subtitle: Text(room.lastMessage),
+                    trailing: Text(room.time),
+                    leading: const CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80'),
+                    ),
+                    onTap: () async {
+                      await _db.getPatient(room.patientId);
+                      context.pushRoute(const DoctorChatRoomRoute());
+                    },
+                  )),
+            ]),
       ),
     );
   }
 }
-
-                        
-                            

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -5,7 +7,7 @@ import 'package:heal_point/providers/providers.dart';
 import 'package:heal_point/screens/screens.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:toast/toast.dart';
+//import 'package:toast/toast.dart';
 
 import '../../models/models.dart';
 import '../../widgets/widgets.dart';
@@ -103,7 +105,7 @@ class _PasswordScreenState extends ConsumerState<PasswordPage> {
                 ),
                 const SizedBox(height: 32),
                 AuthButton(
-                  theme: _theme,
+               
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
                       // Toast.show(

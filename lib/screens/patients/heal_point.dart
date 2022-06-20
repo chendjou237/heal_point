@@ -1,6 +1,8 @@
+// ignore_for_file: unnecessary_new, unused_local_variable
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:heal_point/routes/route.gr.dart';
 import 'package:heal_point/screens/screens.dart';
@@ -48,11 +50,8 @@ class _HealPointState extends ConsumerState<HealPointPage> {
               
               routes: const [
                 HomeRouter(),
-                DoctorsRouter(),
-                NurseFormRouter(),
-                HealthCaresRouter(),
+                ServicesRouter(),
                 PharmacyRouter(),
-                ProfileRouter(),
               ],
               bottomNavigationBuilder: (_, tabsRouter) {
                 return ClipRRect(
@@ -78,27 +77,17 @@ class _HealPointState extends ConsumerState<HealPointPage> {
                           icon: LineIcons.home,
                           text: 'Home',
                         ),
-                         GButton(
-                          icon: LineIcons.doctor,
-                          text: 'Doctor',
-                        ),
-                         GButton(
-                          icon: LineIcons.nurse,
-                          text: 'Nurse',
-                        ),
+                        
                         GButton(
                           icon: LineIcons.hospital,
-                          text: 'Health Care',
+                          text: 'Services',
                         ),
                         GButton(
                           icon: LineIcons.medkit,
                           text: 'Pharmacy',
                         ),
                        
-                        GButton(
-                          icon: LineIcons.user,
-                          text: 'Account',
-                        ),
+           
                       ]),
                 );
               },

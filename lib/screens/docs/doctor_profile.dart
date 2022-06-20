@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, duplicate_ignore
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,7 +51,7 @@ class DoctorProfilePage extends ConsumerWidget {
                     child: CircleAvatar(
                       radius: 70,
                       backgroundImage:
-                          AssetImage('assets/images/profile_pic.jpg'),
+                          NetworkImage('https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'),
                     ),
                   ),
                   // ignore: prefer_const_constructors

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print, curly_braces_in_flow_control_structures
+
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:heal_point/routes/route.gr.dart';
@@ -82,7 +84,6 @@ class _SignInPageState extends ConsumerState<DoctorSignInPage> {
                 ),
                 const SizedBox(height: 24),
                 AuthButton(
-                  theme: theme,
                   onTap: () async {
                     if (await ref.read(authProvider.state).state.signInDoc(
                         mail: _emailController.text,
@@ -103,6 +104,7 @@ class _SignInPageState extends ConsumerState<DoctorSignInPage> {
 
   @override
   void dispose() {
+    // ignore: todo
     // TODO: implement dispose
     super.dispose();
   }

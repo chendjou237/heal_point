@@ -1,16 +1,19 @@
+// ignore_for_file: use_key_in_widget_constructors, unused_local_variable
+
 import 'package:flutter/material.dart';
 
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:heal_point/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:pinput/pinput.dart';
+//import 'package:intl_phone_field/intl_phone_field.dart';
+//import 'package:line_icons/line_icons.dart';
+//import 'package:pinput/pinput.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:toast/toast.dart';
+import 'package:line_icons/line_icons.dart';
+//import 'package:toast/toast.dart';
 
-import '../../models/models.dart';
+//import '../../models/models.dart';
 import '../../utilities/utilities.dart';
 import '../../widgets/widgets.dart';
 
@@ -112,7 +115,6 @@ class _SignUpState extends ConsumerState<SignUpPage> {
                   height: 10,
                 ),
                 AuthButton(
-                  theme: _theme,
                   onTap: () async {
                     //  ToastContext().init(context);
                     if (_formKey.currentState!.validate()) {

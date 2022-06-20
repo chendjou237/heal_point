@@ -6,17 +6,16 @@ import 'package:heal_point/utilities/utilities.dart';
 class AuthButton extends StatelessWidget {
   const AuthButton({
     Key? key,
-    required this.theme,
     required this.onTap,
     required this.label,
   }) : super(key: key);
 
-  final TextTheme theme;
-  final void Function() onTap;
+ final void Function() onTap;
   final String label;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
@@ -24,7 +23,7 @@ class AuthButton extends StatelessWidget {
         fixedSize: const Size(250, 50),
         textStyle: theme.bodyText1,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(32)),
         ),
       ),
       child:  Text(label ),

@@ -22,7 +22,7 @@ class HealButton extends ConsumerWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         primary: secondaryColorLight,
-        shape: StadiumBorder(
+        shape: const StadiumBorder(
         ),
       ),
       child: Text(

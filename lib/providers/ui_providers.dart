@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:heal_point/models/models.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'providers.dart';
-
 final selectedCategoryProvider = StateProvider((_) => "All");
 final selectedDoctorProvider = StateProvider<Doctor>((ref) {
   return Doctor.initial();
