@@ -12,7 +12,6 @@ import 'package:heal_point/utilities/palette.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:ms_undraw/ms_undraw.dart';
 
 import '../../models/models.dart';
 import '../../widgets/widgets.dart';

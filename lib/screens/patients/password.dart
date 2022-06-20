@@ -124,7 +124,7 @@ class _PasswordScreenState extends ConsumerState<PasswordPage> {
                             names: name.state,
                             phoneNumber: phone.state,
                           ),
-                        )) context.pushRoute(const PhoneVerificationRoute());
+                        )) context.pushRoute(const RootRouter());
                         // Navigator.pushNamed(context, "/heal");
                         // Toast.show(
                         //   "Something went wrong ",

@@ -8,6 +8,7 @@ on:
     branches:
       - main
       - master
+      - developement
       
 
 name: "build and release"
