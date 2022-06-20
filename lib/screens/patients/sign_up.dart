@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, unused_local_variable
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:form_field_validator/form_field_validator.dart';
@@ -14,6 +15,7 @@ import 'package:line_icons/line_icons.dart';
 //import 'package:toast/toast.dart';
 
 //import '../../models/models.dart';
+import '../../routes/route.gr.dart';
 import '../../utilities/utilities.dart';
 import '../../widgets/widgets.dart';
 
@@ -40,7 +42,7 @@ class _SignUpState extends ConsumerState<SignUpPage> {
     final otpVisibility = ref.watch(otpVisibilityProvider.state);
     final _auth = ref.read(authProvider.state);
     final _nameController = TextEditingController();
-   
+
     final _theme = Theme.of(context).textTheme;
     String phoneNumber = '';
     final email = ref.read(emailProvider.state);
@@ -125,7 +127,7 @@ class _SignUpState extends ConsumerState<SignUpPage> {
                       // );
                       email.state = _emailController.text;
                       name.state = _nameController.text;
-                      Navigator.pushNamed(context, "/password");
+                      context.pushRoute(const PasswordRoute());
                     }
                     // Toast.show(
                     //   "Something went wrong ",
@@ -149,7 +151,7 @@ class _SignUpState extends ConsumerState<SignUpPage> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      onTap: () => Navigator.pushNamed(context, "/sign_in"),
+                      onTap: () => context.pushRoute(const SignInRoute()),
                     )
                   ],
                 ),
@@ -163,7 +165,6 @@ class _SignUpState extends ConsumerState<SignUpPage> {
 
   @override
   void dispose() {
-    
     super.dispose();
   }
 

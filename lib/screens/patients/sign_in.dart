@@ -13,8 +13,9 @@ import 'package:auto_route/auto_route.dart';
 
 import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
+
 class SignInPage extends ConsumerStatefulWidget {
-   const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   ConsumerState<SignInPage> createState() => _SignInPageState();
@@ -23,16 +24,15 @@ class SignInPage extends ConsumerStatefulWidget {
 class _SignInPageState extends ConsumerState<SignInPage> {
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
-  // final key = 
+  // final key =
   @override
-  Widget build(BuildContext context ) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     final auth = ref.read(authProvider);
     // ToastContext().init(context);
     final phoneController = TextEditingController();
     final passwordController = TextEditingController();
     return Scaffold(
-      
       key: _scaffoldkey,
       body: SafeArea(
         child: Container(
@@ -51,24 +51,28 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Enter your phone number and password',
+                  'Enter your email and password',
                   style: theme.bodyText2,
                 ),
                 const SizedBox(height: 48),
                 AuthField(
                     validator:
-                        RequiredValidator(errorText: 'password is required'),
+                        RequiredValidator(errorText: 'email is required'),
                     theme: theme,
                     controller: phoneController,
-                    hint: 'enter your phone number',
+                    hint: 'enter your phone email',
                     icon: const Icon(
                       LineIcons.mobilePhone,
                     ),
-                    label: 'phone number',
+                    label: 'email',
                     obscureText: false),
                 AuthField(
                     validator:
-                        RequiredValidator(errorText: 'password is required'),
+                    MultiValidator([
+
+                        RequiredValidator(errorText: 'email is required'),
+                        EmailValidator(errorText: 'enter a correct email'),
+                    ]),
                     theme: theme,
                     controller: passwordController,
                     hint: 'enter your password',
@@ -88,16 +92,18 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 ),
                 const SizedBox(height: 24),
                 AuthButton(
-                  onTap: () {
-                    // Navigator.pushNamed(context, "/");
+                  onTap: ()async {
+                    // Navigator.pushNhone, pass: pass)
                     // context.p
-
+                   if( await auth.signInUser(mail: phoneController.text, pass: passwordController.text)){
+                    context.pushRoute(HomeRouter());
+                   }
                   },
                   label: "Login",
                 ),
                 const SizedBox(height: 16),
                 GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed('/sign_up'),
+                  onTap: () => context.pushRoute(const SignUpRouter()),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -121,11 +127,11 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 ElevatedButton.icon(
                     onPressed: () async {
                       await auth.signInWithGoogle(context);
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => HealPoint()));
-                      
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => HealPoint()));
+
                       // Toast.show(
                       //   "Somethin must kill a man",
                       // backgroundColor: errorColor,
@@ -147,8 +153,8 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                       color: Colors.white,
                     ),
                     label: const Text("Connect As Doctor")),
-                    const SizedBox(height: 16),
-                     ElevatedButton.icon(
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.purple,
                     ),
@@ -163,11 +169,11 @@ class _SignInPageState extends ConsumerState<SignInPage> {
               ],
             ),
           ),
-        ),//
+        ), //
       ),
     );
   }
-  
+
   @override
   void dispose() {
     // ignore: todo

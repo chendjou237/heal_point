@@ -71,7 +71,7 @@ class Authentication {
   }
 
   //sign up the user and store his data to firestore
-  Future<void> signupUser({
+  Future<bool> signupUser({
     required String mail,
     required String pass,
     required Patient patient,
@@ -91,12 +91,15 @@ class Authentication {
         // Toast.show("error while signing up",
         //     duration: Toast.lengthShort, backgroundColor: errorColor);
       });
+      return true;
     } on FirebaseAuthException {
+      print('Something went wrong');
       // Toast.show(
       //   err.message ?? "Something went wrong !",
       //   backgroundColor: errorColor,
       //   duration: Toast.lengthShort,
       // );
+      return false;
     }
   }
 
